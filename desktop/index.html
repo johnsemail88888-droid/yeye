@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Mode 2 Apply Preview Prototype</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="vibe-app" data-app>
+      <div class="desktop-shell">
+        <nav class="activity-rail" aria-label="Activity rail">
+          <button class="rail-button is-active" type="button" aria-label="Files">F</button>
+          <button class="rail-button" type="button" aria-label="Search">S</button>
+          <button class="rail-button" type="button" aria-label="Risk scan">R</button>
+          <button class="rail-button" type="button" aria-label="Suggestions">G</button>
+          <button class="rail-button" type="button" aria-label="Run">Run</button>
+        </nav>
+
+        <aside class="project-rail" aria-label="Project files">
+          <section class="panel-section">
+            <div class="title-row">
+              <h1 class="product-title">VibeShield</h1>
+              <span class="pill live" data-source-pill>LIVE</span>
+            </div>
+            <p class="meta" data-source-copy>Read-only state snapshot.</p>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-eyebrow">State Summary</p>
+            <div class="stat-grid" data-stat-grid></div>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-eyebrow">Guided Demo Project</p>
+            <ul class="file-list">
+              <li class="file-row is-active">
+                <span>support-agent/tools.ts</span>
+                <span class="badge" data-file-badge>0</span>
+              </li>
+              <li class="file-row">
+                <span>support-agent/guard.ts</span>
+                <span class="badge">MOCK</span>
+              </li>
+              <li class="file-row">
+                <span>preview/output.html</span>
+                <span class="badge">TODO</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+
+        <section class="editor-pane" aria-label="Editor">
+          <header class="topbar">
+            <div>
+              <div class="breadcrumbs">support-agent / tools.ts</div>
+              <div class="meta">Apply is gated: preview hunk first, then Tab accepts or Esc rejects.</div>
+            </div>
+            <div class="row-actions">
+              <button class="secondary-button" type="button" data-action="open-hunk">Preview Hunk</button>
+              <button class="primary-button" type="button" data-action="accept-hunk">Accept</button>
+              <button class="ghost-button" type="button" data-action="reject-hunk">Reject</button>
+            </div>
+          </header>
+
+          <div class="workspace">
+            <div class="editor-scroll" data-editor-scroll>
+              <article class="code-card" aria-label="Mock editor buffer">
+                <header class="code-header">
+                  <span>MOCK TODO editor spans</span>
+                  <span>selectedFindingId: <span data-selected-label>none</span></span>
+                </header>
+                <div data-editor-lines></div>
+              </article>
+
+              <section class="inline-hunk" data-inline-hunk aria-label="Pending hunk">
+                <div class="hunk-toolbar">
+                  <div>
+                    <strong data-hunk-title>Pending hunk</strong>
+                    <div class="meta">MOCK TODO patch text. Bind to real patch artifact before source write.</div>
+                  </div>
+                  <div class="row-actions">
+                    <span class="kbd">Tab</span>
+                    <span class="kbd">Esc</span>
+                  </div>
+                </div>
+                <div class="diff-row remove"><span>-</span><span data-remove-line>MOCK TODO risky call preview</span></div>
+                <div class="diff-row add"><span>+</span><span data-add-line>MOCK TODO guarded call preview</span></div>
+              </section>
+            </div>
+
+            <aside class="preview-pane" aria-label="Preview">
+              <article class="preview-card">
+                <header class="preview-header">
+                  <span>Preview refresh</span>
+                  <span class="pill mock">MOCK TODO</span>
+                </header>
+                <div class="preview-body">
+                  <p class="muted" data-preview-copy>No hunk accepted yet.</p>
+                  <div class="preview-meter"><span data-preview-meter></span></div>
+                  <div class="row-actions">
+                    <span class="pill live">real finding data</span>
+                    <span class="pill mock">local UI only</span>
+                  </div>
+                </div>
+              </article>
+            </aside>
+          </div>
+
+          <footer class="bottom-log" aria-label="Local event log">
+            <ul class="event-list" data-event-list>
+              <li class="event-row"><span class="dot"></span><span>Apply gate ready. Source writes are disabled in this prototype.</span></li>
+            </ul>
+          </footer>
+        </section>
+
+        <aside class="suggestions-panel" aria-label="Suggestions">
+          <section class="panel-section">
+            <div class="title-row">
+              <div>
+                <p class="section-eyebrow">Suggestions</p>
+                <h2 class="product-title">Apply Gate</h2>
+              </div>
+              <span class="kbd">Cmd Enter</span>
+            </div>
+            <p class="meta">Cards use real findings; patch hunks are labeled `MOCK TODO`.</p>
+          </section>
+
+          <section class="panel-section">
+            <ul class="finding-list" data-finding-list></ul>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <script src="/desktop/app.js"></script>
+  </body>
+</html>
