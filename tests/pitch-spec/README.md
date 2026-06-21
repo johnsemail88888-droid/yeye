@@ -37,3 +37,4 @@ Forbidden writes:
 11. Every broad pitch/Devpost/Q&A claim is status-labeled in `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`.
 12. Morning rehearsal chooses a LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP route before timing.
 13. Demo evidence packet lists identifiers, truth-badge evidence, downgrade labels, and three measured timing rows before any pass can be claimed.
+14. Presenter command card keeps the route, three-minute spine, roadmap wording, do-not-say list, fallback language, and final close on one page.

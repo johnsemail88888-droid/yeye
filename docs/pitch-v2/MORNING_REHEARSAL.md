@@ -6,6 +6,7 @@ No live rehearsal was run in this SPEC_ONLY round. Do not mark timing as measure
 
 Before rehearsing, choose the route in `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`.
 Before marking a rehearsal pass, fill the timing packet in `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md`.
+Use `docs/pitch-v2/PRESENTER_COMMAND_CARD.md` during timed rehearsal so fallback language is practiced.
 
 ## Rehearsal Table
 

@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-presenter-command-card-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "PRESENTER-CARD-001",
+      "name": "route is declared before pitch",
+      "expected": "Presenter command card requires choosing LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP / NOT CONFIGURED before starting."
+    },
+    {
+      "id": "PRESENTER-CARD-002",
+      "name": "spine is evidence-gated",
+      "expected": "Each three-minute segment lists the evidence missing condition that should stop or downgrade the claim."
+    },
+    {
+      "id": "PRESENTER-CARD-003",
+      "name": "roadmap breadth wording is exact",
+      "expected": "The static readiness checklist line preserves roadmap language and not-legal-advice framing."
+    },
+    {
+      "id": "PRESENTER-CARD-004",
+      "name": "do-not-say list blocks unsupported claims",
+      "expected": "Browser extension, CLI install, generated CI, dynamic readiness checks, legal compliance determinations, and unmeasured timing pass are forbidden."
+    },
+    {
+      "id": "PRESENTER-CARD-005",
+      "name": "fallback language downgrades instead of inventing",
+      "expected": "If live endpoint or identifiers are missing, presenter downgrades to recorded/local/spec route instead of claiming live success."
+    }
+  ]
+}
