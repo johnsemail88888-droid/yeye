@@ -42,6 +42,7 @@ createServer(async (req, res) => {
   const url = (req.url || "/").split("?")[0];
   if (url === "/" || url === "/index.html") return page(res, file("web/app.html"));
   if (url === "/demo") return page(res, file("web/demo.html"));
+  if (url === "/judge") return page(res, file("web/judge.html"));
   if (url === "/api/state") return json(res, state());
   if (url === "/api/scan" && req.method === "POST") { run("npx tsx src/scan.ts examples/vulnerable-support-agent"); return json(res, state()); }
   if (url === "/api/run" && req.method === "POST") { bumpRun(); run("npx tsx src/run.ts all"); run("npx tsx src/verify.ts"); return json(res, state()); }

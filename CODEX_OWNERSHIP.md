@@ -21,7 +21,7 @@ Owns: `tests/**`, `fixtures/**`, `evals/prompts/**` (all NEW).
 Do: add more attack fixtures (mutation C/D, boundary $100 exactly, legitimate authorized email, PII variants) as data + a runner that calls the EXISTING core; audit `src/guard.ts` for any test-name / keyword / exact-string special-casing and report findings. Never edit core.
 
 **C — UI / Judge Mode → `codex/ui-judge-mode`**
-Owns: `web/judge.html`, `web/styles.css`, `web/components/**` (all NEW). Polish Shield Pill / Finding / Trace / Before-After / a "Demo Health" view. MUST read real `/api/state` — no hardcoded data. Do NOT edit `app.html`/`demo.html`; build alongside.
+⚠️ UPDATE: `web/judge.html` (Judge Mode) is now **Claude-built and live at `/judge`** — do NOT rebuild it. Re-scope Codex C to: polish the Shield Pill on `demo.html`'s companion, a `web/styles.css` extraction, or skip. Still MUST read real `/api/state`, no hardcoded data, and never edit `app.html`/`demo.html`/`judge.html`.
 
 **D — Reliability / stability → `codex/reliability`**
 Owns: `scripts/**` (NEW): `reset.ts`, `health-check.ts`, `playwright-smoke.ts`, screenshot capture, a recovery runbook. Wrap the EXISTING `pnpm` commands; never edit core.
