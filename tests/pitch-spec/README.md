@@ -36,3 +36,4 @@ Forbidden writes:
 10. Every scripted live action is bound to endpoint evidence, artifact evidence, or ROADMAP in `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`.
 11. Every broad pitch/Devpost/Q&A claim is status-labeled in `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`.
 12. Morning rehearsal chooses a LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP route before timing.
+13. Demo evidence packet lists identifiers, truth-badge evidence, downgrade labels, and three measured timing rows before any pass can be claimed.

@@ -21,6 +21,7 @@ SPEC_ONLY, per both coordination reviews:
 - `docs/pitch-v2/DEVPOST_COPY.md`
 - `docs/pitch-v2/MORNING_REHEARSAL.md`
 - `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`
+- `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md`
 - `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
 - `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
 - `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
@@ -30,6 +31,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/evidence_binding_acceptance.json`
 - `tests/pitch-spec/claim_status_acceptance.json`
 - `tests/pitch-spec/morning_go_no_go_acceptance.json`
+- `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -61,6 +63,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/evidence_binding_acceptance.json`
 - `tests/pitch-spec/claim_status_acceptance.json`
 - `tests/pitch-spec/morning_go_no_go_acceptance.json`
+- `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -147,3 +150,16 @@ Purpose:
 - Force a pre-rehearsal choice among LIVE, RECORDED REAL RUN, LOCAL FALLBACK, and ROADMAP routes.
 - Define hard no-go conditions that prevent live narration.
 - Provide safe close lines for live, recorded, and local fallback demos.
+
+## 2026-06-21 04:34 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md`
+- `tests/pitch-spec/demo_evidence_packet_acceptance.json`
+
+Purpose:
+
+- Require a fillable evidence packet before any route is upgraded to LIVE or RECORDED REAL RUN.
+- Make run identifiers, artifact paths, truth-badge evidence, downgrade labels, and timing rows explicit.
+- Keep `three_minute_timing_pass` and `overall_pass` false until real packet data exists.

@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-demo-evidence-packet-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "DEMO-PACKET-001",
+      "name": "route is explicit",
+      "expected": "Evidence packet requires one selected route: LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP."
+    },
+    {
+      "id": "DEMO-PACKET-002",
+      "name": "live evidence identifiers are required",
+      "expected": "LIVE route requires project_id, run_id, before artifact, after artifact, and verify artifact."
+    },
+    {
+      "id": "DEMO-PACKET-003",
+      "name": "truth badges have downgrade paths",
+      "expected": "Each demo segment lists the evidence field justifying its badge and a downgrade label if evidence is missing."
+    },
+    {
+      "id": "DEMO-PACKET-004",
+      "name": "timing pass requires measurements",
+      "expected": "three_minute_timing_pass remains false unless three measured timing rows are filled."
+    },
+    {
+      "id": "DEMO-PACKET-005",
+      "name": "roadmap capabilities stay downgraded",
+      "expected": "Browser Shield Pill, CLI install, generated CI, readiness checks 5-12, and legal/platform findings default to ROADMAP or static review indicator."
+    }
+  ]
+}

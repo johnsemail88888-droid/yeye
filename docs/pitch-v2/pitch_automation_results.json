@@ -24,6 +24,8 @@
     "Added docs/pitch-v2/CLAIM_STATUS_LEDGER.md to label major product, legal, platform, and adoption claims as LIVE, RECORDED REAL RUN, LOCAL FALLBACK, ROADMAP, or DO NOT CLAIM.",
     "Added tests/pitch-spec/claim_status_acceptance.json to make claim-status review explicit.",
     "Added docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md so the presenter must choose LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP before rehearsal.",
-    "Added tests/pitch-spec/morning_go_no_go_acceptance.json to make route selection, fallback language, hard no-go conditions, and timing gates reviewer-checkable."
+    "Added tests/pitch-spec/morning_go_no_go_acceptance.json to make route selection, fallback language, hard no-go conditions, and timing gates reviewer-checkable.",
+    "Added docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md to require route, identifiers, truth-badge evidence, downgrade labels, and measured timing fields before live claims.",
+    "Added tests/pitch-spec/demo_evidence_packet_acceptance.json to make evidence packet requirements reviewer-checkable."
   ]
 }

@@ -5,6 +5,8 @@ Last updated: 2026-06-21 04:04 PT
 
 Purpose: help the presenter choose the safest truthful demo path in the room. This is a runbook only; it does not implement UI, start the daemon, or run tests.
 
+Fill `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md` before upgrading any route to LIVE or RECORDED REAL RUN.
+
 ## Decision Summary
 
 Choose exactly one route before rehearsal:
