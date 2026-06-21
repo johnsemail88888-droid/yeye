@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-start-here-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "START-HERE-001",
+      "name": "current status is honest",
+      "expected": "Start Here marks three-minute timing and overall pass as false until evidence packet and rehearsals are complete."
+    },
+    {
+      "id": "START-HERE-002",
+      "name": "presenter path is ordered",
+      "expected": "Presenter opens go/no-go, evidence packet, command card, full script, and Q&A in that order."
+    },
+    {
+      "id": "START-HERE-003",
+      "name": "integration path is evidence-bound",
+      "expected": "Integration owner opens request, evidence binding, claim ledger, sponsor truth table, and click map before assigning LIVE badges."
+    },
+    {
+      "id": "START-HERE-004",
+      "name": "reviewer path includes all specs",
+      "expected": "Reviewer path points to results and all pitch-spec acceptance JSON files."
+    },
+    {
+      "id": "START-HERE-005",
+      "name": "hard rules preserve SPEC_ONLY scope",
+      "expected": "Start Here restates no UI, no runtime edits, no daemon/npm/tsx/node src/*, no unsupported CLI, readiness, extension, generated CI, or legal-advice claims."
+    }
+  ]
+}

@@ -12,6 +12,7 @@ SPEC_ONLY, per both coordination reviews:
 
 ## Files Changed
 
+- `docs/pitch-v2/PITCH_V2_START_HERE.md`
 - `docs/pitch-v2/AIDA_BEAT_SHEET.md`
 - `docs/pitch-v2/LIVE_DEMO_SCRIPT.md`
 - `docs/pitch-v2/DEMO_CLICK_MAP.md`
@@ -36,6 +37,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 - `tests/pitch-spec/presenter_command_card_acceptance.json`
 - `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
+- `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -70,6 +72,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 - `tests/pitch-spec/presenter_command_card_acceptance.json`
 - `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
+- `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -195,3 +198,16 @@ Purpose:
 - Keep Arize, ArmorIQ, Token Company, browser extension, CI, and legal/platform integration answers evidence-bound.
 - Provide safe Q&A patch lines for sponsor/integration questions.
 - Require evidence packet and integration-owner approval before any sponsor/integration claim moves to LIVE.
+
+## 2026-06-21 06:04 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/PITCH_V2_START_HERE.md`
+- `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
+
+Purpose:
+
+- Give presenter, integration owner, and reviewer ordered read paths through the pitch-v2 package.
+- Keep timing and overall pass status visibly false until measured evidence exists.
+- Restate the hard SPEC_ONLY boundaries in the first file a morning reviewer should open.

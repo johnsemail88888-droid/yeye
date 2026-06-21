@@ -30,6 +30,8 @@
     "Added docs/pitch-v2/PRESENTER_COMMAND_CARD.md to give the presenter one-page route, timing, fallback, and do-not-say cues.",
     "Added tests/pitch-spec/presenter_command_card_acceptance.json to make the cue card reviewer-checkable.",
     "Added docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md to keep Arize, ArmorIQ, Token Company, browser extension, CI, and legal/platform integration claims evidence-bound.",
-    "Added tests/pitch-spec/sponsor_integration_truth_acceptance.json to make sponsor/integration truth checks reviewer-checkable."
+    "Added tests/pitch-spec/sponsor_integration_truth_acceptance.json to make sponsor/integration truth checks reviewer-checkable.",
+    "Added docs/pitch-v2/PITCH_V2_START_HERE.md to give presenter, integration owner, and reviewer ordered read paths.",
+    "Added tests/pitch-spec/pitch_v2_start_here_acceptance.json to make the index reviewer-checkable."
   ]
 }

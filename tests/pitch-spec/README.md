@@ -4,6 +4,8 @@ Status: SPEC_ONLY
 
 These are acceptance specs for reviewers. They are not executable runtime tests and do not start the daemon.
 
+Start with `docs/pitch-v2/PITCH_V2_START_HERE.md` for the recommended review order.
+
 ## Scope
 
 Allowed files:
@@ -39,3 +41,4 @@ Forbidden writes:
 13. Demo evidence packet lists identifiers, truth-badge evidence, downgrade labels, and three measured timing rows before any pass can be claimed.
 14. Presenter command card keeps the route, three-minute spine, roadmap wording, do-not-say list, fallback language, and final close on one page.
 15. Sponsor/integration truth table prevents external tools or sponsors from being implied live without evidence.
+16. Pitch V2 Start Here gives presenter, integration owner, and reviewer read paths without adding product claims.
