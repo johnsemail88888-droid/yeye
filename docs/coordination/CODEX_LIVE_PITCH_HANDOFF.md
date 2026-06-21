@@ -24,6 +24,7 @@ SPEC_ONLY, per both coordination reviews:
 - `docs/pitch-v2/MORNING_REHEARSAL.md`
 - `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`
 - `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md`
+- `docs/pitch-v2/DEMO_EVIDENCE_PACKET_SCHEMA.md`
 - `docs/pitch-v2/PRESENTER_COMMAND_CARD.md`
 - `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`
 - `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
@@ -40,6 +41,8 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 - `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 - `tests/pitch-spec/integration_owner_review_acceptance.json`
+- `tests/pitch-spec/demo_evidence_packet.schema.json`
+- `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -76,6 +79,8 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 - `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 - `tests/pitch-spec/integration_owner_review_acceptance.json`
+- `tests/pitch-spec/demo_evidence_packet.schema.json`
+- `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -227,3 +232,17 @@ Purpose:
 - Separate docs/spec merge review from runtime implementation expectations.
 - Make clear that merging this branch does not upgrade timing, overall, CLI, extension, generated CI, readiness, external integration, or legal claims.
 - Give the integration owner merge-note wording that preserves SPEC_ONLY status.
+
+## 2026-06-21 07:04 PT SPEC_ONLY Increment
+
+Added:
+
+- `tests/pitch-spec/demo_evidence_packet.schema.json`
+- `docs/pitch-v2/DEMO_EVIDENCE_PACKET_SCHEMA.md`
+- `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
+
+Purpose:
+
+- Define the structural fields required for a future filled evidence packet.
+- Keep schema validation distinct from live evidence review.
+- Preserve conservative timing and claim defaults until the integration owner supplies real artifacts.

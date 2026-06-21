@@ -58,6 +58,7 @@ Open in this order:
 9. `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 10. `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 11. `tests/pitch-spec/integration_owner_review_acceptance.json`
+12. `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 
 Goal:
 Check that every claim is evidence-bound and that timing/overall remain false until measured.
@@ -75,6 +76,7 @@ Check that every claim is evidence-bound and that timing/overall remain false un
 | `DEVPOST_COPY.md` | Devpost-safe copy |
 | `MORNING_REHEARSAL.md` | Rehearsal table and timing gate |
 | `INTEGRATION_OWNER_REVIEW_CHECKLIST.md` | Merge/review checklist for SPEC_ONLY docs |
+| `DEMO_EVIDENCE_PACKET_SCHEMA.md` | Notes for the structural evidence-packet schema |
 
 ## Hard Rules That Still Win
 
