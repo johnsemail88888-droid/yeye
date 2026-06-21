@@ -1,0 +1,17 @@
+{
+  "source": "GET http://127.0.0.1:7878/api/state",
+  "captured_at_local": "2026-06-21T05:49:12-07:00",
+  "project_id": "support-agent",
+  "run_id": "run-0001",
+  "target": "examples/vulnerable-support-agent",
+  "finding_count": 8,
+  "critical_count": 3,
+  "high_count": 3,
+  "before_fail_count": 5,
+  "after_fail_count": 0,
+  "demo_ready": true,
+  "report_audit_pass": true,
+  "live_scan_source": "browser-panel",
+  "live_scan_run_id": "run-0002",
+  "live_scan_captured_at": "2026-06-21T07:09:24.683Z"
+}

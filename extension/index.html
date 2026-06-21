@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VibeShield Extension Scan History</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="../ui-next/styles.css" />
+  </head>
+  <body>
+    <main class="extension-shell" data-view="deep">
+      <section class="browser-surface" aria-label="Observed live site">
+        <div class="browser-topbar">
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <div class="address-bar">https://demo.customer-agent.local/support</div>
+          <span class="ui-chip" data-tone="live">Observed tab</span>
+        </div>
+        <div class="site-preview">
+          <div class="site-header">
+            <span>Support Agent</span>
+            <span>Signed in as operator</span>
+          </div>
+          <div class="chat-stack">
+            <div class="chat-line user">Customer asks for a refund and account help.</div>
+            <div class="chat-line agent">Agent drafts a reply while tools stay observable.</div>
+            <div class="scan-anchor">
+              <span class="pulse"></span>
+              VibeShield is watching this surface only
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="popup-card" aria-label="VibeShield extension popup">
+        <header class="popup-header">
+          <div>
+            <p class="eyebrow">VibeShield</p>
+            <h1>Scan this live agent</h1>
+          </div>
+          <span class="ui-chip" data-tone="live" id="dataSourceChip">LIVE /api/state</span>
+        </header>
+
+        <section class="history-panel" aria-labelledby="history-title">
+          <div class="ui-section-title">
+            <span id="history-title">Recent scans</span>
+            <button class="history-clear ui-button ui-focus-ring" data-variant="ghost" type="button" id="clearHistory">Clear MOCK slots</button>
+          </div>
+          <div class="history-strip" id="historyStrip" role="list" aria-label="Recent scan history"></div>
+        </section>
+
+        <section class="scan-picker" aria-label="Scan direction">
+          <article class="scan-card" data-scan="quick">
+            <div class="scan-card-head">
+              <span class="scan-icon">Q</span>
+              <div>
+                <h2>Quick Scan</h2>
+                <p>Passive DOM, header, and client-surface review.</p>
+              </div>
+            </div>
+            <button class="ui-button run-button" type="button" data-run="quick">Run Quick Scan</button>
+          </article>
+
+          <article class="scan-card" data-scan="active">
+            <div class="scan-card-head">
+              <span class="scan-icon">A</span>
+              <div>
+                <h2>Active Probe</h2>
+                <p>Types benign canary prompts as the logged-in user.</p>
+              </div>
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" id="activeConsent" />
+              <span>Consent to type test messages into this page.</span>
+            </label>
+            <button class="ui-button run-button" type="button" data-run="active" disabled>Run Active Probe</button>
+          </article>
+
+          <article class="scan-card selected" data-scan="deep">
+            <div class="scan-card-head">
+              <span class="scan-icon">D</span>
+              <div>
+                <h2>Deep Scan</h2>
+                <p>Debugger-backed response inspection during the scan.</p>
+              </div>
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" id="deepConsent" checked />
+              <span>I understand Chrome may show a debugging banner.</span>
+            </label>
+            <button class="ui-button run-button" type="button" data-run="deep">Run Deep Scan</button>
+          </article>
+        </section>
+      </section>
+
+      <aside class="side-panel" aria-label="Pinned scan results side panel">
+        <header class="side-header">
+          <div>
+            <p class="eyebrow">Pinned side panel</p>
+            <h2 id="panelTitle">Deep Scan history snapshot</h2>
+          </div>
+          <div class="grade-ring" aria-label="Risk grade">C</div>
+        </header>
+
+        <div class="result-grid" aria-label="Real daemon summary">
+          <div>
+            <span class="metric-label">Findings</span>
+            <strong id="findingCount">--</strong>
+          </div>
+          <div>
+            <span class="metric-label">Critical</span>
+            <strong id="criticalCount">--</strong>
+          </div>
+          <div>
+            <span class="metric-label">After FAIL</span>
+            <strong id="afterFailCount">--</strong>
+          </div>
+        </div>
+
+        <div class="filters" aria-label="Fixability filters">
+          <button class="filter active" type="button">Fix now</button>
+          <button class="filter" type="button">Needs review</button>
+          <button class="filter" type="button">All</button>
+        </div>
+
+        <section class="accordion-stack" aria-label="Risk dimensions">
+          <details open>
+            <summary>
+              <span>Prompt Injection</span>
+              <span class="ui-chip" data-tone="critical">Confirmed</span>
+            </summary>
+            <p id="promptCopy">Loading daemon evidence...</p>
+            <ol>
+              <li>Keep the browser-observed canary trace attached to the finding.</li>
+              <li>Add a server-side guard before tool calls that move money or disclose PII.</li>
+              <li>Verify by rerunning the same probe after the fix.</li>
+            </ol>
+          </details>
+
+          <details>
+            <summary>
+              <span>Excessive Agency</span>
+              <span class="ui-chip" data-tone="info">Confirmed</span>
+            </summary>
+            <p id="agencyCopy">Loading daemon evidence...</p>
+            <ol>
+              <li>Require approval for high-impact tools.</li>
+              <li>Scope runtime permissions to the signed support workflow.</li>
+              <li>Keep destructive actions behind explicit review.</li>
+            </ol>
+          </details>
+
+          <details>
+            <summary>
+              <span>PII Egress</span>
+              <span class="ui-chip" data-tone="info">Confirmed</span>
+            </summary>
+            <p id="piiCopy">Loading daemon evidence...</p>
+            <ol>
+              <li>Block external recipients when customer PII is present.</li>
+              <li>Strip PII before analytics or trace export.</li>
+              <li>Re-run the exact browser-panel scan.</li>
+            </ol>
+          </details>
+        </section>
+      </aside>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
