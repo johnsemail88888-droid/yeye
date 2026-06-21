@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Mode 2 Hover Binding Prototype</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="vibe-app" data-app>
+      <div class="desktop-shell">
+        <nav class="activity-rail" aria-label="Activity rail">
+          <button class="rail-button is-active" type="button" aria-label="Files">F</button>
+          <button class="rail-button" type="button" aria-label="Search">S</button>
+          <button class="rail-button" type="button" aria-label="Risk scan">R</button>
+          <button class="rail-button" type="button" aria-label="Suggestions">G</button>
+          <button class="rail-button" type="button" aria-label="Run">Run</button>
+        </nav>
+
+        <aside class="project-rail" aria-label="Project files">
+          <section class="panel-section">
+            <div class="title-row">
+              <h1 class="product-title">VibeShield</h1>
+              <span class="pill live" data-source-pill>LIVE</span>
+            </div>
+            <p class="meta" data-source-copy>Read-only state snapshot.</p>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-eyebrow">State Summary</p>
+            <div class="stat-grid" data-stat-grid></div>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-eyebrow">Guided Demo Project</p>
+            <ul class="file-list">
+              <li class="file-row is-active">
+                <span>support-agent/tools.ts</span>
+                <span class="badge" data-file-badge>0</span>
+              </li>
+              <li class="file-row">
+                <span>support-agent/runtime.ts</span>
+                <span class="badge">MOCK</span>
+              </li>
+              <li class="file-row">
+                <span>preview/output.html</span>
+                <span class="badge">TODO</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+
+        <section class="editor-pane" aria-label="Editor">
+          <header class="topbar">
+            <div>
+              <div class="breadcrumbs">support-agent / tools.ts</div>
+              <div class="meta">Hover a spot, click it, then click the matching card. Source writes are not performed.</div>
+            </div>
+            <div class="row-actions">
+              <button class="secondary-button" type="button" data-action="prev">Previous</button>
+              <button class="primary-button" type="button" data-action="next">Next</button>
+            </div>
+          </header>
+
+          <div class="editor-scroll" data-editor-scroll>
+            <article class="code-card" aria-label="Mock editor buffer">
+              <header class="code-header">
+                <span>MOCK TODO editor spans</span>
+                <span>selectedFindingId: <span data-selected-label>none</span></span>
+              </header>
+              <div data-editor-lines></div>
+            </article>
+          </div>
+
+          <footer class="bottom-log" aria-label="Local event log">
+            <ul class="event-list" data-event-list>
+              <li class="event-row"><span class="dot"></span><span>Hover binding ready. All changes are local UI state.</span></li>
+            </ul>
+          </footer>
+        </section>
+
+        <aside class="suggestions-panel" aria-label="Suggestions">
+          <section class="panel-section">
+            <div class="title-row">
+              <div>
+                <p class="section-eyebrow">Suggestions</p>
+                <h2 class="product-title">Two-way Binding</h2>
+              </div>
+              <span class="kbd">F</span>
+            </div>
+            <p class="meta">Selected cards expand; unselected cards stay compact like a dense issue list.</p>
+          </section>
+
+          <section class="panel-section">
+            <ul class="card-list" data-card-list></ul>
+          </section>
+        </aside>
+      </div>
+
+      <section class="popover" data-popover role="status" aria-live="polite"></section>
+    </main>
+
+    <script src="/desktop/app.js"></script>
+  </body>
+</html>
