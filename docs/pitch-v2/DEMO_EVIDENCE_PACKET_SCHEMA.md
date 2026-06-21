@@ -6,10 +6,13 @@ Last updated: 2026-06-21 07:04 PT
 Schema file:
 
 - `tests/pitch-spec/demo_evidence_packet.schema.json`
+- `tests/pitch-spec/demo_evidence_packet.example.json`
 
 Purpose:
 
 The schema gives the integration owner a structured target for a future filled evidence packet. It does not fill the packet and does not create live evidence.
+
+The example JSON is a placeholder only. It intentionally uses TODO values, NOT_CONFIGURED / ROADMAP labels, and false timing/signoff fields.
 
 ## What It Requires
 
@@ -35,3 +38,5 @@ The schema preserves conservative defaults:
 Use this schema only after the integration owner creates a filled JSON evidence packet in an allowed future location. This SPEC_ONLY branch does not create that filled packet.
 
 Do not use schema validation to claim the demo is live. Passing a schema only means the packet is structurally complete; the artifact paths still need human review.
+
+Do not use the example packet as evidence. It is a safe starting shape for the integration owner to replace with real values.

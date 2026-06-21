@@ -1,0 +1,157 @@
+{
+  "route": "ROADMAP_NOT_CONFIGURED",
+  "decision": {
+    "owner": "TODO",
+    "time": "TODO",
+    "demo_surface": "TODO",
+    "source_label_shown_to_judge": "NOT_CONFIGURED",
+    "fallback_route": "ROADMAP_NOT_CONFIGURED"
+  },
+  "evidence_identifiers": {
+    "project_id": "TODO",
+    "run_id": "TODO",
+    "test_id": "TODO",
+    "trace_id": "TODO",
+    "before_artifact_path": "TODO",
+    "after_artifact_path": "TODO",
+    "verify_artifact_path": "TODO",
+    "ci_artifact_or_workflow_path": ".github/workflows/vibeshield.yml if shown read-only as hand-committed"
+  },
+  "truth_badges": [
+    {
+      "segment": "App works normally",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO app/demo evidence",
+      "downgrade_if_missing": "LOCAL_FALLBACK"
+    },
+    {
+      "segment": "Feature selected",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO feature selection or scope evidence",
+      "downgrade_if_missing": "LOCAL_FALLBACK"
+    },
+    {
+      "segment": "Live assessment",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO endpoint result or recorded artifact",
+      "downgrade_if_missing": "LOCAL_FALLBACK"
+    },
+    {
+      "segment": "Critical finding",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO run_id plus before artifact",
+      "downgrade_if_missing": "RECORDED_REAL_RUN"
+    },
+    {
+      "segment": "Trace/evidence chain",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO trace_id or artifact path",
+      "downgrade_if_missing": "RECORDED_REAL_RUN"
+    },
+    {
+      "segment": "Apply protection",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO guard decision or after artifact",
+      "downgrade_if_missing": "RECORDED_REAL_RUN"
+    },
+    {
+      "segment": "Same-test proof",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO verify artifact with attack and benign outcomes",
+      "downgrade_if_missing": "RECORDED_REAL_RUN"
+    },
+    {
+      "segment": "Static readiness checklist",
+      "planned_badge": "ROADMAP",
+      "evidence_field": "docs/pitch-v2 specs only",
+      "downgrade_if_missing": "ROADMAP"
+    },
+    {
+      "segment": "Deployment/CI",
+      "planned_badge": "NOT_CONFIGURED",
+      "evidence_field": "TODO hand-committed workflow only; generated CI remains ROADMAP",
+      "downgrade_if_missing": "ROADMAP"
+    }
+  ],
+  "timing": {
+    "three_minute_timing_pass": false,
+    "runs": [
+      {
+        "run_number": 1,
+        "source_label": "LOCAL_FALLBACK",
+        "start": "TODO",
+        "stop": "TODO",
+        "duration_seconds": 0,
+        "failure_visible_by_70s": false,
+        "fix_starts_by_95s": false,
+        "after_proof_by_150s": false,
+        "pass": false,
+        "evidence_path": "TODO"
+      },
+      {
+        "run_number": 2,
+        "source_label": "LOCAL_FALLBACK",
+        "start": "TODO",
+        "stop": "TODO",
+        "duration_seconds": 0,
+        "failure_visible_by_70s": false,
+        "fix_starts_by_95s": false,
+        "after_proof_by_150s": false,
+        "pass": false,
+        "evidence_path": "TODO"
+      },
+      {
+        "run_number": 3,
+        "source_label": "LOCAL_FALLBACK",
+        "start": "TODO",
+        "stop": "TODO",
+        "duration_seconds": 0,
+        "failure_visible_by_70s": false,
+        "fix_starts_by_95s": false,
+        "after_proof_by_150s": false,
+        "pass": false,
+        "evidence_path": "TODO"
+      }
+    ]
+  },
+  "capability_downgrades": [
+    {
+      "capability": "Browser Shield Pill / real extension",
+      "default_label": "ROADMAP",
+      "upgrade_evidence_required": "Extension package, live demo evidence, and integration-owner signoff",
+      "current_position": "Do not call LIVE"
+    },
+    {
+      "capability": "npx vibeshield install",
+      "default_label": "ROADMAP",
+      "upgrade_evidence_required": "Repo has real CLI bin and install flow",
+      "current_position": "Do not show as working"
+    },
+    {
+      "capability": "Generated GitHub Action",
+      "default_label": "ROADMAP",
+      "upgrade_evidence_required": "CLI or generator creates workflow",
+      "current_position": "Existing workflow is hand-committed"
+    },
+    {
+      "capability": "Readiness checks 5-12",
+      "default_label": "ROADMAP",
+      "upgrade_evidence_required": "Scanner or runtime artifacts implement each check",
+      "current_position": "Static checklist only"
+    },
+    {
+      "capability": "Legal/platform findings",
+      "default_label": "STATIC_REVIEW_INDICATOR",
+      "upgrade_evidence_required": "Product has evidence cards with source and limitation",
+      "current_position": "Not legal advice"
+    }
+  ],
+  "presenter_signoff": {
+    "route_chosen": false,
+    "evidence_packet_complete": false,
+    "three_rehearsals_measured": false,
+    "any_live_badge_without_evidence": false,
+    "any_do_not_claim_item_still_in_script": false,
+    "final_safe_close_selected": "TODO"
+  }
+}

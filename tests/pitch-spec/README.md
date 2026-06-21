@@ -44,3 +44,4 @@ Forbidden writes:
 16. Pitch V2 Start Here gives presenter, integration owner, and reviewer read paths without adding product claims.
 17. Integration owner review checklist separates mergeable docs/specs from runtime implementation and live-claim upgrades.
 18. Demo evidence packet schema defines structural requirements without claiming live evidence.
+19. Demo evidence packet example is a TODO/NOT_CONFIGURED placeholder, not evidence.

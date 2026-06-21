@@ -36,6 +36,8 @@
     "Added docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md to separate docs/spec merge review from runtime implementation and live-claim upgrades.",
     "Added tests/pitch-spec/integration_owner_review_acceptance.json to make integration-owner review gates reviewer-checkable.",
     "Added tests/pitch-spec/demo_evidence_packet.schema.json as a SPEC_ONLY structural schema for a future filled evidence packet.",
-    "Added docs/pitch-v2/DEMO_EVIDENCE_PACKET_SCHEMA.md and tests/pitch-spec/demo_evidence_packet_schema_acceptance.json to document and review the schema without claiming live evidence."
+    "Added docs/pitch-v2/DEMO_EVIDENCE_PACKET_SCHEMA.md and tests/pitch-spec/demo_evidence_packet_schema_acceptance.json to document and review the schema without claiming live evidence.",
+    "Added tests/pitch-spec/demo_evidence_packet.example.json as a TODO/NOT_CONFIGURED placeholder shape, not evidence.",
+    "Added tests/pitch-spec/demo_evidence_packet_example_acceptance.json to make the placeholder status reviewer-checkable."
   ]
 }

@@ -42,7 +42,9 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 - `tests/pitch-spec/integration_owner_review_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet.schema.json`
+- `tests/pitch-spec/demo_evidence_packet.example.json`
 - `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
+- `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -80,7 +82,9 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 - `tests/pitch-spec/integration_owner_review_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet.schema.json`
+- `tests/pitch-spec/demo_evidence_packet.example.json`
 - `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
+- `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -246,3 +250,16 @@ Purpose:
 - Define the structural fields required for a future filled evidence packet.
 - Keep schema validation distinct from live evidence review.
 - Preserve conservative timing and claim defaults until the integration owner supplies real artifacts.
+
+## 2026-06-21 07:34 PT SPEC_ONLY Increment
+
+Added:
+
+- `tests/pitch-spec/demo_evidence_packet.example.json`
+- `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
+
+Purpose:
+
+- Provide a schema-shaped placeholder packet using TODO / NOT_CONFIGURED / ROADMAP values only.
+- Prevent the placeholder from being mistaken for live or recorded demo evidence.
+- Give the integration owner a safe structure to replace with real values later.

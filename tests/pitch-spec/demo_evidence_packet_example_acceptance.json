@@ -1,0 +1,26 @@
+{
+  "spec_name": "pitch-v2-demo-evidence-packet-example-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "DEMO-EXAMPLE-001",
+      "name": "example is not evidence",
+      "expected": "Example packet uses ROADMAP_NOT_CONFIGURED, NOT_CONFIGURED, TODO, and false timing/signoff values rather than real demo identifiers."
+    },
+    {
+      "id": "DEMO-EXAMPLE-002",
+      "name": "example keeps timing false",
+      "expected": "Example packet keeps three_minute_timing_pass false and every rehearsal row pass false."
+    },
+    {
+      "id": "DEMO-EXAMPLE-003",
+      "name": "example preserves roadmap downgrades",
+      "expected": "Browser extension, CLI install, generated CI, readiness checks 5-12, and legal/platform findings remain ROADMAP or STATIC_REVIEW_INDICATOR."
+    },
+    {
+      "id": "DEMO-EXAMPLE-004",
+      "name": "example is schema-shaped only",
+      "expected": "Example packet is provided as a structural placeholder and must be replaced or filled by the integration owner before use."
+    }
+  ]
+}

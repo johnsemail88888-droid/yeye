@@ -59,6 +59,7 @@ Open in this order:
 10. `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
 11. `tests/pitch-spec/integration_owner_review_acceptance.json`
 12. `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
+13. `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
 
 Goal:
 Check that every claim is evidence-bound and that timing/overall remain false until measured.
