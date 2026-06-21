@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-evidence-binding-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "EVIDENCE-BIND-001",
+      "name": "every scripted live action has a binding",
+      "expected": "Each live pitch action maps to a current endpoint, a named artifact path, or an explicit ROADMAP label."
+    },
+    {
+      "id": "EVIDENCE-BIND-002",
+      "name": "state-changing endpoints are integration-owned",
+      "expected": "The SPEC_ONLY branch documents POST /api/live-scan, POST /api/run, POST /api/install-guard, and POST /api/agent but does not call them."
+    },
+    {
+      "id": "EVIDENCE-BIND-003",
+      "name": "truth badges default safe",
+      "expected": "A capability defaults to NOT CONFIGURED or LOCAL FALLBACK unless current endpoint or artifact evidence supports LIVE."
+    },
+    {
+      "id": "EVIDENCE-BIND-004",
+      "name": "timing cannot be self-attested",
+      "expected": "three_minute_timing_pass and overall_pass stay false until three measured rehearsals with artifacts exist."
+    },
+    {
+      "id": "EVIDENCE-BIND-005",
+      "name": "no duplicate judge mode",
+      "expected": "This branch never creates UI, Shield Pill, Mode-1, Mode-2, packages/judge-mode-v2, or ui-next implementation files."
+    }
+  ]
+}

@@ -33,3 +33,4 @@ Forbidden writes:
 7. Legal cards say "Risk indicator for developer or legal review; not legal advice."
 8. Timing remains false unless three real rehearsals are measured.
 9. No UI is built by this branch.
+10. Every scripted live action is bound to endpoint evidence, artifact evidence, or ROADMAP in `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`.

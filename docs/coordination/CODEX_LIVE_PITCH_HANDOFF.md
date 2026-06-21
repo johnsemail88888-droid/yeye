@@ -21,9 +21,11 @@ SPEC_ONLY, per both coordination reviews:
 - `docs/pitch-v2/DEVPOST_COPY.md`
 - `docs/pitch-v2/MORNING_REHEARSAL.md`
 - `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
+- `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
 - `docs/pitch-v2/pitch_automation_results.json`
 - `tests/pitch-spec/README.md`
 - `tests/pitch-spec/pitch_truth_acceptance.json`
+- `tests/pitch-spec/evidence_binding_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -34,6 +36,7 @@ SPEC_ONLY, per both coordination reviews:
 - Read coordination and review files with PowerShell `Get-Content`
 - Read-only fact checks with `Get-Content` and `rg`
 - Created only SPEC_ONLY directories/files
+- Added evidence binding and truth-badge gates for scripted actions
 
 Not run:
 
@@ -51,6 +54,7 @@ Created reviewer acceptance specs in:
 
 - `tests/pitch-spec/README.md`
 - `tests/pitch-spec/pitch_truth_acceptance.json`
+- `tests/pitch-spec/evidence_binding_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -97,3 +101,17 @@ Planned only, not measured:
 - LIVE labels require current daemon or artifact evidence.
 - Legal/platform copy must remain "risk indicator for developer or legal review; not legal advice."
 - UI integration remains owned outside this SPEC_ONLY branch.
+
+## 2026-06-21 03:04 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
+- `tests/pitch-spec/evidence_binding_acceptance.json`
+
+Purpose:
+
+- Bind each scripted demo action to an existing endpoint, artifact path, or ROADMAP label.
+- Make truth badges fail-safe by default.
+- Keep timing gates false until measured rehearsals exist.
+- Reassert that state-changing endpoints and UI implementation are owned by the integration/UI worker, not this branch.

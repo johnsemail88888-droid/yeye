@@ -3,6 +3,8 @@
 Status: SPEC_ONLY
 Owner boundary: this file specifies the route only. UI implementation belongs to the integration/UI owner.
 
+Detailed proof requirements are in `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`.
+
 ## Route
 
 | Step | User action | Expected screen | Backing evidence | Truth label |
