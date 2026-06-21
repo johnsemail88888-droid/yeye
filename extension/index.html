@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Extension Fix Guide</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="extension-shell" data-app>
+      <aside class="popup-pane" aria-label="Extension popup">
+        <header class="pane-head">
+          <div class="title-stack">
+            <span class="eyebrow">Extension experience</span>
+            <span class="title">Scan direction</span>
+            <span class="subtle">Prototype only. Real MV3 packaging is cut.</span>
+          </div>
+          <button class="icon-button" type="button" data-action="toggle-command" title="Command menu" aria-label="Command menu">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M5 7h14M5 12h10M5 17h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </header>
+        <section class="scan-cards" data-scan-cards></section>
+      </aside>
+
+      <section class="side-panel" aria-label="Pinned side panel">
+        <header class="side-head">
+          <div class="title-stack">
+            <span class="eyebrow">Pinned side panel</span>
+            <span class="title">Live-site fix guide</span>
+            <span class="subtle" data-source-line>Loading state snapshot</span>
+          </div>
+          <div class="grade-shell" aria-label="Risk grade unavailable">
+            <strong>TBD</strong>
+            <span>TODO grade</span>
+          </div>
+        </header>
+        <section class="summary-grid" data-summary-grid></section>
+        <section class="filter-strip">
+          <div class="title-stack">
+            <span class="eyebrow">Fixability rail</span>
+            <span class="subtle">Choose the risk dimension to expand.</span>
+          </div>
+          <div class="filter-list" data-filter-list></div>
+        </section>
+        <section class="accordion-list" data-accordion-list></section>
+      </section>
+
+      <section class="command-menu" data-command-menu aria-label="Command menu">
+        <input class="command-search" data-command-search aria-label="Search commands" placeholder="Search extension actions">
+        <div class="command-list" data-command-list></div>
+      </section>
+    </main>
+    <script type="module" src="/extension/app.js"></script>
+  </body>
+</html>

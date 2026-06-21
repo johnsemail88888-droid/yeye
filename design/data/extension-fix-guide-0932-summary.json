@@ -1,0 +1,82 @@
+{
+  "captured_at": "2026-06-21T09:33:57.0569980-07:00",
+  "source_status": "LIVE /api/state",
+  "source_detail": "Read-only GET http://127.0.0.1:7878/api/state. The endpoint exposed project id, run ids, risk_map findings, severity, category, and verify booleans. It did not expose browser confidence, grade, DOM selectors, request URLs, canary traces, or extension scan mode.",
+  "project_id": "support-agent",
+  "run_id": "run-0001",
+  "live_scan_run_id": "run-0002",
+  "finding_count": 8,
+  "severity_counts": {
+    "critical": 3,
+    "high": 3,
+    "medium": 1,
+    "low": 1
+  },
+  "verify": {
+    "demo_ready": true,
+    "report_audit_pass": true,
+    "browser_live_loop_pass": true
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "tool": "refund_customer",
+      "category": "money-movement",
+      "severity": "critical",
+      "detail": "moves money - must require approval above a threshold"
+    },
+    {
+      "id": "F2",
+      "tool": "send_email",
+      "category": "external-communication",
+      "severity": "critical",
+      "detail": "can exfiltrate data to an external recipient"
+    },
+    {
+      "id": "F3",
+      "tool": "update_user_plan",
+      "category": "privilege-change",
+      "severity": "high",
+      "detail": "changes account state / entitlements"
+    },
+    {
+      "id": "F4",
+      "tool": "lookup_customer",
+      "category": "pii-access",
+      "severity": "high",
+      "detail": "reads customer PII (name/email/phone)"
+    },
+    {
+      "id": "F5",
+      "tool": "read_ticket",
+      "category": "untrusted-input",
+      "severity": "medium",
+      "detail": "reads attacker-controllable ticket text"
+    },
+    {
+      "id": "F6",
+      "tool": "create_support_reply",
+      "category": "output",
+      "severity": "low",
+      "detail": "drafts a customer-facing reply"
+    },
+    {
+      "id": "F7",
+      "category": "missing-control",
+      "severity": "critical",
+      "detail": "no runtime intent guard: untrusted ticket text can trigger any tool, including money movement and PII exfiltration"
+    },
+    {
+      "id": "F8",
+      "category": "missing-control",
+      "severity": "high",
+      "detail": "no approval gate for high-impact tools (refund / plan change)"
+    }
+  ],
+  "mock_todo": [
+    "Mode 1 browser confidence is not exposed by /api/state.",
+    "Overall A-F grade is not exposed by /api/state.",
+    "DOM selectors, request URLs, and canary in-out evidence are not exposed by /api/state.",
+    "This is an extension experience prototype, not shipped MV3 packaging."
+  ]
+}
