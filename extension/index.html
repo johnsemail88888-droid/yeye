@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VibeShield Command Palette</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="../ui-next/styles.css" />
+  </head>
+  <body>
+    <main class="prototype-shell">
+      <section class="target-page" aria-label="Observed deployed site">
+        <div class="browser-bar">
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <div class="address">https://demo.customer-agent.local/support</div>
+          <span class="chip" data-tone="live">Observed tab</span>
+        </div>
+        <div class="page-body">
+          <div class="page-meta">
+            <span>Support Agent</span>
+            <span>Mode 1 side panel</span>
+          </div>
+          <div class="mock-agent">
+            <div class="bubble">Customer request includes refund and account details.</div>
+            <div class="bubble agent">Agent response and tool attempts are summarized in the pinned VibeShield panel.</div>
+            <div class="target-highlight" id="targetHighlight" hidden>Highlighted evidence selector</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="VibeShield results side panel">
+        <header class="panel-header">
+          <div>
+            <p class="eyebrow">Pinned side panel</p>
+            <h1>Deep Scan results</h1>
+          </div>
+          <div class="grade-ring" aria-label="Risk grade">C</div>
+        </header>
+
+        <div class="chip-row">
+          <span class="chip" data-tone="live">LIVE /api/state</span>
+          <span class="chip" data-tone="fallback">Phoenix local fallback</span>
+        </div>
+
+        <section class="metric-grid" aria-label="Scan summary">
+          <div class="metric">
+            <span>Findings</span>
+            <strong id="findingCount">--</strong>
+          </div>
+          <div class="metric">
+            <span>Critical</span>
+            <strong id="criticalCount">--</strong>
+          </div>
+          <div class="metric">
+            <span>After FAIL</span>
+            <strong id="afterFailCount">--</strong>
+          </div>
+        </section>
+
+        <button class="command-entry" type="button" id="openPalette">
+          <span>Open command palette</span>
+          <span class="kbd">Ctrl K</span>
+        </button>
+
+        <div class="status-line" role="status" id="statusLine">Ready. Press Ctrl+K to run a side-panel action.</div>
+
+        <section aria-label="Finding detail">
+          <details open>
+            <summary>
+              <span>Prompt Injection</span>
+              <span class="chip" data-tone="critical">Confirmed</span>
+            </summary>
+            <p>Palette actions operate on the selected finding without leaving the pinned side panel.</p>
+            <ol>
+              <li>Highlight the observed element on the live page.</li>
+              <li>Copy the evidence summary for review.</li>
+              <li>Rerun the same scan or export the local trace bundle.</li>
+            </ol>
+          </details>
+        </section>
+      </aside>
+    </main>
+
+    <div class="command-overlay" id="commandOverlay" hidden>
+      <section class="command-modal" role="dialog" aria-modal="true" aria-labelledby="paletteTitle">
+        <header class="command-top">
+          <div>
+            <p class="eyebrow">Command palette</p>
+            <h2 id="paletteTitle">Side-panel actions</h2>
+          </div>
+          <span class="kbd">Esc</span>
+        </header>
+        <input class="command-input" id="commandSearch" autocomplete="off" placeholder="Search actions..." />
+        <div class="command-list" id="commandList" role="listbox"></div>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VibeShield">
+  <rect width="64" height="64" rx="14" fill="#08090A"/>
+  <path d="M32 8 50 15v14c0 12-7 21-18 27-11-6-18-15-18-27V15l18-7Z" fill="#5E6AD2"/>
+  <path d="M22 25h20M22 33h20M22 41h12" stroke="#F7F8F8" stroke-width="4" stroke-linecap="round"/>
+</svg>
