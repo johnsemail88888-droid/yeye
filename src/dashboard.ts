@@ -33,7 +33,7 @@ for (const r of beforeFails) {
 }
 timeline.push(`Installed VibeShield runtime guard (intent firewall)`);
 timeline.push(`AFTER: reran same ${after.length} tests — <span style="color:#43d17a">0 unauthorized executed</span>`);
-timeline.push(`VERIFY: <b style="color:${verify.overall_pass ? "#43d17a" : "#ff5c6c"}">overall_pass = ${verify.overall_pass}</b>`);
+timeline.push(`VERIFY: <b style="color:${verify.demo_ready ? "#43d17a" : "#ff5c6c"}">demo_ready = ${verify.demo_ready}</b>`);
 
 const findingsHtml = risk.findings
   .map(
@@ -83,8 +83,8 @@ td{padding:8px;border-bottom:1px solid #161b22;font-size:13px;vertical-align:top
 </style></head><body>
 <header>
   <h1>🛡 VibeShield Studio <span style="color:#7d8590;font-weight:400">— Risk Debugger</span></h1>
-  <div class="badge" style="background:${verify.overall_pass ? "#43d17a22" : "#ff5c6c22"};color:${verify.overall_pass ? "#43d17a" : "#ff5c6c"}">
-    ${verify.overall_pass ? "VERIFY PASSED" : "VERIFY FAILED"} · before→after loop
+  <div class="badge" style="background:${verify.demo_ready ? "#43d17a22" : "#ff5c6c22"};color:${verify.demo_ready ? "#43d17a" : "#ff5c6c"}">
+    ${verify.demo_ready ? "VERIFY PASSED" : "VERIFY FAILED"} · before→after loop
   </div>
 </header>
 <div class="grid">
@@ -126,4 +126,4 @@ td{padding:8px;border-bottom:1px solid #161b22;font-size:13px;vertical-align:top
 
 writeFileSync("studio.html", html);
 console.log("studio.html written —", html.length, "bytes");
-console.log(`  findings: ${risk.findings.length} | before fails: ${beforeFails.length} | after fails: ${after.filter((r) => r.eval.final_status === "FAIL").length} | verify: ${verify.overall_pass}`);
+console.log(`  findings: ${risk.findings.length} | before fails: ${beforeFails.length} | after fails: ${after.filter((r) => r.eval.final_status === "FAIL").length} | verify: ${verify.demo_ready}`);

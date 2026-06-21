@@ -67,6 +67,7 @@
 </div>
 <script>
 let STATE = null, TAB = "overview";
+const esc = (x) => String(x == null ? "" : x).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const sev = s => ({critical:"#ff5c6c",high:"#ffb454",medium:"#ffd866",low:"#9aa4b2"}[s]||"#9aa4b2");
 const sc = s => ({FAIL:"#ff5c6c",PASS:"#43d17a",BLOCKED:"#43d17a",NEEDS_APPROVAL:"#ffb454"}[s]||"#9aa4b2");
 
@@ -112,20 +113,20 @@ function renderPanel(){
       <div class="card" style="margin-top:8px">${rm.tools.length} tools · ${rm.findings.length} findings · ${rm.findings.filter(f=>f.severity==="critical").length} critical · guard ${rm.guard_present?"present":"<span style='color:#ff5c6c'>missing</span>"}</div>`;
   } else if(TAB==="findings"){
     h=[...rm.findings].sort((a,b)=>["critical","high","medium","low"].indexOf(a.severity)-["critical","high","medium","low"].indexOf(b.severity))
-      .map(f=>`<div class="card"><span class="pill" style="background:${sev(f.severity)}22;color:${sev(f.severity)}">${f.severity.toUpperCase()}</span><b>${f.tool||f.category}</b><div class="muted">${f.detail}</div></div>`).join("");
+      .map(f=>`<div class="card"><span class="pill" style="background:${sev(f.severity)}22;color:${sev(f.severity)}">${esc(String(f.severity).toUpperCase())}</span><b>${esc(f.tool||f.category)}</b><div class="muted">${esc(f.detail)}</div></div>`).join("");
   } else if(TAB==="evidence"){
     h=(s.runs_before||[]).filter(r=>r.eval.final_status==="FAIL").map(r=>`<div class="card">
-      <b>${r.test}</b><div class="muted" style="margin:4px 0">untrusted ticket:</div>
-      <pre>${(r.ticket||"").replace(/</g,"&lt;")}</pre>
+      <b>${esc(r.test)}</b><div class="muted" style="margin:4px 0">untrusted ticket:</div>
+      <pre>${esc(r.ticket||"")}</pre>
       <div class="muted" style="margin-top:6px">agent did:</div>
-      <pre style="color:#ff8b94">${r.executed.filter(c=>["refund_customer","send_email"].includes(c.tool)).map(c=>c.tool+"("+JSON.stringify(c.args)+")").join("\n")||"—"}</pre></div>`).join("")
+      <pre style="color:#ff8b94">${esc(r.executed.filter(c=>["refund_customer","send_email"].includes(c.tool)).map(c=>c.tool+"("+JSON.stringify(c.args)+")").join("\n"))||"—"}</pre></div>`).join("")
       || `<div class="muted">no failures recorded</div>`;
   } else {
     h=`<table><tr><th>Test</th><th>Before</th><th></th><th>After</th></tr>${
       (s.runs_before||[]).map(b=>{ const a=(s.runs_after||[]).find(x=>x.test===b.test)||b;
         const reason=(a.guardDecisions||[]).find(g=>g.decision!=="allow")?.reason||"";
-        return `<tr><td>${b.test}</td><td><span class="status" style="color:${sc(b.eval.final_status)}">${b.eval.final_status}</span></td>
-          <td class="arrow">→</td><td><span class="status" style="color:${sc(a.eval.final_status)}">${a.eval.final_status}</span><div class="muted">${reason}</div></td></tr>`;
+        return `<tr><td>${esc(b.test)}</td><td><span class="status" style="color:${sc(b.eval.final_status)}">${esc(b.eval.final_status)}</span></td>
+          <td class="arrow">→</td><td><span class="status" style="color:${sc(a.eval.final_status)}">${esc(a.eval.final_status)}</span><div class="muted">${esc(reason)}</div></td></tr>`;
       }).join("")}</table>`;
   }
   p.innerHTML=h;

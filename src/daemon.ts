@@ -98,10 +98,20 @@ const json = (res: ServerResponse, code: number, obj: unknown) => {
   res.end(JSON.stringify(obj));
 };
 
+// Same-origin / DNS-rebinding guard for state-changing requests.
+const ALLOWED_HOSTS = new Set(["127.0.0.1:7878", "localhost:7878"]);
+function originOk(req: IncomingMessage): boolean {
+  if (!ALLOWED_HOSTS.has(req.headers.host || "")) return false;
+  const origin = req.headers.origin;
+  return !origin || /^https?:\/\/(127\.0\.0\.1|localhost):7878$/.test(origin);
+}
+
 createServer(async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const url = (req.url || "/").split("?")[0];
     const m = req.method || "GET";
+
+    if (m === "POST" && !originOk(req)) return json(res, 403, { error: "forbidden origin" });
 
     if (m === "GET" && SAFE_PAGES[url]) return servePage(res, SAFE_PAGES[url]);
     if (m === "GET" && url === "/api/state") return json(res, 200, state());

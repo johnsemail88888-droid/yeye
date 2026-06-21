@@ -29,3 +29,19 @@ Independent harsh subagent critiques → I fix → commit → re-critique. Goal:
 
 Verified after fixes: typecheck exit 0 · 22/22 tests pass · loop 5 FAIL → 0 FAIL · `demo:verify-three` 3/3 · **demo_ready=true** (browser_live via the real endpoint).
 
+---
+
+## Round 2 — SCORE 7/10
+> "All 8 round-1 fixes verified genuine (ran tsc/vitest/loop/XSS-probe). No remaining P0. But the verifier/reporter/scanner + the daemon have zero test coverage, `dashboard.ts` ships broken, one live shell-injection remains in `experiment.ts`, and the pages have latent XSS."
+
+**Issues → fixes applied (round 3 commit) — verified:**
+1. ✅ `/api/agent` wrote attacker-supplied ticket into the shared evidence dir → `runTicket` is now **non-persisting** (`runScenario(..., persist=false)`); daemon adds a **same-origin/host check** (`originOk`, 403 on mismatch).
+2. ✅ Deciders untested → extracted `computeGates` (`src/verify.ts`) + `auditReport` (`src/auditor.ts`) as **pure, side-effect-free** functions (script `main` guarded by `import.meta.url`); added **+13 tests** (`verify.test.ts` 6, `auditor.test.ts` 7). Total now **35 tests**.
+3. ✅ `dashboard.ts` read non-existent `verify.overall_pass` → `demo_ready`.
+4. ✅ `experiment.ts` `execSync(\`curl ... ${endpoint}\`)` shell-injection → `fetch()` + `^https?://` validation; removed `child_process`.
+5. ✅ Honesty copy: `README.md` LIMITATIONS section makes the deterministic-stand-in / sandbox / seam-integration scope explicit; the auditor enforces "no fabricated integration."
+6. ✅ Latent XSS: added `esc()` and escaped every attacker-reachable interpolation in `app.html` + `demo.html`.
+Also added `README.md` and `LICENSE` (MIT).
+
+Verified: typecheck exit 0 · **35/35 tests** · loop 5 FAIL → 0 FAIL · report audit 100 · **demo_ready=true**.
+

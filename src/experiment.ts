@@ -1,5 +1,4 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
-import { execSync } from "node:child_process";
 
 // Arize / Phoenix integration. Builds a before/after Experiment over one stable
 // dataset and exports OpenInference-shaped OTel spans (the exact format Phoenix
@@ -64,11 +63,14 @@ writeFileSync(".vibeshield/traces/otel/openinference.jsonl", spans.map((s) => JS
 // --- optional: ship to a real Phoenix collector if configured ---
 const endpoint = process.env.PHOENIX_COLLECTOR_ENDPOINT;
 let phoenix_shipped = false;
-if (endpoint) {
+if (endpoint && /^https?:\/\//.test(endpoint)) {
   try {
-    execSync(`curl -s -X POST ${endpoint} -H "content-type: application/json" --data-binary @.vibeshield/traces/otel/openinference.jsonl`, { stdio: "ignore" });
-    phoenix_shipped = true;
-  } catch { phoenix_shipped = false; }
+    const payload = readFileSync(".vibeshield/traces/otel/openinference.jsonl", "utf8");
+    const resp = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: payload });
+    phoenix_shipped = resp.ok;
+  } catch {
+    phoenix_shipped = false;
+  }
 }
 
 writeFileSync(".vibeshield/experiments/phoenix_status.json", JSON.stringify({

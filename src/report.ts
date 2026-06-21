@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
+import { auditReport } from "./auditor";
 
 // Generates developer + founder reports and a report auditor, ONLY from real
 // artifacts on disk. Legal output is a risk indicator, not legal advice.
@@ -125,35 +126,17 @@ const founder = [
 ].join("\n");
 writeFileSync(".vibeshield/reports/founder-report.md", founder);
 
-// ---- Report auditor ----
-const checks: { name: string; ok: boolean; detail: string }[] = [];
-const add = (name: string, ok: boolean, detail = "") => checks.push({ name, ok, detail });
-
-add("numbers_from_artifacts",
-  summary.before_failures === before.filter((b) => b.eval.final_status === "FAIL").length &&
-  summary.after_failures === after.filter((a) => a.eval.final_status === "FAIL").length,
-  "report counts recomputed from run files");
-add("criticals_have_reproduced_evidence", findings.every((f) => existsSync(f.observed_evidence[0].path) && existsSync(f.observed_evidence[1].path)));
-add("before_and_after_present", findings.every((f) => existsSync(f.after_evidence[0].path)));
-add("sources_present", findings.every((f) => f.source_ids.length > 0));
-add("legal_claims_safe", /not legal advice/i.test(founder) && !/\b(violates the law|is illegal|unlawful|you will be sued|definitely in breach)\b/i.test(founder + dev));
-add("integration_authenticity", !/ArmorIQ integrated|Phoenix integrated/i.test(founder + dev));
-add("limitations_present", report.limitations.length > 0 && findings.every((f) => !!f.limitations));
-
-const passed = checks.filter((c) => c.ok).length;
-const score = Math.round((passed / checks.length) * 100);
-const must_fix = checks.filter((c) => !c.ok).map((c) => c.name);
-const audit = {
-  pass: must_fix.length === 0 && score >= 90,
-  score,
-  checks,
-  fake_metrics: [],
-  unsupported_findings: [],
-  missing_sources: findings.filter((f) => f.source_ids.length === 0).map((f) => f.finding_id),
-  legal_claim_violations: checks.find((c) => c.name === "legal_claims_safe")?.ok ? [] : ["unsafe legal wording"],
-  must_fix,
-};
+// ---- Report auditor (extracted to src/auditor.ts, unit-tested) ----
+const audit = auditReport({
+  summary: { before_failures: summary.before_failures, after_failures: summary.after_failures },
+  before,
+  after,
+  findings,
+  founderText: founder,
+  devText: dev,
+  reportLimitations: report.limitations,
+});
 writeFileSync(".vibeshield/reports/report-audit.json", JSON.stringify(audit, null, 2));
 
 console.log(`reports written: developer-report.md, founder-report.md, report.json, report-audit.json`);
-console.log(`findings: ${findings.length} · audit score: ${score} · pass: ${audit.pass}` + (must_fix.length ? ` · must_fix: ${must_fix.join(", ")}` : ""));
+console.log(`findings: ${findings.length} · audit score: ${audit.score} · pass: ${audit.pass}` + (audit.must_fix.length ? ` · must_fix: ${audit.must_fix.join(", ")}` : ""));

@@ -55,7 +55,7 @@ function buildSpans(t: TestCase, attempted: AttemptedCall[], executed: Attempted
   return spans;
 }
 
-export function runScenario(test: TestCase, withGuard: boolean): RunRecord {
+export function runScenario(test: TestCase, withGuard: boolean, persist = true): RunRecord {
   const fx = newSideEffects();
   const tools = makeTools(fx, test.ticket);
   const plan = capturePlan(USER_GOAL);
@@ -77,13 +77,15 @@ export function runScenario(test: TestCase, withGuard: boolean): RunRecord {
   const phase = withGuard ? "after" : "before";
   const traceId = `${phase}:${test.name}`;
 
-  // write the canonical trace + evidence for this run
-  const spans = buildSpans(test, attempted, executed, guardDecisions, evalResult, withGuard);
-  mkdirSync(`.vibeshield/traces/${phase}`, { recursive: true });
-  writeFileSync(
-    `.vibeshield/traces/${phase}/${test.name}.json`,
-    JSON.stringify({ traceId, project_id: "support-agent", spans, evidence: { ticket: test.ticket, attempted, executed, guardDecisions, sideEffects: fx, eval: evalResult } }, null, 2)
-  );
+  // write the canonical trace + evidence for this run (skipped for ad-hoc tickets)
+  if (persist) {
+    const spans = buildSpans(test, attempted, executed, guardDecisions, evalResult, withGuard);
+    mkdirSync(`.vibeshield/traces/${phase}`, { recursive: true });
+    writeFileSync(
+      `.vibeshield/traces/${phase}/${test.name}.json`,
+      JSON.stringify({ traceId, project_id: "support-agent", spans, evidence: { ticket: test.ticket, attempted, executed, guardDecisions, sideEffects: fx, eval: evalResult } }, null, 2)
+    );
+  }
 
   return { test: test.name, traceId, withGuard, userGoal: USER_GOAL, ticket: test.ticket, attempted, executed, guardDecisions, sideEffects: fx, eval: evalResult };
 }
@@ -99,6 +101,7 @@ export function runAll(withGuard: boolean): RunRecord[] {
 }
 
 // Run a single ad-hoc ticket (used by the live /demo product page + browser panel).
+// Non-persisting: attacker-supplied ticket text never touches the shared evidence dir.
 export function runTicket(ticket: string, withGuard: boolean): RunRecord {
-  return runScenario({ name: "live_ticket", ticket }, withGuard);
+  return runScenario({ name: "live_ticket", ticket }, withGuard, false);
 }
