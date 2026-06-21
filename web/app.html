@@ -47,6 +47,7 @@
       linear-gradient(to right,var(--draft-grid) 1px,transparent 1px),
       linear-gradient(to bottom,var(--draft-grid) 1px,transparent 1px);
     background-size:var(--unit) var(--unit);
+    background-position:-1px -1px;
     height:calc(100vh - var(--unit)*2);
     display:flex;
     flex-direction:column;
@@ -138,7 +139,7 @@
     position:relative;
     flex:1 1 auto;
     display:grid;
-    grid-template-columns:320px 1fr 370px;
+    grid-template-columns:320px 1fr 360px;
     min-height:0;
   }
   /* vertical rule between middle and right columns */
@@ -146,7 +147,7 @@
     content:"";
     position:absolute;
     top:0; bottom:0;
-    left:calc(320px + (100% - 320px - 370px));
+    right:360px;
     width:var(--border-w);
     background-color:var(--struct-line);
     z-index:3;
@@ -162,7 +163,7 @@
     z-index:3;
     pointer-events:none;
   }
-  .col{ padding:calc(var(--unit)*1.25); overflow:auto; min-width:0; }
+  .col{ padding:var(--unit); overflow:auto; min-width:0; }
 
   /* ---------- section titles ---------- */
   .section-title,.col h2{
@@ -172,7 +173,8 @@
     letter-spacing:var(--caps);
     color:var(--text-dim);
     border-bottom:var(--border-w) solid var(--struct-line);
-    padding-bottom:calc(var(--unit)*0.5);
+    line-height:20px;
+    padding-bottom:19px;
     margin:0 0 var(--unit);
     display:flex;
     justify-content:space-between;
@@ -180,7 +182,7 @@
     gap:8px;
     font-weight:400;
   }
-  .col h2.sub{ margin-top:calc(var(--unit)*1.5); }
+  .col h2.sub{ margin-top:var(--unit); }
 
   /* ---------- nav / projects ---------- */
   .nav .row{
@@ -253,8 +255,9 @@
     position:relative;
     font-family:var(--font-mono);
     font-size:12px;
-    line-height:1.5;
-    padding:8px 0 8px 18px;
+    line-height:20px;
+    padding:10px 0 10px 28px;
+    margin:0;
     margin-left:2px;
     border-left:var(--border-w) solid var(--struct-line);
     color:var(--text-main);
@@ -262,7 +265,7 @@
   .ev::before{
     content:'';
     position:absolute;
-    left:-4px; top:13px;
+    left:-4px; top:16px;
     width:7px; height:7px;
     border:var(--border-w) solid var(--struct-line);
     background:var(--paper-bg);
@@ -276,8 +279,8 @@
     background:var(--paper-raised);
     border:var(--border-w) solid var(--struct-line);
     border-radius:0;
-    padding:10px 12px;
-    margin-bottom:10px;
+    padding:10px var(--unit);
+    margin-bottom:var(--unit);
     font-family:var(--font-mono);
     font-size:12px;
   }
@@ -288,18 +291,18 @@
     font-size:10px;
     font-weight:600;
     letter-spacing:.05em;
-    padding:2px 7px;
+    padding:2px 10px;
     border:var(--border-w) solid var(--struct-line);
     border-radius:0;
-    margin-right:8px;
+    margin-right:10px;
   }
   .stat{
     display:inline-block;
     background:var(--paper-raised);
     border:var(--border-w) solid var(--struct-line);
     border-radius:0;
-    padding:8px 12px;
-    margin:0 8px 8px 0;
+    padding:10px var(--unit);
+    margin:0 10px 10px 0;
     font-family:var(--font-mono);
     font-size:12px;
   }
@@ -307,7 +310,7 @@
   .stat b{ font-size:18px; font-weight:700; }
 
   /* ---------- tables ---------- */
-  table{ width:100%; border-collapse:collapse; margin-top:6px; font-family:var(--font-mono); font-size:12px; }
+  table{ width:100%; border-collapse:collapse; margin-top:10px; font-family:var(--font-mono); font-size:12px; }
   th{
     text-align:left;
     font-size:10px;
@@ -315,10 +318,10 @@
     text-transform:uppercase;
     letter-spacing:.04em;
     font-weight:400;
-    padding:6px 8px;
+    padding:10px;
     border-bottom:var(--border-w) solid var(--struct-line);
   }
-  td{ padding:8px; border-bottom:var(--border-w) solid var(--draft-grid); font-size:12px; vertical-align:top; }
+  td{ padding:10px; border-bottom:var(--border-w) solid var(--draft-grid); font-size:12px; vertical-align:top; }
   table tr:hover{ background:rgba(0,0,0,0.03); }
 
   .status{ font-weight:700; font-size:12px; font-family:var(--font-mono); }
@@ -357,6 +360,8 @@
       <h2 class="section-title sub">Run</h2>
       <button id="run" class="runbtn" onclick="rerun()">&#9654; Rerun the same attack</button>
       <div id="runmsg" class="muted" style="margin-top:8px"></div>
+      <button id="agentscan" class="runbtn" style="margin-top:10px" onclick="agentScan()">&#9673; AI Agent Scan (BYOK)</button>
+      <div id="agentmsg" class="muted" style="margin-top:8px"></div>
     </div>
     <div class="col">
       <h2 class="section-title">Agent Activity</h2>
@@ -388,6 +393,18 @@ async function rerun(){
   b.disabled=false; document.getElementById("runmsg").textContent="done — re-read from disk";
   render();
 }
+async function agentScan(){
+  const b=document.getElementById("agentscan"); b.disabled=true;
+  const msg=document.getElementById("agentmsg");
+  msg.textContent="AI agent reading the code… (BYOK, ~30–60s)";
+  try{
+    const r=await fetch("/api/agent-scan",{method:"POST"});
+    if(!r.ok){ const e=await r.json().catch(()=>({})); msg.textContent="scan failed — is ANTHROPIC_API_KEY set in .env? ("+esc(e.error||r.status)+")"; b.disabled=false; return; }
+    STATE=await r.json();
+    msg.textContent="done — agent findings merged into the risk map";
+    b.disabled=false; tab("findings"); render();
+  }catch(err){ msg.textContent="scan failed: "+esc(err.message); b.disabled=false; }
+}
 function tab(t){ TAB=t; document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.tab===t)); renderPanel(); }
 
 function render(){
@@ -418,11 +435,12 @@ function renderPanel(){
   const p=document.getElementById("panel"); let h="";
   if(TAB==="overview"){
     const gates=[["core_loop_pass",v.core_loop_pass],["trace_evidence_pass",v.trace_evidence_pass],["mutation_generic_pass",v.mutation_generic_pass],["browser_live_loop_pass",v.browser_live_loop_pass],["report_audit_pass",v.report_audit_pass],["demo_ready",v.demo_ready]];
+    const ag=rm.findings.filter(f=>f.engine==="agent").length, det=rm.findings.filter(f=>f.engine==="deterministic").length;
     h=`<div>${gates.map(([k,val])=>`<span class="stat"><span class="muted">${k}</span><br><b style="color:${val?"#2f6b3a":"#a8200f"}">${val}</b></span>`).join("")}</div>
-      <div class="card" style="margin-top:8px">${rm.tools.length} tools · ${rm.findings.length} findings · ${rm.findings.filter(f=>f.severity==="critical").length} critical · guard ${rm.guard_present?"present":"<span style='color:#a8200f'>missing</span>"}</div>`;
+      <div class="card" style="margin-top:8px">${rm.tools.length} tools · ${rm.findings.length} findings · ${rm.findings.filter(f=>f.severity==="critical").length} critical · guard ${rm.guard_present?"present":"<span style='color:#a8200f'>missing</span>"}${ag?` · <span class="muted">${ag} agent / ${det} deterministic</span>`:""}</div>`;
   } else if(TAB==="findings"){
     h=[...rm.findings].sort((a,b)=>["critical","high","medium","low"].indexOf(a.severity)-["critical","high","medium","low"].indexOf(b.severity))
-      .map(f=>`<div class="card"><span class="pill" style="background:${sev(f.severity)}22;color:${sev(f.severity)}">${esc(String(f.severity).toUpperCase())}</span><b>${esc(f.tool||f.category)}</b><div class="muted">${esc(f.detail)}</div></div>`).join("");
+      .map(f=>`<div class="card"><span class="pill" style="background:${sev(f.severity)}22;color:${sev(f.severity)}">${esc(String(f.severity).toUpperCase())}</span>${f.engine?`<span class="pill" style="background:#00000010;color:#555;margin-left:4px">${esc(f.engine)}</span>`:""}<b>${esc(f.tool||f.category)}</b><div class="muted">${esc(f.detail)}</div>${f.suggested_fix?`<div class="muted" style="margin-top:4px"><b>fix:</b> ${esc(f.suggested_fix)}</div>`:""}</div>`).join("");
   } else if(TAB==="evidence"){
     h=(s.runs_before||[]).filter(r=>r.eval.final_status==="FAIL").map(r=>`<div class="card">
       <b>${esc(r.test)}</b><div class="muted" style="margin:4px 0">untrusted ticket:</div>

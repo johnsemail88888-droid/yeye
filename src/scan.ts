@@ -13,6 +13,12 @@ export interface Finding {
   severity: "critical" | "high" | "medium" | "low";
   detail: string;
   file?: string;
+  // Additive fields (all optional → existing consumers that read id/tool/category/
+  // severity/detail are unaffected). Populated by the agent scanner; the deterministic
+  // scanner stamps `engine: "deterministic"`.
+  engine?: "deterministic" | "agent";
+  evidence?: string;
+  suggested_fix?: string;
 }
 
 export const TOOL_RISK: Record<string, { category: string; severity: Finding["severity"]; detail: string }> = {
@@ -51,6 +57,7 @@ export function buildRiskMap(target: string, allText: string, scannedFiles: numb
   if (!approval_gate_present) {
     findings.push({ id: `F${i++}`, category: "missing-control", severity: "high", detail: "no approval gate for high-impact tools (refund / plan change)" });
   }
+  for (const f of findings) f.engine = "deterministic";
   return {
     target,
     scanned_files: scannedFiles,

@@ -62,10 +62,10 @@ function state() {
     live_scan: readJson(join(ROOT, ".vibeshield/live_scan.json")),
   };
 }
-async function runCmd(args: string[]): Promise<void> {
+async function runCmd(args: string[], timeoutMs: number = CMD_TIMEOUT): Promise<void> {
   // Throws on failure so the endpoint returns 500 (never 200 + stale state).
   try {
-    await execFileP(process.execPath, [TSX_CLI, ...args], { cwd: ROOT, timeout: CMD_TIMEOUT, windowsHide: true });
+    await execFileP(process.execPath, [TSX_CLI, ...args], { cwd: ROOT, timeout: timeoutMs, windowsHide: true });
   } catch (e) {
     console.error("[daemon] cmd failed:", args.join(" "), (e as Error).message);
     throw new Error(`command failed: ${args.join(" ")}`);
@@ -139,6 +139,15 @@ export function createDaemon() {
     if (m === "POST" && url === "/api/scan") {
       return json(res, 200, await serialize(async () => {
         await runCmd(["src/scan.ts", "examples/vulnerable-support-agent"]);
+        return state();
+      }));
+    }
+    if (m === "POST" && url === "/api/agent-scan") {
+      // BYOK LLM agent scan. The subprocess loads ANTHROPIC_API_KEY from .env itself
+      // (loadDotenv) and merges its findings into risk_map.json. Long timeout: live
+      // model calls are slow. Throws → 500 if the key is missing or the call fails.
+      return json(res, 200, await serialize(async () => {
+        await runCmd(["src/agent-scan.ts", "examples/vulnerable-support-agent", "--no-verify"], 240_000);
         return state();
       }));
     }

@@ -12,6 +12,7 @@
     "demo:after": "tsx src/run.ts after",
     "demo:all": "tsx src/run.ts all",
     "vibeshield:scan": "tsx src/scan.ts examples/vulnerable-support-agent",
+    "vibeshield:agent-scan": "tsx src/agent-scan.ts examples/vulnerable-support-agent",
     "vibeshield:test:before": "tsx src/run.ts before",
     "vibeshield:test:after": "tsx src/run.ts after",
     "report": "tsx src/report.ts",
@@ -22,9 +23,12 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
     "tsx": "^4.19.2",
-    "vitest": "^2.1.8",
     "typescript": "^5.7.2",
-    "@types/node": "^22.10.2"
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0"
   }
 }
