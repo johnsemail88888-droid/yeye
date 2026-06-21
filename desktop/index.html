@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Desktop Preview Refresh</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="app-shell" data-app>
+      <nav class="activity-rail" aria-label="Workspace">
+        <button class="rail-button" type="button" data-active="true" title="Risk scan" aria-label="Risk scan">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3l7 3v5c0 4.4-2.8 8.4-7 10-4.2-1.6-7-5.6-7-10V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9.5 12l1.7 1.7 3.6-4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="rail-button" type="button" title="Files" aria-label="Files">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11l2 2h4.5A2.5 2.5 0 0 1 20 7.5v9A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-11z" stroke="currentColor" stroke-width="1.7"/>
+          </svg>
+        </button>
+        <button class="rail-button" type="button" title="Command menu" aria-label="Command menu" data-action="toggle-command">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M8 9h8M8 15h5M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+
+      <aside class="project-tree" aria-label="Project files">
+        <header class="tree-header">
+          <div class="tree-title">
+            <span class="eyebrow">Working copy</span>
+            <span class="title-line" data-project-name>support-agent</span>
+          </div>
+          <span class="badge" data-tone="critical" data-file-badge>0</span>
+        </header>
+        <section class="tree-section">
+          <div class="section-label">
+            <span>Demo files</span>
+            <span class="chip">sandbox</span>
+          </div>
+          <button class="file-row" type="button" data-active="true">
+            <span class="row-main">
+              <span>agent.ts</span>
+              <span class="chip" data-tone="mock">MOCK TODO span map</span>
+            </span>
+            <span class="badge" data-tone="critical" data-file-count>0</span>
+          </button>
+          <button class="file-row" type="button">
+            <span class="row-main">tools.ts</span>
+            <span class="badge">read only</span>
+          </button>
+        </section>
+      </aside>
+
+      <section class="editor-region" aria-label="Editor preview">
+        <header class="editor-toolbar">
+          <div class="view-title">
+            <span class="eyebrow">Mode 2 desktop app</span>
+            <span class="title-line">Inline fix review with preview refresh</span>
+          </div>
+          <div class="toolbar-actions">
+            <span class="chip" data-tone="mock">MOCK TODO patch text</span>
+            <button class="button" type="button" data-action="toggle-command">Cmd K</button>
+          </div>
+        </header>
+
+        <div class="editor-main">
+          <article class="code-card" aria-label="Mock editor surface">
+            <div class="code-head">
+              <span>examples/vulnerable-support-agent/agent.ts</span>
+              <span>guided demo surface</span>
+            </div>
+            <pre class="code-lines" data-code-lines></pre>
+          </article>
+        </div>
+
+        <section class="preview-pane" aria-label="Preview refresh lane">
+          <header class="preview-header">
+            <div>
+              <span class="eyebrow">Live preview dock</span>
+              <span class="title-line">Before and after guard state</span>
+            </div>
+            <div class="preview-actions">
+              <span class="chip" data-tone="mock">MOCK TODO rendered preview</span>
+              <span class="chip" data-preview-status>Waiting for hunk</span>
+            </div>
+          </header>
+          <div class="preview-grid" data-preview-grid></div>
+        </section>
+      </section>
+
+      <aside class="suggestions-panel" aria-label="Suggestions">
+        <header class="panel-header">
+          <div class="panel-title">
+            <span class="eyebrow">Suggestions</span>
+            <span class="title-line">Real findings, local fix gate</span>
+          </div>
+          <div class="panel-actions">
+            <button class="icon-button" type="button" title="Accept all visible" aria-label="Accept all visible" data-action="accept-all">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <div class="findings-list" data-findings-list></div>
+        <div class="detail-pane" data-detail-pane></div>
+      </aside>
+
+      <section class="command-menu" data-command-menu aria-label="Command menu">
+        <input class="command-search" data-command-search aria-label="Search commands" placeholder="Search actions">
+        <div class="command-list" data-command-list></div>
+      </section>
+    </main>
+    <script type="module" src="/desktop/app.js"></script>
+  </body>
+</html>
