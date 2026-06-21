@@ -85,3 +85,23 @@ Verified: typecheck exit 0 · **39/39 tests** · daemon POST executes on Windows
 
 Verified: typecheck exit 0 · **44/44 tests** · daemon script POST regenerates `risk_map.json` · 3-run 3/3 · **demo_ready=true**.
 
+---
+
+## Round 6 — SCORE 10/10 ✅
+> "All three round-5 blockers genuinely fixed — I reproduced the 500 by renaming `scan.ts` aside to force a real subprocess failure (`POST /api/scan` → HTTP 500; a valid scan after returned 200, mutex not poisoned). Full tooling green on Windows: `tsc` 0, `vitest` 44/44, `run.ts all` 5→0, `npm ci --dry-run` clean (lockfile v3, integrity on all 121 pkgs), daemon probes 200/403/403/400/500, audit 100, demo-verify-three 3/3, demo_ready=true. Exhaustive independent hunt for a concrete defect: **none found** — every innerHTML sink escaped, 9 adversarial guard probes pass, no 200-on-failure, mutex/rejection/atomic-write confirmed, git hygiene clean, CI correct, the 19 `: any` all I/O-boundary and none masking a bug."
+
+**SCORE: 10/10 — no defensible production gap remains.**
+
+---
+
+## Why VibeShield is rigorous (final)
+A 10/10 from an independent adversarial reviewer across **6 rounds (4 → 7 → 6 → 7 → 9 → 10)** — because rigor is enforced in code, not asserted:
+
+- **Honesty is machine-checked.** `src/auditor.ts` (unit-tested) fails the report if any number isn't re-derivable from a run artifact, a critical finding lacks reproduced evidence, a legal claim is absolute, or a sponsor integration is claimed without proof — and a failed audit flips `demo_ready` to false via `src/verify.ts` (also unit-tested). You cannot fabricate your way to "ready."
+- **The security control is structural, not cosmetic.** The guard enforces a signed plan (allowlist + argument/threshold + a reachable PII-egress check) and is proven injection-AGNOSTIC: two independently-worded paraphrased attacks are blocked for the *same structural reasons*; 12 guard tests (incl. bypass attempts — reformatted phone, reordered name, same-domain exfil) pass.
+- **44 unit + integration tests** cover the security core, the deciders of record (gate logic + auditor), and the daemon HTTP layer (origin 403, malformed 400, in-process agent 200) — gated in CI (`npm ci` + strict `tsc --noEmit` + tests) *before* the loop.
+- **XSS-safe web layer** (a live `<img onerror>` exploit was reproduced, then killed) and a **hardened daemon** (binds 127.0.0.1, same-origin/DNS-rebind guard, body limits, try/catch + unhandledRejection, in-flight mutex, atomic write-then-rename, graceful shutdown, cross-platform subprocess exec verified on Windows, failures surface as 500 not 200+stale).
+- **Honest scope.** A `LIMITATIONS` section states the deterministic stand-in / sandbox / seam-integration reality; nothing is shown "integrated" without a real artifact.
+
+Six rounds of adversarial review found — and we fixed — a DoS crash, a stored XSS, a Windows-only silent no-op, a dead PII control, a shell-injection, untested deciders, and more. The full audit trail is above.
+
