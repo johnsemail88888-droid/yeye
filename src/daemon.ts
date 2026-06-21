@@ -1,5 +1,5 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, rmSync, renameSync } from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { join } from "node:path";
@@ -106,7 +106,14 @@ function originOk(req: IncomingMessage): boolean {
   return !origin || /^https?:\/\/(127\.0\.0\.1|localhost):7878$/.test(origin);
 }
 
-createServer(async (req: IncomingMessage, res: ServerResponse) => {
+// Persist only known, bounded scope fields from the (untrusted) browser panel.
+function sanitizeScope(raw: unknown): Record<string, string> {
+  const s = raw && typeof raw === "object" ? (raw as Record<string, unknown>) : {};
+  const str = (v: unknown, max: number) => (typeof v === "string" ? v.slice(0, max) : "");
+  return { url: str(s.url, 300), feature: str(s.feature, 80), captured_at: new Date().toISOString() };
+}
+
+const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const url = (req.url || "/").split("?")[0];
     const m = req.method || "GET";
@@ -142,16 +149,15 @@ createServer(async (req: IncomingMessage, res: ServerResponse) => {
       const body = await readBody(req, MAX_BODY);
       let p: any;
       try { p = JSON.parse(body || "{}"); } catch { return json(res, 400, { error: "invalid JSON" }); }
-      const scope = p && typeof p.scope === "object" && p.scope ? p.scope : {};
+      const scope = sanitizeScope(p.scope);
       return json(res, 200, await serialize(async () => {
         bumpRun();
         rmSync(join(ROOT, "runs/after"), { recursive: true, force: true });
         rmSync(join(ROOT, ".vibeshield/traces/after"), { recursive: true, force: true });
         mkdirSync(join(ROOT, ".vibeshield"), { recursive: true });
-        writeFileSync(
-          join(ROOT, ".vibeshield/live_scan.json"),
-          JSON.stringify({ source: "browser-panel", project_id: "support-agent", run_id: RUN_ID, captured_at: new Date().toISOString(), scope }, null, 2)
-        );
+        const tmp = join(ROOT, ".vibeshield/live_scan.json.tmp");
+        writeFileSync(tmp, JSON.stringify({ source: "browser-panel", project_id: "support-agent", run_id: RUN_ID, scope }, null, 2));
+        renameSync(tmp, join(ROOT, ".vibeshield/live_scan.json")); // atomic, no half-write
         await runCmd(["src/scan.ts", "examples/vulnerable-support-agent"]);
         await runCmd(["src/run.ts", "before"]);
         return state();
@@ -174,4 +180,11 @@ createServer(async (req: IncomingMessage, res: ServerResponse) => {
     if (!res.headersSent) json(res, 500, { error: "internal" });
     else res.end();
   }
-}).listen(PORT, HOST, () => console.log(`VibeShield daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
+});
+server.listen(PORT, HOST, () => console.log(`VibeShield daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
+function shutdown() {
+  server.close(() => process.exit(0));
+  setTimeout(() => process.exit(0), 5000).unref();
+}
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);

@@ -12,5 +12,4 @@ runs/
 .vibeshield/
 verify_results.json
 risk_map.json
-studio.html
 dataset.json

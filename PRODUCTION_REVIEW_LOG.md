@@ -45,3 +45,17 @@ Also added `README.md` and `LICENSE` (MIT).
 
 Verified: typecheck exit 0 · **35/35 tests** · loop 5 FAIL → 0 FAIL · report audit 100 · **demo_ready=true**.
 
+---
+
+## Round 3 — SCORE 6/10 (regressed — a real exploit was found)
+> "5 of 6 fixes genuine, but `judge.html` `esc()` is a complete no-op (byte-verified). I POSTed `<img onerror=…>` to `/api/live-scan`, confirmed it's stored raw and served raw, flowing through the dead `esc()` into `innerHTML` → **reachable stored XSS in Judge Mode** (the view a judge opens)."
+
+**Issues → fixes applied (round 4 commit) — verified:**
+1. ✅ **P0** — `web/judge.html:392` `esc()` no-op (its entity map was corrupted by my entity-decoding during extraction: `&`→`&` instead of `&`→`&amp;`) → restored a real entity map; **plus** daemon `sanitizeScope` (only bounded `url`/`feature` strings are persisted from the untrusted panel — attacker fields dropped) = defense in depth.
+2. ✅ Untested producers → extracted `buildRiskMap` (`src/scan.ts`) as a pure, guarded function; **+3 tests** (`scan.test.ts`). Total **38 tests**.
+3. ✅ `src/dashboard.ts` + `studio.html` were dead code carrying the raw-`innerHTML` XSS pattern → **deleted** + removed from `.gitignore`.
+4. ✅ CI `npm install` → `npm ci` (integrity-pinned lockfile).
+5. ✅ daemon: graceful shutdown (`SIGTERM`/`SIGINT` → `server.close` + timed force-exit) and **atomic write-then-rename** for `live_scan.json` (no half-written evidence on interrupt).
+
+Verified: typecheck exit 0 · **38/38 tests** · 3-run 3/3 · **demo_ready=true**.
+
