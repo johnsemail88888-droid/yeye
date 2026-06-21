@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VibeShield Extension Shell</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235E6AD2'/%3E%3Cpath d='M9 9h14v6c0 5-3 8-7 9-4-1-7-4-7-9z' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="extension-stage" aria-label="VibeShield extension prototype">
+      <section class="browser-surface" aria-label="Mock live site surface">
+        <header class="browser-bar">
+          <div class="traffic" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="address">
+            <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3.5 19 7v5.5c0 4.3-2.8 6.8-7 8-4.2-1.2-7-3.7-7-8V7z" />
+            </svg>
+            https://demo-agent.example
+            <span class="u-mock">MOCK target</span>
+          </div>
+          <button class="toolbar-button" type="button" data-command="toggle-popup" aria-label="Toggle extension popup">
+            <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 5h12M6 12h12M6 19h12" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="page-frame">
+          <section class="agent-card">
+            <p class="u-label">Live AI support page</p>
+            <h1>Customer assistant</h1>
+            <p>
+              This page is a static stand-in for an already deployed agent. Scan evidence in this prototype is labeled MOCK.
+            </p>
+            <div class="agent-chat" aria-label="Mock agent transcript">
+              <div class="bubble user">Can you help with a refund?</div>
+              <div class="bubble agent" data-highlight-target>
+                I can check policy, ask for approval, and keep sensitive data inside trusted paths.
+              </div>
+            </div>
+          </section>
+
+          <aside class="extension-popup" data-popup aria-label="Extension popup scan choices">
+            <div class="popup-header">
+              <div>
+                <p class="u-label">VibeShield</p>
+                <h2>Choose scan direction</h2>
+              </div>
+              <span class="u-mock">MOCK</span>
+            </div>
+
+            <div class="scan-picker" role="list" aria-label="Scan choices">
+              <button class="scan-card is-selected" type="button" data-scan="quick">
+                <span class="scan-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5v14" />
+                    <circle cx="12" cy="12" r="7.5" />
+                  </svg>
+                </span>
+                <span>
+                  <strong>Quick Scan</strong>
+                  <small>Passive DOM, headers, request metadata</small>
+                </span>
+              </button>
+              <button class="scan-card" type="button" data-scan="active">
+                <span class="scan-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="m7 8 5 4-5 4M13 16h4" />
+                    <rect x="4" y="5" width="16" height="14" rx="3" />
+                  </svg>
+                </span>
+                <span>
+                  <strong>Active Probe</strong>
+                  <small>Types benign canaries with consent</small>
+                </span>
+              </button>
+              <button class="scan-card" type="button" data-scan="deep">
+                <span class="scan-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3.5 19 7v5.5c0 4.3-2.8 6.8-7 8-4.2-1.2-7-3.7-7-8V7z" />
+                    <path d="M9 12h6" />
+                  </svg>
+                </span>
+                <span>
+                  <strong>Deep Scan</strong>
+                  <small>Debugger permission, traffic body review</small>
+                </span>
+              </button>
+            </div>
+
+            <div class="consent-line" data-consent>
+              We will only use passive observations for this selection.
+            </div>
+
+            <button class="primary-scan" type="button" data-run-scan>
+              <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+              Open pinned side panel
+            </button>
+          </aside>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="Pinned VibeShield side panel">
+        <header class="panel-header">
+          <div class="grade-ring" aria-label="Mock grade">
+            <span>F</span>
+            <small>MOCK</small>
+          </div>
+          <div>
+            <p class="u-label">Pinned side panel</p>
+            <h2>Observable risk review</h2>
+            <div class="panel-meta">
+              <span data-mode-label>Quick Scan</span>
+              <span>https://demo-agent.example</span>
+              <span class="u-mock">MOCK timestamp</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="progress-strip" aria-label="Scan progress">
+          <span class="progress-step is-active">Reading DOM</span>
+          <span class="progress-step">Checking headers</span>
+          <span class="progress-step">Opening results</span>
+        </div>
+
+        <nav class="filter-rail" aria-label="Fixability filters">
+          <button class="filter-pill is-active" type="button" data-filter="all">All</button>
+          <button class="filter-pill" type="button" data-filter="fix-now">Fix now</button>
+          <button class="filter-pill" type="button" data-filter="review">Needs review</button>
+          <button class="filter-pill" type="button" data-filter="infra">Infra</button>
+        </nav>
+
+        <section class="counts" aria-label="Detected versus review counts">
+          <div>
+            <strong data-detected>MOCK</strong>
+            <span>Detected</span>
+          </div>
+          <div>
+            <strong data-review>MOCK</strong>
+            <span>Needs review</span>
+          </div>
+        </section>
+
+        <section class="accordion-stack" data-dimensions aria-label="Risk dimensions"></section>
+      </aside>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
