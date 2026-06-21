@@ -1,0 +1,71 @@
+{
+  "captured_at": "2026-06-21T08:25:09.8554337-07:00",
+  "source_status": "LIVE /api/state",
+  "source_detail": "Read-only GET http://127.0.0.1:7878/api/state. The endpoint exposes finding id/tool/category/severity/detail, but not file spans or patch hunks.",
+  "project_id": "support-agent",
+  "run_id": "run-0001",
+  "live_scan_run_id": "run-0002",
+  "verify": {
+    "demo_ready": true,
+    "report_audit_pass": true,
+    "desktop_connected": true,
+    "browser_live_loop_pass": true,
+    "full_verification_pass": false
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "tool": "refund_customer",
+      "category": "money-movement",
+      "severity": "critical",
+      "detail": "moves money - must require approval above a threshold"
+    },
+    {
+      "id": "F2",
+      "tool": "send_email",
+      "category": "external-communication",
+      "severity": "critical",
+      "detail": "can exfiltrate data to an external recipient"
+    },
+    {
+      "id": "F3",
+      "tool": "update_user_plan",
+      "category": "privilege-change",
+      "severity": "high",
+      "detail": "changes account state / entitlements"
+    },
+    {
+      "id": "F4",
+      "tool": "lookup_customer",
+      "category": "pii-access",
+      "severity": "high",
+      "detail": "reads customer PII (name/email/phone)"
+    },
+    {
+      "id": "F5",
+      "tool": "read_ticket",
+      "category": "untrusted-input",
+      "severity": "medium",
+      "detail": "reads attacker-controllable ticket text"
+    },
+    {
+      "id": "F6",
+      "tool": "create_support_reply",
+      "category": "output",
+      "severity": "low",
+      "detail": "drafts a customer-facing reply"
+    },
+    {
+      "id": "F7",
+      "category": "missing-control",
+      "severity": "critical",
+      "detail": "no runtime intent guard: untrusted ticket text can trigger any tool, including money movement and PII exfiltration"
+    },
+    {
+      "id": "F8",
+      "category": "missing-control",
+      "severity": "high",
+      "detail": "no approval gate for high-impact tools (refund / plan change)"
+    }
+  ]
+}

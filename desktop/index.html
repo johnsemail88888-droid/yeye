@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Mode 2 Command Palette Prototype</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="vibe-app" data-app>
+      <div class="desktop-shell">
+        <nav class="activity-rail" aria-label="Activity rail">
+          <button class="rail-button is-active" type="button" title="Files" aria-label="Files">F</button>
+          <button class="rail-button" type="button" title="Search" aria-label="Search">S</button>
+          <button class="rail-button" type="button" title="Risk scan" aria-label="Risk scan">R</button>
+          <button class="rail-button" type="button" title="Suggestions" aria-label="Suggestions">G</button>
+          <button class="rail-button" type="button" title="Run" aria-label="Run">Run</button>
+        </nav>
+
+        <aside class="project-rail" aria-label="Project files">
+          <section class="panel-section">
+            <div class="title-row">
+              <h1 class="product-title">VibeShield</h1>
+              <span class="pill live" data-source-pill>LIVE</span>
+            </div>
+            <p class="meta" data-source-copy>Reading real state snapshot.</p>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-eyebrow">State Summary</p>
+            <div class="stat-grid" data-stat-grid></div>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-eyebrow">Guided Demo Project</p>
+            <ul class="file-list">
+              <li class="file-row is-active">
+                <span>support-agent/tools.ts</span>
+                <span class="badge" data-file-badge>0</span>
+              </li>
+              <li class="file-row">
+                <span>support-agent/guard.ts</span>
+                <span class="badge">TODO</span>
+              </li>
+              <li class="file-row">
+                <span>preview/output.html</span>
+                <span class="badge">MOCK</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+
+        <section class="editor-pane" aria-label="Editor">
+          <header class="topbar">
+            <div class="topbar-left">
+              <button class="icon-button" type="button" data-command="toggle-suggestions" title="Toggle suggestions" aria-label="Toggle suggestions">P</button>
+              <div>
+                <div class="breadcrumbs">support-agent / tools.ts</div>
+                <div class="meta">Mode 2 editor prototype. File lines and patches are MOCK TODO until risk_map exposes spans.</div>
+              </div>
+            </div>
+            <div class="topbar-actions">
+              <button class="secondary-button" type="button" data-open-palette>Cmd/Ctrl K</button>
+              <button class="primary-button" type="button" data-command="quick-fix">Quick Fix</button>
+            </div>
+          </header>
+
+          <div class="editor-scroll" data-editor-scroll>
+            <article class="code-card" aria-label="Mock editor buffer">
+              <header class="code-header">
+                <span>MOCK TODO editor buffer</span>
+                <span>prototype only, no source write</span>
+              </header>
+              <div data-editor-lines></div>
+            </article>
+
+            <section class="diff-preview" data-diff-preview aria-label="Mock patch preview">
+              <div class="diff-row remove"><span>-</span><span>MOCK TODO unguarded tool invocation placeholder</span></div>
+              <div class="diff-row add"><span>+</span><span>MOCK TODO guarded invocation preview. Bind to real risk_map patch before applying.</span></div>
+            </section>
+          </div>
+
+          <footer class="bottom-log" aria-label="Local event log">
+            <ul class="event-list" data-event-list>
+              <li class="event-row"><span class="dot"></span><span>Command palette ready. Actions mutate this prototype state only.</span></li>
+            </ul>
+          </footer>
+        </section>
+
+        <aside class="suggestions-panel" data-suggestions-panel aria-label="Suggestions">
+          <section class="panel-section">
+            <div class="title-row">
+              <div>
+                <p class="section-eyebrow">Suggestions</p>
+                <h2 class="product-title">Fixable Spots</h2>
+              </div>
+              <button class="icon-button" type="button" data-command="toggle-suggestions" title="Collapse suggestions" aria-label="Collapse suggestions">B</button>
+            </div>
+            <p class="meta">Counts and severities are real. Line spans and patch hunks are labeled MOCK TODO.</p>
+          </section>
+
+          <section class="panel-section">
+            <div class="row-actions">
+              <button class="secondary-button" type="button" data-command="focus-finding">Focus</button>
+              <button class="secondary-button" type="button" data-command="accept-hunk">Accept</button>
+              <button class="ghost-button" type="button" data-command="reject-hunk">Reject</button>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <ul class="finding-list" data-finding-list></ul>
+          </section>
+        </aside>
+      </div>
+
+      <section class="palette-backdrop" data-palette-backdrop aria-hidden="true">
+        <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
+          <div class="palette-input-wrap">
+            <input class="palette-input" data-palette-input type="search" placeholder="Search commands" autocomplete="off">
+          </div>
+          <ul class="command-list" data-command-list></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="/desktop/app.js"></script>
+  </body>
+</html>
