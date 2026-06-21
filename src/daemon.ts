@@ -2,6 +2,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, rmSync, renameSync } from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { createRequire } from "node:module";
 import { join } from "node:path";
 import { runTicket } from "./harness";
 
@@ -12,6 +13,16 @@ const HOST = "127.0.0.1"; // localhost only — not LAN-exposed
 const MAX_BODY = 64 * 1024; // 64 KB request cap
 const CMD_TIMEOUT = 90_000; // ms
 let RUN_ID = "run-0001";
+
+// Resolve the tsx CLI so we can run scripts via `node <tsx-cli>` — cross-platform
+// (execFile("npx", …) ENOENTs on Windows because it won't resolve the .cmd shim).
+const localRequire = createRequire(import.meta.url);
+let TSX_CLI: string;
+try {
+  TSX_CLI = localRequire.resolve("tsx/cli");
+} catch {
+  TSX_CLI = join(ROOT, "node_modules", "tsx", "dist", "cli.mjs");
+}
 
 process.on("unhandledRejection", (e) => console.error("[daemon] unhandledRejection:", e));
 process.on("uncaughtException", (e) => console.error("[daemon] uncaughtException:", e));
@@ -52,7 +63,7 @@ function state() {
 }
 async function runCmd(args: string[]): Promise<boolean> {
   try {
-    await execFileP("npx", ["tsx", ...args], { cwd: ROOT, timeout: CMD_TIMEOUT, windowsHide: true });
+    await execFileP(process.execPath, [TSX_CLI, ...args], { cwd: ROOT, timeout: CMD_TIMEOUT, windowsHide: true });
     return true;
   } catch (e) {
     console.error("[daemon] cmd failed:", args.join(" "), (e as Error).message);

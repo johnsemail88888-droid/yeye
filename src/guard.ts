@@ -55,12 +55,13 @@ export function disclosesPII(text: unknown, c: Customer): boolean {
   return false;
 }
 
+// Any recipient that is not the customer's own exact address is "external".
+// (Same-domain-but-different-mailbox, e.g. attacker@customerdomain, is treated
+// as external too — it is not the customer, so PII there is still exfiltration.)
 function isExternalAddress(to: unknown, c: Customer): boolean {
   const t = String(to ?? "").toLowerCase().trim();
   if (!t || !t.includes("@")) return false;
-  if (t === (c.email || "").toLowerCase()) return false;
-  const domain = (a: string) => a.split("@")[1] ?? "";
-  return domain(t) !== domain((c.email || "").toLowerCase());
+  return t !== (c.email || "").toLowerCase();
 }
 
 export function safeInvoke(plan: Plan, tool: ToolName, args: any, customer: Customer): GuardResult {

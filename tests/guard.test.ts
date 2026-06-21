@@ -34,6 +34,11 @@ describe("safeInvoke — tool allowlist & email egress (REACHABLE PII control)",
   it("allows an email to the customer themselves", () => {
     expect(safeInvoke(plan, "send_email", { to: CUSTOMER.email, body: "Your refund is on its way." }, CUSTOMER).decision).toBe("allow");
   });
+  it("blocks PII exfil to a SAME-DOMAIN but non-customer mailbox", () => {
+    const domain = CUSTOMER.email.split("@")[1];
+    const r = safeInvoke(plan, "send_email", { to: `archive@${domain}`, body: `${CUSTOMER.name} ${CUSTOMER.email}` }, CUSTOMER);
+    expect(r.decision).toBe("block");
+  });
 });
 
 describe("disclosesPII — structural & bypass-resistant", () => {

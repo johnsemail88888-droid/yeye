@@ -59,3 +59,17 @@ Verified: typecheck exit 0 · **35/35 tests** · loop 5 FAIL → 0 FAIL · repor
 
 Verified: typecheck exit 0 · **38/38 tests** · 3-run 3/3 · **demo_ready=true**.
 
+---
+
+## Round 4 — SCORE 7/10 (XSS confirmed dead; new disqualifier found)
+> "Stored XSS is dead (re-ran the live exploit; `esc()` neutralizes, `sanitizeScope` strips). But the daemon's POST endpoints ENOENT on Windows — `execFile('npx',…)` won't resolve the `.cmd` shim — so every demo button no-ops (200 + stale state) on John's actual machine while CI (Linux) stays green."
+
+**Issues → fixes applied (round 5 commit) — verified:**
+1. ✅ **HIGH** — daemon `execFile("npx",…)` ENOENT on Windows → run `node <tsx-cli>` via `process.execPath` + resolved `tsx/cli` (cross-platform, no shell, no `.cmd`). **Verified on Windows**: deleted `risk_map.json` → POST `/api/scan` regenerated it; POST `/api/run` → real 5 FAIL → 0 FAIL.
+2. ✅ MEDIUM — `disclosesPII`/egress same-domain gap → `isExternalAddress` now treats ANY non-customer address as external (same-domain-but-different-mailbox PII → `block`). +1 test.
+3. ✅ LOW — README "35 tests" → **39** (+ scanner mention).
+4. ✅ LOW — added `.nvmrc` (20) + `"engines": ">=20"`.
+5. ✅ LOW — removed `_v4pack/` (232 KB of prompt docs) from the repo.
+
+Verified: typecheck exit 0 · **39/39 tests** · daemon POST executes on Windows · 3-run 3/3 · **demo_ready=true**.
+
