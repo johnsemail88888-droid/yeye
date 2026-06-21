@@ -20,6 +20,7 @@ SPEC_ONLY, per both coordination reviews:
 - `docs/pitch-v2/USE_CASES.md`
 - `docs/pitch-v2/DEVPOST_COPY.md`
 - `docs/pitch-v2/MORNING_REHEARSAL.md`
+- `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`
 - `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
 - `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
 - `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
@@ -28,6 +29,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/pitch_truth_acceptance.json`
 - `tests/pitch-spec/evidence_binding_acceptance.json`
 - `tests/pitch-spec/claim_status_acceptance.json`
+- `tests/pitch-spec/morning_go_no_go_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -58,6 +60,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/pitch_truth_acceptance.json`
 - `tests/pitch-spec/evidence_binding_acceptance.json`
 - `tests/pitch-spec/claim_status_acceptance.json`
+- `tests/pitch-spec/morning_go_no_go_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -131,3 +134,16 @@ Purpose:
 - Status-label broad product, legal, platform, and adoption claims before the morning pitch.
 - Keep `npx vibeshield install`, generated CI, real browser Shield Pill, and readiness checks 5-12 out of LIVE narration unless future evidence exists.
 - Give Devpost, Q&A, and spoken script one shared source for supported wording.
+
+## 2026-06-21 04:04 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`
+- `tests/pitch-spec/morning_go_no_go_acceptance.json`
+
+Purpose:
+
+- Force a pre-rehearsal choice among LIVE, RECORDED REAL RUN, LOCAL FALLBACK, and ROADMAP routes.
+- Define hard no-go conditions that prevent live narration.
+- Provide safe close lines for live, recorded, and local fallback demos.

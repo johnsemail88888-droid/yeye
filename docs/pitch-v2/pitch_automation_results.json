@@ -22,6 +22,8 @@
     "Added docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md to bind each pitch action to endpoint evidence, artifact evidence, or ROADMAP.",
     "Added tests/pitch-spec/evidence_binding_acceptance.json to make truth badges, endpoint ownership, timing, and non-duplication reviewer-checkable.",
     "Added docs/pitch-v2/CLAIM_STATUS_LEDGER.md to label major product, legal, platform, and adoption claims as LIVE, RECORDED REAL RUN, LOCAL FALLBACK, ROADMAP, or DO NOT CLAIM.",
-    "Added tests/pitch-spec/claim_status_acceptance.json to make claim-status review explicit."
+    "Added tests/pitch-spec/claim_status_acceptance.json to make claim-status review explicit.",
+    "Added docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md so the presenter must choose LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP before rehearsal.",
+    "Added tests/pitch-spec/morning_go_no_go_acceptance.json to make route selection, fallback language, hard no-go conditions, and timing gates reviewer-checkable."
   ]
 }

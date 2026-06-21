@@ -7,6 +7,7 @@ This script assumes the integration owner has a daemon-backed demo state or a la
 
 Before calling any action LIVE, check `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`.
 Before using broad product, legal, platform, or adoption language, check `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`.
+Before rehearsal, choose the route in `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`.
 
 ## Preflight Truth Badges
 

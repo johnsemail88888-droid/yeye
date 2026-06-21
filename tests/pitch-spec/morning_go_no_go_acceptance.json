@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-morning-go-no-go-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "GO-NOGO-001",
+      "name": "route is selected before rehearsal",
+      "expected": "Presenter chooses LIVE, RECORDED REAL RUN, LOCAL FALLBACK, or ROADMAP before timing the pitch."
+    },
+    {
+      "id": "GO-NOGO-002",
+      "name": "live route has full evidence",
+      "expected": "LIVE route requires run_id, artifact path or current endpoint evidence, failure evidence, protection evidence, after-proof evidence, and benign task evidence."
+    },
+    {
+      "id": "GO-NOGO-003",
+      "name": "fallback language is explicit",
+      "expected": "Recorded and local fallback routes use explicit labels and do not imply current live execution."
+    },
+    {
+      "id": "GO-NOGO-004",
+      "name": "hard no-go conditions block live claims",
+      "expected": "Missing evidence, missing benign utility proof, roadmap browser plugin, roadmap CLI, dynamic readiness overclaim, or legal guarantee language prevents LIVE narration."
+    },
+    {
+      "id": "GO-NOGO-005",
+      "name": "timing remains evidence-bound",
+      "expected": "three_minute_timing_pass remains false unless three measured rehearsals exist at or under 3:00."
+    }
+  ]
+}

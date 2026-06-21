@@ -4,6 +4,8 @@ Status: SPEC_ONLY
 
 No live rehearsal was run in this SPEC_ONLY round. Do not mark timing as measured until a real rehearsal is performed against a live endpoint or a labeled recorded real run.
 
+Before rehearsing, choose the route in `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`.
+
 ## Rehearsal Table
 
 | Run | Time | Demo source | Target duration | Actual duration | Pass | Notes |
