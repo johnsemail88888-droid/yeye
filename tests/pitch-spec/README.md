@@ -46,3 +46,4 @@ Forbidden writes:
 18. Demo evidence packet schema defines structural requirements without claiming live evidence.
 19. Demo evidence packet example is a TODO/NOT_CONFIGURED placeholder, not evidence.
 20. Final morning brief summarizes docs/spec readiness while keeping live/timing/overall claims false.
+21. Automation closeout states no more scheduled SPEC_ONLY additions should occur after 09:00 PT without a new request.

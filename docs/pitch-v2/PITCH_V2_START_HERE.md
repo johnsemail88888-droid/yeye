@@ -6,6 +6,7 @@ Last updated: 2026-06-21 06:04 PT
 This is the morning navigation index. It does not add product claims; it tells the presenter, integration owner, and reviewer which pitch-v2 files to open first.
 
 For the shortest final overview, open `docs/pitch-v2/FINAL_MORNING_BRIEF.md`.
+For automation closeout, open `docs/pitch-v2/AUTOMATION_CLOSEOUT.md`.
 
 ## Current Pass Status
 
@@ -63,6 +64,7 @@ Open in this order:
 12. `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 13. `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
 14. `tests/pitch-spec/final_morning_brief_acceptance.json`
+15. `tests/pitch-spec/automation_closeout_acceptance.json`
 
 Goal:
 Check that every claim is evidence-bound and that timing/overall remain false until measured.
@@ -82,6 +84,7 @@ Check that every claim is evidence-bound and that timing/overall remain false un
 | `INTEGRATION_OWNER_REVIEW_CHECKLIST.md` | Merge/review checklist for SPEC_ONLY docs |
 | `DEMO_EVIDENCE_PACKET_SCHEMA.md` | Notes for the structural evidence-packet schema |
 | `FINAL_MORNING_BRIEF.md` | Short final overview for morning review |
+| `AUTOMATION_CLOSEOUT.md` | End-of-window automation closeout |
 
 ## Hard Rules That Still Win
 

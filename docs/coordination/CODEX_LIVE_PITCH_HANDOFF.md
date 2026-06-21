@@ -14,6 +14,7 @@ SPEC_ONLY, per both coordination reviews:
 
 - `docs/pitch-v2/PITCH_V2_START_HERE.md`
 - `docs/pitch-v2/FINAL_MORNING_BRIEF.md`
+- `docs/pitch-v2/AUTOMATION_CLOSEOUT.md`
 - `docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md`
 - `docs/pitch-v2/AIDA_BEAT_SHEET.md`
 - `docs/pitch-v2/LIVE_DEMO_SCRIPT.md`
@@ -47,6 +48,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
 - `tests/pitch-spec/final_morning_brief_acceptance.json`
+- `tests/pitch-spec/automation_closeout_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -88,6 +90,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
 - `tests/pitch-spec/final_morning_brief_acceptance.json`
+- `tests/pitch-spec/automation_closeout_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -279,3 +282,16 @@ Purpose:
 - Provide a short final morning overview for presenter, integration owner, and reviewer.
 - Keep docs/spec readiness separate from live demo, timing, and overall pass claims.
 - Preserve roadmap/not-configured status for unsupported capabilities.
+
+## 2026-06-21 08:34 PT SPEC_ONLY Closeout
+
+Added:
+
+- `docs/pitch-v2/AUTOMATION_CLOSEOUT.md`
+- `tests/pitch-spec/automation_closeout_acceptance.json`
+
+Purpose:
+
+- Close the scheduled SPEC_ONLY automation window before 09:00 PT.
+- State that future additions need explicit user or integration-owner request.
+- Preserve docs/spec-only status and false timing/overall gates.

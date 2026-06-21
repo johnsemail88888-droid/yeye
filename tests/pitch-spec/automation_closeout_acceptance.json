@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-automation-closeout-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "CLOSEOUT-001",
+      "name": "closeout summarizes delivered docs",
+      "expected": "Closeout lists the pitch docs, truth gates, evidence packet assets, reviewer specs, and handoff delivered by the automation."
+    },
+    {
+      "id": "CLOSEOUT-002",
+      "name": "closeout preserves no-runtime boundary",
+      "expected": "Closeout states no UI, runtime, protected paths, daemon, npm, tsx, node src/*, demo scripts, or merge actions were performed."
+    },
+    {
+      "id": "CLOSEOUT-003",
+      "name": "closeout keeps false gates false",
+      "expected": "Closeout states timing and overall remain false until real rehearsals and evidence exist."
+    },
+    {
+      "id": "CLOSEOUT-004",
+      "name": "closeout stops scheduled additions",
+      "expected": "Closeout says no more automated SPEC_ONLY additions should be made after 09:00 PT from this schedule."
+    },
+    {
+      "id": "CLOSEOUT-005",
+      "name": "closeout points to final handoff files",
+      "expected": "Closeout points to final morning brief, start here, integration owner checklist, evidence packet template, and presenter command card."
+    }
+  ]
+}
