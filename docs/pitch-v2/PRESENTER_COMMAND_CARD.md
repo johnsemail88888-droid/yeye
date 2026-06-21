@@ -12,6 +12,7 @@ Fill or review:
 - `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md`
 - `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`
 - `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
+- `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`
 
 Choose one route:
 

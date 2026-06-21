@@ -28,6 +28,8 @@
     "Added docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md to require route, identifiers, truth-badge evidence, downgrade labels, and measured timing fields before live claims.",
     "Added tests/pitch-spec/demo_evidence_packet_acceptance.json to make evidence packet requirements reviewer-checkable.",
     "Added docs/pitch-v2/PRESENTER_COMMAND_CARD.md to give the presenter one-page route, timing, fallback, and do-not-say cues.",
-    "Added tests/pitch-spec/presenter_command_card_acceptance.json to make the cue card reviewer-checkable."
+    "Added tests/pitch-spec/presenter_command_card_acceptance.json to make the cue card reviewer-checkable.",
+    "Added docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md to keep Arize, ArmorIQ, Token Company, browser extension, CI, and legal/platform integration claims evidence-bound.",
+    "Added tests/pitch-spec/sponsor_integration_truth_acceptance.json to make sponsor/integration truth checks reviewer-checkable."
   ]
 }

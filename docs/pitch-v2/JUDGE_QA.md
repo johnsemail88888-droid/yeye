@@ -3,6 +3,8 @@
 Status: SPEC_ONLY
 Answer style: lead with what is proved, then name the limit.
 
+For sponsor or integration questions, also check `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`.
+
 ## 1. Why is this not another static scanner?
 
 10-second answer:
@@ -149,7 +151,7 @@ The matrix is a demo safety guide, not legal advice.
 Treat it as observability context only if the integration actually exists.
 
 30-second technical answer:
-The pitch should not imply Arize is wired unless a real artifact proves it. If mentioned, say observability integrations are a production path and keep the demo focused on VibeShield's own evidence.
+The pitch should not imply a live Arize connection unless a real artifact proves it. If mentioned, say observability integrations are a production path and keep the demo focused on VibeShield's own evidence.
 
 Screen/file:
 Integration truth badge.

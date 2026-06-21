@@ -23,6 +23,7 @@ SPEC_ONLY, per both coordination reviews:
 - `docs/pitch-v2/MORNING_GO_NO_GO_RUNBOOK.md`
 - `docs/pitch-v2/DEMO_EVIDENCE_PACKET_TEMPLATE.md`
 - `docs/pitch-v2/PRESENTER_COMMAND_CARD.md`
+- `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`
 - `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
 - `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
 - `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
@@ -34,6 +35,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/morning_go_no_go_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 - `tests/pitch-spec/presenter_command_card_acceptance.json`
+- `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -67,6 +69,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/morning_go_no_go_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 - `tests/pitch-spec/presenter_command_card_acceptance.json`
+- `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -179,3 +182,16 @@ Purpose:
 - Give the presenter a one-page cue card for route-specific opening lines, the three-minute spine, fallback language, and final close.
 - Keep unsupported claims out of spoken narration under pressure.
 - Practice downgrade language during timed rehearsal instead of improvising if live evidence is missing.
+
+## 2026-06-21 05:34 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`
+- `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
+
+Purpose:
+
+- Keep Arize, ArmorIQ, Token Company, browser extension, CI, and legal/platform integration answers evidence-bound.
+- Provide safe Q&A patch lines for sponsor/integration questions.
+- Require evidence packet and integration-owner approval before any sponsor/integration claim moves to LIVE.

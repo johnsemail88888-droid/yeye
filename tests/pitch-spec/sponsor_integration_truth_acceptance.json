@@ -1,0 +1,26 @@
+{
+  "spec_name": "pitch-v2-sponsor-integration-truth-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "SPONSOR-TRUTH-001",
+      "name": "external integrations are not implied live",
+      "expected": "Arize, ArmorIQ, Token Company, browser extension, CI generation, and legal/platform sources are not described as live external services without evidence."
+    },
+    {
+      "id": "SPONSOR-TRUTH-002",
+      "name": "safe Q&A lines exist",
+      "expected": "Truth table provides safe answers for Arize, ArmorIQ, and Token Company questions."
+    },
+    {
+      "id": "SPONSOR-TRUTH-003",
+      "name": "upgrade requires evidence packet update",
+      "expected": "Any upgrade to LIVE requires integration owner approval, endpoint/config/artifact evidence, truth badge, evidence packet update, claim ledger update, and Q&A update."
+    },
+    {
+      "id": "SPONSOR-TRUTH-004",
+      "name": "SPEC_ONLY branch does not implement integrations",
+      "expected": "Runtime, UI, package files, and CI remain untouched by this branch."
+    }
+  ]
+}
