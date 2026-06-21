@@ -1,0 +1,36 @@
+{
+  "spec_name": "pitch-v2-truth-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "PITCH-SPEC-001",
+      "name": "coordination is spec only",
+      "expected": "Both review JSON files contain decision APPROVE_SPEC_ONLY."
+    },
+    {
+      "id": "PITCH-SPEC-002",
+      "name": "unsupported capabilities are labeled",
+      "expected": "CLI install, real browser Shield Pill/plugin, readiness checks 5-12, and generated GitHub Action are marked PLACEHOLDER or ROADMAP."
+    },
+    {
+      "id": "PITCH-SPEC-003",
+      "name": "secondary breadth wording is safe",
+      "expected": "The 2:30-2:48 script says VibeShield surfaces a static readiness checklist and does not imply those roadmap items are dynamic scanner output."
+    },
+    {
+      "id": "PITCH-SPEC-004",
+      "name": "legal findings are review indicators",
+      "expected": "Legal copy includes: Risk indicator for developer or legal review; not legal advice."
+    },
+    {
+      "id": "PITCH-SPEC-005",
+      "name": "timing is not fabricated",
+      "expected": "three_minute_timing_pass remains false until three real rehearsals are measured."
+    },
+    {
+      "id": "PITCH-SPEC-006",
+      "name": "no runtime conflict",
+      "expected": "No daemon is started, no npm or tsx command is run, and no node src/* command is run."
+    }
+  ]
+}
