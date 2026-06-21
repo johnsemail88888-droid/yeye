@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VibeShield Export Strip</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="../ui-next/styles.css" />
+  </head>
+  <body>
+    <main class="prototype-shell">
+      <section class="target-page" aria-label="Observed deployed site">
+        <div class="browser-bar">
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <div class="address">https://demo.customer-agent.local/support</div>
+          <span class="chip" data-tone="live">Observed tab</span>
+        </div>
+        <div class="page-body">
+          <div class="page-meta">
+            <span>Support Agent</span>
+            <span>Scan mode: Deep Scan</span>
+          </div>
+          <div class="mock-agent">
+            <div class="bubble">Customer request includes refund and account details.</div>
+            <div class="bubble agent">Agent response and tool attempts are summarized in the pinned VibeShield panel.</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="VibeShield results side panel">
+        <header class="panel-header">
+          <div>
+            <p class="eyebrow">Pinned side panel</p>
+            <h1>Deep Scan results</h1>
+          </div>
+          <div class="grade-ring" aria-label="Risk grade">C</div>
+        </header>
+
+        <div class="chip-row">
+          <span class="chip" data-tone="live" id="sourceChip">LIVE /api/state</span>
+          <span class="chip" data-tone="fallback" id="phoenixChip">Phoenix local fallback</span>
+        </div>
+
+        <section class="metric-grid" aria-label="Scan summary">
+          <div class="metric">
+            <span>Findings</span>
+            <strong id="findingCount">--</strong>
+          </div>
+          <div class="metric">
+            <span>Critical</span>
+            <strong id="criticalCount">--</strong>
+          </div>
+          <div class="metric">
+            <span>After FAIL</span>
+            <strong id="afterFailCount">--</strong>
+          </div>
+        </section>
+
+        <section class="export-card" aria-labelledby="export-title">
+          <div class="export-card-header">
+            <div>
+              <p class="eyebrow">Trace handoff</p>
+              <h2 id="export-title">Send to Phoenix / export</h2>
+            </div>
+            <span class="chip" data-tone="fallback" id="exportMode">Local fallback</span>
+          </div>
+          <p id="exportReason">Loading sponsor status...</p>
+          <div class="export-actions">
+            <button type="button" id="exportLocal">Export local bundle</button>
+            <button type="button" id="copyPayload" data-variant="ghost">Copy payload summary</button>
+            <button type="button" id="sendPhoenix" disabled>Send to Phoenix</button>
+          </div>
+          <div class="status-line" id="statusLine" role="status">No export action yet.</div>
+          <div class="payload" aria-label="Payload summary">
+            <div class="payload-row">
+              <strong>Run</strong>
+              <span id="runId">--</span>
+            </div>
+            <div class="payload-row">
+              <strong>Evidence</strong>
+              <span id="evidenceFiles">--</span>
+            </div>
+            <div class="payload-row">
+              <strong>Audit</strong>
+              <span id="auditState">--</span>
+            </div>
+          </div>
+        </section>
+
+        <section aria-label="Finding detail">
+          <details open>
+            <summary>
+              <span>Prompt Injection</span>
+              <span class="chip" data-tone="critical">Confirmed</span>
+            </summary>
+            <p>Export includes only run identifiers, summary counts, and artifact paths. It does not embed customer PII from traces.</p>
+            <ol>
+              <li>Review the finding in this side panel.</li>
+              <li>Export the local bundle when Phoenix is unavailable.</li>
+              <li>Send to Phoenix only when a real collector endpoint is configured.</li>
+            </ol>
+          </details>
+        </section>
+      </aside>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

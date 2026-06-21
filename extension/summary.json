@@ -1,0 +1,21 @@
+{
+  "source": "GET http://127.0.0.1:7878/api/state",
+  "captured_at_local": "2026-06-21T07:19:13-07:00",
+  "project_id": "support-agent",
+  "run_id": "run-0001",
+  "finding_count": 8,
+  "critical_count": 3,
+  "after_fail_count": 0,
+  "demo_ready": true,
+  "report_audit_pass": true,
+  "phoenix_or_local_experiment_present": true,
+  "phoenix_collector_endpoint": "",
+  "live_scan_source": "browser-panel",
+  "live_scan_run_id": "run-0002",
+  "evidence_files": [
+    "runs/before/*.json",
+    "runs/after/*.json",
+    ".vibeshield/traces/*",
+    "risk_map.json"
+  ]
+}
