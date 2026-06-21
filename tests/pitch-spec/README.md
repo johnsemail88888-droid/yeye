@@ -42,3 +42,4 @@ Forbidden writes:
 14. Presenter command card keeps the route, three-minute spine, roadmap wording, do-not-say list, fallback language, and final close on one page.
 15. Sponsor/integration truth table prevents external tools or sponsors from being implied live without evidence.
 16. Pitch V2 Start Here gives presenter, integration owner, and reviewer read paths without adding product claims.
+17. Integration owner review checklist separates mergeable docs/specs from runtime implementation and live-claim upgrades.

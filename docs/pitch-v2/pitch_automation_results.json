@@ -32,6 +32,8 @@
     "Added docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md to keep Arize, ArmorIQ, Token Company, browser extension, CI, and legal/platform integration claims evidence-bound.",
     "Added tests/pitch-spec/sponsor_integration_truth_acceptance.json to make sponsor/integration truth checks reviewer-checkable.",
     "Added docs/pitch-v2/PITCH_V2_START_HERE.md to give presenter, integration owner, and reviewer ordered read paths.",
-    "Added tests/pitch-spec/pitch_v2_start_here_acceptance.json to make the index reviewer-checkable."
+    "Added tests/pitch-spec/pitch_v2_start_here_acceptance.json to make the index reviewer-checkable.",
+    "Added docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md to separate docs/spec merge review from runtime implementation and live-claim upgrades.",
+    "Added tests/pitch-spec/integration_owner_review_acceptance.json to make integration-owner review gates reviewer-checkable."
   ]
 }

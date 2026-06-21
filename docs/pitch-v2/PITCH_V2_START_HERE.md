@@ -34,10 +34,11 @@ Choose the route, fill evidence fields, rehearse with the command card, then use
 Open in this order:
 
 1. `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
-2. `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
-3. `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
-4. `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`
-5. `docs/pitch-v2/DEMO_CLICK_MAP.md`
+2. `docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md`
+3. `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
+4. `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
+5. `docs/pitch-v2/SPONSOR_INTEGRATION_TRUTH_TABLE.md`
+6. `docs/pitch-v2/DEMO_CLICK_MAP.md`
 
 Goal:
 Decide which existing surface and artifacts can back LIVE or RECORDED REAL RUN badges, then keep unsupported capabilities downgraded.
@@ -55,6 +56,8 @@ Open in this order:
 7. `tests/pitch-spec/demo_evidence_packet_acceptance.json`
 8. `tests/pitch-spec/presenter_command_card_acceptance.json`
 9. `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
+10. `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
+11. `tests/pitch-spec/integration_owner_review_acceptance.json`
 
 Goal:
 Check that every claim is evidence-bound and that timing/overall remain false until measured.
@@ -71,6 +74,7 @@ Check that every claim is evidence-bound and that timing/overall remain false un
 | `USE_CASES.md` | Primary and secondary use cases |
 | `DEVPOST_COPY.md` | Devpost-safe copy |
 | `MORNING_REHEARSAL.md` | Rehearsal table and timing gate |
+| `INTEGRATION_OWNER_REVIEW_CHECKLIST.md` | Merge/review checklist for SPEC_ONLY docs |
 
 ## Hard Rules That Still Win
 

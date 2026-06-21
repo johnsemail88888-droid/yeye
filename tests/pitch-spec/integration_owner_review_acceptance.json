@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-integration-owner-review-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "INTEGRATION-REVIEW-001",
+      "name": "review outcome options separate docs from runtime",
+      "expected": "Checklist distinguishes merge docs/spec only, request integration data, request wording fix, and reject runtime expectation."
+    },
+    {
+      "id": "INTEGRATION-REVIEW-002",
+      "name": "diff review preserves allowed paths",
+      "expected": "Checklist allows only docs/pitch-v2, tests/pitch-spec, and CODEX_LIVE_PITCH_HANDOFF.md and lists forbidden runtime/UI paths."
+    },
+    {
+      "id": "INTEGRATION-REVIEW-003",
+      "name": "merge does not upgrade claims",
+      "expected": "Checklist says merging docs does not make overall/timing/live CLI/extension/generated CI/readiness/external integration/legal claims true."
+    },
+    {
+      "id": "INTEGRATION-REVIEW-004",
+      "name": "evidence packet fields gate live route",
+      "expected": "Checklist requires route, surface, source label, identifiers, artifact paths, downgrade labels, and measured timing rows where applicable."
+    },
+    {
+      "id": "INTEGRATION-REVIEW-005",
+      "name": "merge note preserves SPEC_ONLY status",
+      "expected": "Checklist provides merge wording that states the branch does not implement UI/runtime and does not set live demo timing or overall pass true."
+    }
+  ]
+}

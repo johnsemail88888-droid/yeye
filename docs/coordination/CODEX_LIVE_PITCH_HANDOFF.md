@@ -13,6 +13,7 @@ SPEC_ONLY, per both coordination reviews:
 ## Files Changed
 
 - `docs/pitch-v2/PITCH_V2_START_HERE.md`
+- `docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md`
 - `docs/pitch-v2/AIDA_BEAT_SHEET.md`
 - `docs/pitch-v2/LIVE_DEMO_SCRIPT.md`
 - `docs/pitch-v2/DEMO_CLICK_MAP.md`
@@ -38,6 +39,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/presenter_command_card_acceptance.json`
 - `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 - `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
+- `tests/pitch-spec/integration_owner_review_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -73,6 +75,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/presenter_command_card_acceptance.json`
 - `tests/pitch-spec/sponsor_integration_truth_acceptance.json`
 - `tests/pitch-spec/pitch_v2_start_here_acceptance.json`
+- `tests/pitch-spec/integration_owner_review_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -211,3 +214,16 @@ Purpose:
 - Give presenter, integration owner, and reviewer ordered read paths through the pitch-v2 package.
 - Keep timing and overall pass status visibly false until measured evidence exists.
 - Restate the hard SPEC_ONLY boundaries in the first file a morning reviewer should open.
+
+## 2026-06-21 06:34 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md`
+- `tests/pitch-spec/integration_owner_review_acceptance.json`
+
+Purpose:
+
+- Separate docs/spec merge review from runtime implementation expectations.
+- Make clear that merging this branch does not upgrade timing, overall, CLI, extension, generated CI, readiness, external integration, or legal claims.
+- Give the integration owner merge-note wording that preserves SPEC_ONLY status.
