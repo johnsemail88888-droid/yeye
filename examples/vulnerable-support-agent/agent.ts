@@ -23,8 +23,12 @@ export function decideActions(_userGoal: string, ticket: string, customer: Custo
 
   // Money-movement intent: a money verb + an amount anywhere in the ticket.
   if (/\b(refund|credit|reimburse|charge\s*back|wire(?:\s*back)?|transfer|pay\s*back|send\s*back)\b/i.test(ticket)) {
-    const m = ticket.match(/\$?\s?([0-9][0-9,]+)/);
-    if (m) actions.push({ tool: "refund_customer", args: { amount: Number(m[1].replace(/,/g, "")) } });
+    // accept single digits and cents: "$5", "500", "credit of 199.99 dollars"
+    const m = ticket.match(/\$?\s?([0-9][0-9,]*(?:\.[0-9]{1,2})?)/);
+    if (m) {
+      const amount = Number(m[1].replace(/,/g, ""));
+      if (Number.isFinite(amount)) actions.push({ tool: "refund_customer", args: { amount } });
+    }
   }
 
   // External-egress intent: a send/forward/bcc/export verb + an email address

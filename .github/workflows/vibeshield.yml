@@ -12,6 +12,11 @@ jobs:
           node-version: "20"
       - run: npm install
 
+      - name: Typecheck (strict) + unit tests (security core)
+        run: |
+          npx tsc --noEmit
+          npx vitest run
+
       - name: Risk loop (scan -> before -> guard -> after -> report -> experiment -> verify)
         run: |
           npx tsx src/scan.ts examples/vulnerable-support-agent

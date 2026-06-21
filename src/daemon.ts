@@ -1,22 +1,43 @@
-import { createServer } from "node:http";
+import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, rmSync } from "node:fs";
-import { execSync } from "node:child_process";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { join } from "node:path";
 import { runTicket } from "./harness";
 
-// VibeShield local daemon. Serves the desktop control plane (app.html), the
-// controlled deployed product (/demo), and the API the browser panel + desktop
-// share (same project_id/run_id). Pure Node stdlib.
-
+const execFileP = promisify(execFile);
 const ROOT = process.cwd();
 const PORT = 7878;
+const HOST = "127.0.0.1"; // localhost only — not LAN-exposed
+const MAX_BODY = 64 * 1024; // 64 KB request cap
+const CMD_TIMEOUT = 90_000; // ms
 let RUN_ID = "run-0001";
 
-function readJson(p: string): any { return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null; }
-function readRuns(rel: string): any[] {
+process.on("unhandledRejection", (e) => console.error("[daemon] unhandledRejection:", e));
+process.on("uncaughtException", (e) => console.error("[daemon] uncaughtException:", e));
+
+// Serialize file-mutating endpoints so concurrent requests never clobber runs/.
+let chain: Promise<unknown> = Promise.resolve();
+function serialize<T>(fn: () => Promise<T>): Promise<T> {
+  const next = chain.then(fn, fn) as Promise<T>;
+  chain = next.catch(() => undefined);
+  return next;
+}
+
+function readJson(p: string): unknown {
+  try {
+    return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null;
+  } catch {
+    return null;
+  }
+}
+function readRuns(rel: string): unknown[] {
   const d = join(ROOT, rel);
   if (!existsSync(d)) return [];
-  return readdirSync(d).filter((f) => f.endsWith(".json")).map((f) => readJson(join(d, f)));
+  return readdirSync(d)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => readJson(join(d, f)))
+    .filter((x) => x !== null);
 }
 function state() {
   return {
@@ -29,47 +50,118 @@ function state() {
     live_scan: readJson(join(ROOT, ".vibeshield/live_scan.json")),
   };
 }
-function run(cmd: string) { try { execSync(cmd, { cwd: ROOT, stdio: "ignore" }); } catch { /* surfaced via state */ } }
-function bumpRun() { RUN_ID = "run-" + String((parseInt(RUN_ID.split("-")[1], 10) || 0) + 1).padStart(4, "0"); }
-function body(req: any): Promise<string> {
-  return new Promise((resolve) => { let b = ""; req.on("data", (c: any) => (b += c)); req.on("end", () => resolve(b)); });
+async function runCmd(args: string[]): Promise<boolean> {
+  try {
+    await execFileP("npx", ["tsx", ...args], { cwd: ROOT, timeout: CMD_TIMEOUT, windowsHide: true });
+    return true;
+  } catch (e) {
+    console.error("[daemon] cmd failed:", args.join(" "), (e as Error).message);
+    return false;
+  }
 }
-const file = (rel: string) => readFileSync(join(ROOT, rel), "utf8");
-const json = (res: any, obj: any) => { res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify(obj)); };
-const page = (res: any, s: string) => { res.writeHead(200, { "content-type": "text/html; charset=utf-8" }); res.end(s); };
+function bumpRun() {
+  RUN_ID = "run-" + String((parseInt(RUN_ID.split("-")[1] ?? "0", 10) || 0) + 1).padStart(4, "0");
+}
+function readBody(req: IncomingMessage, max: number): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let b = "";
+    let len = 0;
+    req.on("data", (c: Buffer) => {
+      len += c.length;
+      if (len > max) {
+        reject(new Error("body too large"));
+        req.destroy();
+      } else b += c;
+    });
+    req.on("end", () => resolve(b));
+    req.on("error", reject);
+  });
+}
 
-createServer(async (req, res) => {
-  const url = (req.url || "/").split("?")[0];
-  if (url === "/" || url === "/index.html") return page(res, file("web/app.html"));
-  if (url === "/demo") return page(res, file("web/demo.html"));
-  if (url === "/judge") return page(res, file("web/judge.html"));
-  if (url === "/api/state") return json(res, state());
-  if (url === "/api/scan" && req.method === "POST") { run("npx tsx src/scan.ts examples/vulnerable-support-agent"); return json(res, state()); }
-  if (url === "/api/run" && req.method === "POST") { bumpRun(); run("npx tsx src/run.ts all"); run("npx tsx src/verify.ts"); return json(res, state()); }
-  if (url === "/api/agent" && req.method === "POST") {
-    const { ticket = "", guard = false } = JSON.parse((await body(req)) || "{}");
-    return json(res, { run_id: RUN_ID, ...runTicket(String(ticket), !!guard) });
+const SAFE_PAGES: Record<string, string> = {
+  "/": "web/app.html",
+  "/index.html": "web/app.html",
+  "/demo": "web/demo.html",
+  "/judge": "web/judge.html",
+};
+function servePage(res: ServerResponse, rel: string) {
+  const p = join(ROOT, rel);
+  if (!existsSync(p)) {
+    res.writeHead(404);
+    return res.end("not found");
   }
-  // browser panel drives the live loop:
-  if (url === "/api/live-scan" && req.method === "POST") {
-    const { scope = {} } = JSON.parse((await body(req)) || "{}");
-    bumpRun();
-    // fresh AFTER so the desktop shows a before-only state until the guard is installed
-    rmSync(join(ROOT, "runs/after"), { recursive: true, force: true });
-    rmSync(join(ROOT, ".vibeshield/traces/after"), { recursive: true, force: true });
-    mkdirSync(join(ROOT, ".vibeshield"), { recursive: true });
-    writeFileSync(join(ROOT, ".vibeshield/live_scan.json"),
-      JSON.stringify({ source: "browser-panel", project_id: "support-agent", run_id: RUN_ID, captured_at: new Date().toISOString(), scope }, null, 2));
-    run("npx tsx src/scan.ts examples/vulnerable-support-agent");
-    run("npx tsx src/run.ts before");
-    return json(res, state());
+  res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
+  res.end(readFileSync(p, "utf8"));
+}
+const json = (res: ServerResponse, code: number, obj: unknown) => {
+  res.writeHead(code, { "content-type": "application/json" });
+  res.end(JSON.stringify(obj));
+};
+
+createServer(async (req: IncomingMessage, res: ServerResponse) => {
+  try {
+    const url = (req.url || "/").split("?")[0];
+    const m = req.method || "GET";
+
+    if (m === "GET" && SAFE_PAGES[url]) return servePage(res, SAFE_PAGES[url]);
+    if (m === "GET" && url === "/api/state") return json(res, 200, state());
+
+    if (m === "POST" && url === "/api/scan") {
+      return json(res, 200, await serialize(async () => {
+        await runCmd(["src/scan.ts", "examples/vulnerable-support-agent"]);
+        return state();
+      }));
+    }
+    if (m === "POST" && url === "/api/run") {
+      return json(res, 200, await serialize(async () => {
+        bumpRun();
+        await runCmd(["src/run.ts", "all"]);
+        await runCmd(["src/verify.ts"]);
+        return state();
+      }));
+    }
+    if (m === "POST" && url === "/api/agent") {
+      const body = await readBody(req, MAX_BODY);
+      let p: any;
+      try { p = JSON.parse(body || "{}"); } catch { return json(res, 400, { error: "invalid JSON" }); }
+      if (typeof p !== "object" || p === null) return json(res, 400, { error: "expected an object" });
+      const ticket = typeof p.ticket === "string" ? p.ticket.slice(0, 8000) : "";
+      return json(res, 200, { run_id: RUN_ID, ...runTicket(ticket, !!p.guard) });
+    }
+    if (m === "POST" && url === "/api/live-scan") {
+      const body = await readBody(req, MAX_BODY);
+      let p: any;
+      try { p = JSON.parse(body || "{}"); } catch { return json(res, 400, { error: "invalid JSON" }); }
+      const scope = p && typeof p.scope === "object" && p.scope ? p.scope : {};
+      return json(res, 200, await serialize(async () => {
+        bumpRun();
+        rmSync(join(ROOT, "runs/after"), { recursive: true, force: true });
+        rmSync(join(ROOT, ".vibeshield/traces/after"), { recursive: true, force: true });
+        mkdirSync(join(ROOT, ".vibeshield"), { recursive: true });
+        writeFileSync(
+          join(ROOT, ".vibeshield/live_scan.json"),
+          JSON.stringify({ source: "browser-panel", project_id: "support-agent", run_id: RUN_ID, captured_at: new Date().toISOString(), scope }, null, 2)
+        );
+        await runCmd(["src/scan.ts", "examples/vulnerable-support-agent"]);
+        await runCmd(["src/run.ts", "before"]);
+        return state();
+      }));
+    }
+    if (m === "POST" && url === "/api/install-guard") {
+      return json(res, 200, await serialize(async () => {
+        await runCmd(["src/run.ts", "after"]);
+        await runCmd(["src/report.ts"]);
+        await runCmd(["src/experiment.ts"]);
+        await runCmd(["src/verify.ts"]);
+        return state();
+      }));
+    }
+
+    res.writeHead(404);
+    res.end("not found");
+  } catch (e) {
+    console.error("[daemon] handler error:", (e as Error).message);
+    if (!res.headersSent) json(res, 500, { error: "internal" });
+    else res.end();
   }
-  if (url === "/api/install-guard" && req.method === "POST") {
-    run("npx tsx src/run.ts after");
-    run("npx tsx src/report.ts");
-    run("npx tsx src/experiment.ts");
-    run("npx tsx src/verify.ts");
-    return json(res, state());
-  }
-  res.writeHead(404); res.end("not found");
-}).listen(PORT, () => console.log(`VibeShield daemon on http://localhost:${PORT}  (desktop / · product /demo)`));
+}).listen(PORT, HOST, () => console.log(`VibeShield daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
