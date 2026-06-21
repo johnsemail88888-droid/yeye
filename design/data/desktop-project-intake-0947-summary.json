@@ -1,0 +1,32 @@
+{
+  "captured_at": "2026-06-21T09:48:31.3951531-07:00",
+  "source_status": "LIVE /api/state",
+  "source_detail": "Read-only GET http://127.0.0.1:7878/api/state. The endpoint exposed project id, run ids, risk_map findings, scanned file count, high-impact tools, guard presence, approval gate presence, and verify booleans. It did not expose uploaded projects, file picker state, clone status, or real working-copy write state.",
+  "project_id": "support-agent",
+  "run_id": "run-0001",
+  "live_scan_run_id": "run-0002",
+  "finding_count": 8,
+  "severity_counts": {
+    "critical": 3,
+    "high": 3,
+    "medium": 1,
+    "low": 1
+  },
+  "risk_map": {
+    "target": "examples/vulnerable-support-agent",
+    "scanned_files": 2,
+    "high_impact_tool_count": 4,
+    "guard_present": false,
+    "approval_gate_present": false
+  },
+  "verify": {
+    "demo_ready": true,
+    "report_audit_pass": true,
+    "desktop_connected": true
+  },
+  "mock_todo": [
+    "Real project upload, folder picker, clone, and zip import are not exposed by /api/state.",
+    "Working-copy writes are not wired in this prototype.",
+    "File span coordinates are not exposed by /api/state."
+  ]
+}

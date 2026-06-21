@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Desktop Project Intake</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="desktop-shell" data-app>
+      <nav class="activity-rail" aria-label="Activity rail">
+        <button class="rail-button" type="button" data-active="true" title="Projects" aria-label="Projects">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H11l2 2h4.5A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-10z" stroke="currentColor" stroke-width="1.7"/>
+          </svg>
+        </button>
+        <button class="rail-button" type="button" title="Risk scan" aria-label="Risk scan">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3l7 3v5c0 4.4-2.8 8.4-7 10-4.2-1.6-7-5.6-7-10V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9.5 12l1.7 1.7 3.6-4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="rail-button" type="button" title="Command menu" aria-label="Command menu" data-action="toggle-command">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 8h12M6 12h8M6 16h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </nav>
+
+      <aside class="project-rail" aria-label="Projects">
+        <header class="pane-head">
+          <div class="title-stack">
+            <span class="eyebrow">Projects</span>
+            <span class="title">Local intake</span>
+            <span class="subtitle">No source writes in prototype.</span>
+          </div>
+        </header>
+        <section class="project-list" data-project-list></section>
+        <section class="source-list" data-source-list></section>
+      </aside>
+
+      <section class="workspace" aria-label="Project intake workspace">
+        <header class="workspace-head">
+          <div class="title-stack">
+            <span class="eyebrow">Mode 2 desktop app</span>
+            <span class="title">Add a pre-launch project</span>
+            <span class="subtitle" data-source-line>Loading state snapshot</span>
+          </div>
+          <button class="button" type="button" data-action="toggle-command">Cmd K</button>
+        </header>
+
+        <section class="workspace-main">
+          <div class="intake-board">
+            <section>
+              <span class="eyebrow">Isolation choice</span>
+              <h1 class="title">Choose how VibeShield should open this codebase</h1>
+              <p class="subtitle">The prototype demonstrates the gate only. A real file picker or clone operation is not exposed by the current state API.</p>
+            </section>
+
+            <section class="choice-grid" data-choice-grid></section>
+
+            <section class="drop-zone" data-drop-zone>
+              <div class="title-stack">
+                <span class="eyebrow">Import target</span>
+                <span class="title" data-drop-title>Waiting for a source</span>
+                <span class="subtitle" data-drop-copy>Pick a source row or command. This is MOCK TODO local intake.</span>
+              </div>
+              <button class="button" data-primary="true" type="button" data-action="add-project">Add project</button>
+            </section>
+
+            <section class="risk-grid" data-risk-grid></section>
+          </div>
+        </section>
+
+        <footer class="status-bar">
+          <span class="chip" data-tone="mock">MOCK TODO import</span>
+          <span class="subtitle" data-status-line>Sandbox copy is recommended.</span>
+        </footer>
+      </section>
+
+      <aside class="side-panel" aria-label="Risk summary">
+        <header class="side-head">
+          <div class="title-stack">
+            <span class="eyebrow">Next step</span>
+            <span class="title">Scan after import</span>
+          </div>
+          <span class="badge" data-tone="critical" data-risk-badge>0</span>
+        </header>
+        <section class="side-panel-content">
+          <article class="next-card">
+            <span class="eyebrow">Selected mode</span>
+            <span class="title" data-selected-mode>Sandbox copy</span>
+            <p class="subtitle" data-selected-mode-copy>Edits stay isolated until explicitly applied.</p>
+          </article>
+          <section class="timeline" data-timeline></section>
+        </section>
+      </aside>
+
+      <section class="command-menu" data-command-menu aria-label="Command menu">
+        <input class="command-search" data-command-search aria-label="Search commands" placeholder="Search project actions">
+        <div class="command-list" data-command-list></div>
+      </section>
+    </main>
+    <script type="module" src="/desktop/app.js"></script>
+  </body>
+</html>
