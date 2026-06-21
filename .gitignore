@@ -19,3 +19,7 @@ artifacts/
 
 # Yeye mascot raw source art (13MB) — served frames live in web/yeye/
 assets/yeye/v2/
+
+# Stray files dropped by the Codex mascot automation — never ours to commit
+web/yeye-pet.*
+web/assets/
