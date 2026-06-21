@@ -635,7 +635,7 @@ function renderPanel(){
 load();
 </script>
 
-<!-- 耶耶 (Yeye) realistic desktop pet v3 — directional roam (side walk cycle + mirror, back walk-away, front idle, sniff/wave/rest), frames served from /yeye/, real /api/state, click-through, reduced-motion safe. -->
+<!-- 耶耶 (Yeye) realistic desktop pet v3.1 — directional roam + run_id-driven sniff (works on every page via /api/state). Frames from /yeye/. Self-contained, pointer-events:none (never blocks page), reduced-motion safe. Touches NO page logic. -->
 <style id="yeye-style">
 #yeye{position:fixed;left:0;top:0;z-index:70;width:128px;height:128px;pointer-events:none;will-change:transform;transition:transform .3s ease}
 #yeyeFlip{width:128px;height:128px;transform:scaleX(var(--face,1));transition:transform .18s}
@@ -662,12 +662,13 @@ load();
   var F={front:'/yeye/front.png',walk1:'/yeye/walk1.png',walk2:'/yeye/walk2.png',away1:'/yeye/away1.png',away2:'/yeye/away2.png',back:'/yeye/back.png',sniff:'/yeye/sniff.png',wave:'/yeye/wave.png',rest:'/yeye/rest.png'};
   for(var k in F){var pre=new Image();pre.src=F[k];}
   var root=document.getElementById('yeye'),flip=document.getElementById('yeyeFlip'),img=document.getElementById('yeyeImg'),bubble=document.getElementById('yeyeBubble');
+  if(!root||!img)return;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SZ=128,SPEED=130,x=innerWidth-185,y=innerHeight-175,face=1;
-  var busy=false,scanning=false,cyc=null,cp=0,moveTO=null,loopTO=null,sayTO=null,lastRun=null;
+  var busy=false,scanning=false,cyc=null,cp=0,moveTO=null,loopTO=null,sayTO=null,lastRun=null,curState=null,curPose='front';
   function place(){root.style.transform='translate('+Math.round(x)+'px,'+Math.round(y)+'px)';flip.style.setProperty('--face',face);}
   function frame(n){img.src=F[n]||F.front;}
-  function pose(p,mv){root.setAttribute('data-pose',p);root.setAttribute('data-mv',mv?'1':'0');}
+  function pose(p,mv){curPose=p;root.setAttribute('data-pose',p);root.setAttribute('data-mv',mv?'1':'0');}
   function say(t){if(!t)return;bubble.textContent=t;root.classList.add('say');clearTimeout(sayTO);sayTO=setTimeout(function(){root.classList.remove('say');},4400);}
   function stopCyc(){if(cyc){clearInterval(cyc);cyc=null;}}
   function startCyc(a,b){stopCyc();cp=0;frame(a);if(reduce)return;cyc=setInterval(function(){cp^=1;frame(cp?b:a);},210);}
@@ -689,20 +690,27 @@ load();
     if(busy||scanning)return;
     if(Math.random()<0.16){rest();loopTO=setTimeout(function(){settle();roam();},2800+Math.random()*3000);return;}
     var tx=24+Math.random()*(innerWidth-SZ-48),ty=80+Math.random()*Math.max(40,innerHeight-SZ-130);
-    walkTo(tx,ty,function(){settle();if(Math.random()<0.25){frame('wave');pose('wave',0);say('汪!');}loopTO=setTimeout(roam,1000+Math.random()*2600);});
+    walkTo(tx,ty,function(){settle();if(Math.random()<0.22){frame('wave');pose('wave',0);say('汪!');}loopTO=setTimeout(roam,1000+Math.random()*2600);});
   }
   function derive(s){if(!s||!s.verify)return 'idle';var v=s.verify,af=(s.runs_after||[]),bf=(s.runs_before||[]);var aF=af.filter(function(r){return r.eval&&r.eval.final_status==='FAIL';}).length;var bF=bf.filter(function(r){return r.eval&&r.eval.final_status==='FAIL';}).length;if(v.demo_ready&&af.length&&aF===0)return 'protected';if(bF>0&&(af.length===0||aF>0))return 'alert';return 'idle';}
-  function targetRect(){var t=document.getElementById('timeline')||document.getElementById('panel')||document.body;return t.getBoundingClientRect();}
-  function startScan(){if(scanning)return;scanning=true;busy=true;clearTimeout(loopTO);clearTimeout(moveTO);
-    var r=targetRect();walkTo(r.left+r.width*0.3-SZ/2,Math.min(innerHeight-SZ-24,Math.max(80,r.top+24)),function(){stopCyc();frame('sniff');pose('sniff',0);say('耶耶在到处闻 bug…');});}
-  function endScan(){scanning=false;stopCyc();var st=derive(window.STATE);
-    frame('wave');pose('wave',0);say(st==='alert'?'闻到高风险工具调用!':'已保护 · 同样攻击被拦,正常流程照过');
-    loopTO=setTimeout(function(){busy=false;settle();roam();},3000);}
-  var rb=document.getElementById('run');if(rb)rb.addEventListener('click',startScan);
-  function poll(){fetch('/api/state').then(function(r){return r.json();}).then(function(s){if(!window.STATE)window.STATE=s;
-    if(scanning&&s.run_id&&s.run_id!==lastRun&&(s.runs_after||[]).length){lastRun=s.run_id;endScan();return;}
+  function targetRect(){var t=document.getElementById('timeline')||document.getElementById('panel')||document.querySelector('[data-yeye-target]')||document.querySelector('main')||document.body;return t.getBoundingClientRect();}
+  function reactToScan(){
+    if(scanning)return;scanning=true;busy=true;clearTimeout(loopTO);clearTimeout(moveTO);
+    var r=targetRect();
+    walkTo(r.left+Math.min(r.width*0.3,200)-SZ/2,Math.max(80,Math.min(innerHeight-SZ-24,r.top+24)),function(){
+      stopCyc();frame('sniff');pose('sniff',0);say('耶耶在闻 bug…');
+      loopTO=setTimeout(function(){
+        var st=derive(curState);frame('wave');pose('wave',0);
+        say(st==='alert'?'闻到高风险工具调用!':'已保护 · 同样攻击被拦,正常流程照过');
+        loopTO=setTimeout(function(){scanning=false;busy=false;settle();roam();},2600);
+      },1500);
+    });
+  }
+  var rb=document.getElementById('run');if(rb)rb.addEventListener('click',function(){reactToScan();});
+  function poll(){fetch('/api/state').then(function(r){return r.json();}).then(function(s){curState=s;
+    if(scanning){lastRun=s.run_id;return;}
+    if(lastRun!==null&&s.run_id!==lastRun){lastRun=s.run_id;reactToScan();return;}
     lastRun=s.run_id;
-    if(!scanning&&!busy){var st=derive(s);if(st==='alert'&&root.getAttribute('data-pose')!=='wave'){busy=true;var r=targetRect();walkTo(r.left+40,Math.max(80,r.top+24),function(){frame('wave');pose('wave',0);say('闻到高风险!');busy=false;});}}
   }).catch(function(){});}
   place();frame('front');pose('front',0);say('耶耶来啦 🐾');poll();setInterval(poll,2600);
   if(reduce){x=innerWidth-160;y=innerHeight-160;place();frame('front');pose('front',0);}else{loopTO=setTimeout(roam,1400);}
