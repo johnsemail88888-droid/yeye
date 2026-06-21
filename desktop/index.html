@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VibeShield Desktop Fixable Triad</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235E6AD2'/%3E%3Cpath d='M9 9h14v6c0 5-3 8-7 9-4-1-7-4-7-9z' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="desktop-shell" aria-label="VibeShield desktop prototype">
+      <aside class="activity-rail" aria-label="Primary navigation">
+        <div class="brand-mark">VS</div>
+        <button class="rail-button is-active" type="button" aria-label="Files">
+          <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 6.5h6l2 2h8v9H4z" />
+          </svg>
+        </button>
+        <button class="rail-button" type="button" aria-label="Risk scan">
+          <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3.5 19 7v5.5c0 4.3-2.8 6.8-7 8-4.2-1.2-7-3.7-7-8V7z" />
+          </svg>
+        </button>
+        <button class="rail-button" type="button" data-command-open aria-label="Open command menu">
+          <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M12 5v14" />
+          </svg>
+        </button>
+      </aside>
+
+      <aside class="project-tree" aria-label="Project and files">
+        <header class="pane-header">
+          <div>
+            <p class="u-label">Sandbox copy</p>
+            <h1>support-agent-draft</h1>
+          </div>
+          <span class="u-mock">MOCK</span>
+        </header>
+        <button class="project-row is-active" type="button">
+          <span>agent.ts</span>
+          <span class="risk-badge">MOCK</span>
+        </button>
+        <button class="project-row" type="button">
+          <span>tools.ts</span>
+          <span class="risk-badge quiet">0</span>
+        </button>
+        <button class="project-row" type="button">
+          <span>guard.ts</span>
+          <span class="risk-badge quiet">TODO</span>
+        </button>
+        <div class="tree-note">
+          All sample findings are MOCK. Real Mode 2 fixes must bind to `risk_map.json` or `GET /api/state`.
+        </div>
+      </aside>
+
+      <section class="editor-pane" aria-label="Code editor">
+        <header class="editor-topbar">
+          <div>
+            <p class="u-label">Editor</p>
+            <h2>agent.ts</h2>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-button" type="button" data-command-open>Cmd/Ctrl+K</button>
+            <button class="ghost-button" type="button" data-toggle-preview>Preview</button>
+          </div>
+        </header>
+
+        <div class="code-surface" data-editor>
+          <div class="code-line">
+            <span class="line-number">18</span>
+            <span class="gutter"></span>
+            <code>const plan = await model.plan(ticket.text)</code>
+          </div>
+          <button class="code-line fixable is-selected" type="button" data-finding-id="refund">
+            <span class="line-number">19</span>
+            <span class="gutter dot agency"></span>
+            <code>await <span class="squiggle agency">refund_customer(plan.customerId, plan.amount)</span></code>
+            <span class="lightbulb" aria-label="Quick fix available">
+              <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.5 14.2 9l5.8 1-4.2 4.1 1 5.9-4.8-3-4.8 3 1-5.9L4 10l5.8-1z" />
+              </svg>
+            </span>
+            <span class="spot-popover">Excessive agency: state-changing tool needs an explicit approval gate.</span>
+          </button>
+          <div class="code-line">
+            <span class="line-number">20</span>
+            <span class="gutter"></span>
+            <code>await send_email(plan.email, plan.summary)</code>
+          </div>
+          <button class="code-line fixable" type="button" data-finding-id="pii">
+            <span class="line-number">21</span>
+            <span class="gutter dot pii"></span>
+            <code>await send_email(externalAddress, <span class="squiggle pii">customer.profile</span>)</code>
+            <span class="lightbulb" aria-label="Quick fix available">
+              <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.5 14.2 9l5.8 1-4.2 4.1 1 5.9-4.8-3-4.8 3 1-5.9L4 10l5.8-1z" />
+              </svg>
+            </span>
+            <span class="spot-popover">PII egress: customer profile leaves the trusted destination boundary.</span>
+          </button>
+          <div class="code-line">
+            <span class="line-number">22</span>
+            <span class="gutter"></span>
+            <code>return create_support_reply(plan.summary)</code>
+          </div>
+        </div>
+
+        <section class="inline-diff" data-diff hidden aria-label="Pending inline diff">
+          <div class="diff-row remove">- await refund_customer(plan.customerId, plan.amount)</div>
+          <div class="diff-row add">+ await requireApproval("refund", plan.customerId, plan.amount)</div>
+          <div class="diff-row add">+ await refund_customer(plan.customerId, plan.amount)</div>
+        </section>
+      </section>
+
+      <aside class="suggestions-pane" aria-label="Suggestions panel">
+        <header class="pane-header">
+          <div>
+            <p class="u-label">Suggestions</p>
+            <h2>Fix queue</h2>
+          </div>
+          <button class="collapse-button" type="button" data-toggle-panel aria-label="Collapse suggestions">
+            <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 6-6 6 6 6" />
+            </svg>
+          </button>
+        </header>
+
+        <nav class="filter-tabs" aria-label="Dimension filters">
+          <button class="is-active" type="button" data-filter="all">All</button>
+          <button type="button" data-filter="agency">Agency</button>
+          <button type="button" data-filter="pii">PII</button>
+        </nav>
+
+        <section class="suggestion-list" data-suggestions></section>
+
+        <section class="metadata-block" aria-label="Finding metadata">
+          <p class="u-label">Metadata</p>
+          <div><strong>ArmorIQ verdict</strong><span>local fallback - MOCK</span></div>
+          <div><strong>Phoenix trace</strong><span>not linked - MOCK</span></div>
+          <div><strong>auto-fixable</strong><span data-autofix>yes - MOCK</span></div>
+        </section>
+      </aside>
+
+      <aside class="preview-pane" data-preview aria-label="Live preview">
+        <p class="u-label">Preview</p>
+        <h2>Policy gate state</h2>
+        <div class="preview-card" data-preview-card>
+          <span class="status-dot"></span>
+          <strong>Pending approval gate</strong>
+          <span>Apply is gated; no source is changed automatically.</span>
+        </div>
+      </aside>
+
+      <div class="command-backdrop" data-command hidden>
+        <section class="command-menu" role="dialog" aria-modal="true" aria-label="Command menu">
+          <div class="command-search">
+            <svg class="u-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m21 21-4.2-4.2M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4z" />
+            </svg>
+            <input value="fix" aria-label="Command search" />
+          </div>
+          <button type="button" data-command-action="refund"><span>Focus refund approval finding</span><kbd>Enter</kbd></button>
+          <button type="button" data-command-action="pii"><span>Focus PII egress finding</span><kbd>Ctrl 2</kbd></button>
+          <button type="button" data-command-action="apply"><span>Preview selected inline diff</span><kbd>Tab</kbd></button>
+        </section>
+      </div>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
