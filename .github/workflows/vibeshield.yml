@@ -1,0 +1,36 @@
+name: VibeShield Risk Debugger
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  vibeshield:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install
+
+      - name: Risk loop (scan -> before -> guard -> after -> report -> experiment -> verify)
+        run: |
+          npx tsx src/scan.ts examples/vulnerable-support-agent
+          npx tsx src/run.ts all
+          npx tsx src/report.ts
+          npx tsx src/experiment.ts
+          npx tsx src/verify.ts
+
+      - name: Gate on real risk regression
+        run: |
+          node -e "const v=require('./verify_results.json'); if(!v.core_loop_pass||!v.report_audit_pass){console.error('VibeShield gate FAILED: a risk regressed or the report audit failed');process.exit(1);} console.log('VibeShield: core loop + report audit passed');"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vibeshield-evidence
+          path: |
+            runs/**
+            .vibeshield/**
+            verify_results.json
+            risk_map.json

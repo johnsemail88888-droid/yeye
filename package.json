@@ -1,0 +1,22 @@
+{
+  "name": "vibeshield",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "VibeShield Risk Debugger — find where a vibe-coded AI agent can be hijacked, prove it, install an ArmorIQ-style tool firewall, and prove the risk is fixed while normal utility is preserved.",
+  "scripts": {
+    "demo:before": "tsx src/run.ts before",
+    "demo:after": "tsx src/run.ts after",
+    "demo:all": "tsx src/run.ts all",
+    "vibeshield:scan": "tsx src/scan.ts examples/vulnerable-support-agent",
+    "vibeshield:test:before": "tsx src/run.ts before",
+    "vibeshield:test:after": "tsx src/run.ts after",
+    "report": "tsx src/report.ts",
+    "experiment": "tsx src/experiment.ts",
+    "demo:verify-three": "tsx src/demo-verify-three.ts",
+    "verify": "tsx src/verify.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}

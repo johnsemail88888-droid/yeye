@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>VibeShield Studio</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:#0d1117; color:#e6edf3; }
+  header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid #1f2630; background:#0f141b; }
+  header h1 { font-size:16px; margin:0; font-weight:600; }
+  .badge { padding:4px 12px; border-radius:20px; font-weight:600; font-size:12px; }
+  .grid { display:grid; grid-template-columns:210px 1fr 1.15fr; height:calc(100vh - 53px); }
+  .col { padding:16px; overflow:auto; border-right:1px solid #1f2630; }
+  .col h2 { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#7d8590; margin:0 0 12px; }
+  .nav div { padding:8px 10px; border-radius:6px; margin-bottom:4px; }
+  .nav .active { background:#1f6feb22; color:#79c0ff; border:1px solid #1f6feb44; }
+  .muted { color:#7d8590; font-size:12px; }
+  .ev { position:relative; padding:7px 0 7px 16px; border-left:2px solid #1f2630; margin-left:2px; }
+  .ev::before { content:''; position:absolute; left:-5px; top:12px; width:8px; height:8px; border-radius:50%; background:#1f6feb; }
+  code { background:#161b22; border:1px solid #232a33; border-radius:4px; padding:1px 5px; font-size:12px; color:#ffa657; }
+  .card { background:#11161d; border:1px solid #232a33; border-radius:8px; padding:10px 12px; margin-bottom:8px; }
+  .pill { font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; margin-right:8px; }
+  table { width:100%; border-collapse:collapse; margin-top:6px; }
+  th { text-align:left; font-size:11px; color:#7d8590; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid #232a33; }
+  td { padding:8px; border-bottom:1px solid #161b22; font-size:13px; vertical-align:top; }
+  .status { font-weight:700; font-size:12px; }
+  .arrow { color:#43d17a; font-weight:700; }
+  .tabs { display:flex; gap:6px; margin-bottom:12px; }
+  .tabs button { background:#161b22; color:#9aa4b2; border:1px solid #232a33; border-radius:6px; padding:6px 12px; font-size:12px; cursor:pointer; }
+  .tabs button.on { background:#1f6feb22; color:#79c0ff; border-color:#1f6feb55; }
+  .runbtn { background:#1f6feb; color:#fff; border:none; border-radius:6px; padding:8px 14px; font-size:13px; font-weight:600; cursor:pointer; }
+  .runbtn:disabled { opacity:.6; cursor:default; }
+  pre { margin:0; font-size:12px; color:#9aa4b2; white-space:pre-wrap; }
+  .stat { display:inline-block; background:#11161d; border:1px solid #232a33; border-radius:8px; padding:8px 14px; margin:0 8px 8px 0; }
+  .stat b { font-size:20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🛡 VibeShield Studio <span class="muted" style="font-weight:400">— Risk Debugger</span></h1>
+  <div id="badge" class="badge">loading…</div>
+</header>
+<div class="grid">
+  <div class="col nav">
+    <h2>Projects</h2>
+    <div class="active">📦 support-agent <span class="muted">(Build)</span></div>
+    <div class="muted">🌐 + New Live Project</div>
+    <h2 style="margin-top:22px">Run</h2>
+    <button id="run" class="runbtn" onclick="rerun()">▶ Rerun the same attack</button>
+    <div id="runmsg" class="muted" style="margin-top:8px"></div>
+  </div>
+  <div class="col">
+    <h2>Agent Activity</h2>
+    <div id="timeline"></div>
+  </div>
+  <div class="col">
+    <h2>Risk Inspector</h2>
+    <div class="tabs">
+      <button data-tab="overview" class="on" onclick="tab('overview')">Overview</button>
+      <button data-tab="findings" onclick="tab('findings')">Findings</button>
+      <button data-tab="evidence" onclick="tab('evidence')">Evidence</button>
+      <button data-tab="beforeafter" onclick="tab('beforeafter')">Before / After</button>
+    </div>
+    <div id="panel"></div>
+  </div>
+</div>
+<script>
+let STATE = null, TAB = "overview";
+const sev = s => ({critical:"#ff5c6c",high:"#ffb454",medium:"#ffd866",low:"#9aa4b2"}[s]||"#9aa4b2");
+const sc = s => ({FAIL:"#ff5c6c",PASS:"#43d17a",BLOCKED:"#43d17a",NEEDS_APPROVAL:"#ffb454"}[s]||"#9aa4b2");
+
+async function load(){ STATE = await (await fetch("/api/state")).json(); render(); }
+async function rerun(){
+  const b=document.getElementById("run"); b.disabled=true;
+  document.getElementById("runmsg").textContent="running the loop on real code…";
+  STATE = await (await fetch("/api/run",{method:"POST"})).json();
+  b.disabled=false; document.getElementById("runmsg").textContent="done — re-read from disk";
+  render();
+}
+function tab(t){ TAB=t; document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.tab===t)); renderPanel(); }
+
+function render(){
+  const s=STATE; if(!s) return;
+  const v=s.verify||{};
+  const core=v.core_loop_pass, demo=v.demo_ready;
+  const badge=document.getElementById("badge");
+  badge.textContent=`core loop ${core?"✓":"✗"} · demo_ready ${demo?"✓":"✗"}`;
+  badge.style.background=core?"#43d17a22":"#ff5c6c22"; badge.style.color=core?"#43d17a":"#ff5c6c";
+
+  const rm=s.risk_map||{findings:[],tools:[]};
+  const fails=(s.runs_before||[]).filter(r=>r.eval.final_status==="FAIL");
+  const tl=[];
+  tl.push(`Project created — <b>Build</b>: vulnerable-support-agent`);
+  tl.push(`Scanner: ${rm.tools.length} tools, ${rm.findings.length} findings (${rm.findings.filter(f=>f.severity==="critical").length} critical)`);
+  tl.push(`BEFORE: ${(s.runs_before||[]).length} dynamic tests — <span style="color:#ff5c6c">${fails.length} FAILED</span>`);
+  fails.forEach(r=>{ const bad=r.executed.filter(c=>["refund_customer","send_email","update_user_plan"].includes(c.tool));
+    tl.push(`&nbsp;&nbsp;↳ ${r.test}: <code>${bad.map(c=>c.tool+"("+JSON.stringify(c.args)+")").join(", ")}</code>${r.eval.pii_disclosed?" <span style='color:#ff5c6c'>PII leaked</span>":""}`); });
+  tl.push(`Installed VibeShield runtime guard (intent firewall)`);
+  tl.push(`AFTER: same tests — <span style="color:#43d17a">0 unauthorized executed</span>`);
+  tl.push(`VERIFY: core_loop_pass = <b style="color:${core?"#43d17a":"#ff5c6c"}">${core}</b> · demo_ready = <b style="color:${demo?"#43d17a":"#ff5c6c"}">${demo}</b>`);
+  document.getElementById("timeline").innerHTML=tl.map(t=>`<div class="ev">${t}</div>`).join("");
+  renderPanel();
+}
+
+function renderPanel(){
+  const s=STATE; if(!s) return; const rm=s.risk_map||{findings:[]}; const v=s.verify||{};
+  const p=document.getElementById("panel"); let h="";
+  if(TAB==="overview"){
+    const gates=[["core_loop_pass",v.core_loop_pass],["trace_evidence_pass",v.trace_evidence_pass],["mutation_generic_pass",v.mutation_generic_pass],["browser_live_loop_pass",v.browser_live_loop_pass],["report_audit_pass",v.report_audit_pass],["demo_ready",v.demo_ready]];
+    h=`<div>${gates.map(([k,val])=>`<span class="stat"><span class="muted">${k}</span><br><b style="color:${val?"#43d17a":"#ff5c6c"}">${val}</b></span>`).join("")}</div>
+      <div class="card" style="margin-top:8px">${rm.tools.length} tools · ${rm.findings.length} findings · ${rm.findings.filter(f=>f.severity==="critical").length} critical · guard ${rm.guard_present?"present":"<span style='color:#ff5c6c'>missing</span>"}</div>`;
+  } else if(TAB==="findings"){
+    h=[...rm.findings].sort((a,b)=>["critical","high","medium","low"].indexOf(a.severity)-["critical","high","medium","low"].indexOf(b.severity))
+      .map(f=>`<div class="card"><span class="pill" style="background:${sev(f.severity)}22;color:${sev(f.severity)}">${f.severity.toUpperCase()}</span><b>${f.tool||f.category}</b><div class="muted">${f.detail}</div></div>`).join("");
+  } else if(TAB==="evidence"){
+    h=(s.runs_before||[]).filter(r=>r.eval.final_status==="FAIL").map(r=>`<div class="card">
+      <b>${r.test}</b><div class="muted" style="margin:4px 0">untrusted ticket:</div>
+      <pre>${(r.ticket||"").replace(/</g,"&lt;")}</pre>
+      <div class="muted" style="margin-top:6px">agent did:</div>
+      <pre style="color:#ff8b94">${r.executed.filter(c=>["refund_customer","send_email"].includes(c.tool)).map(c=>c.tool+"("+JSON.stringify(c.args)+")").join("\n")||"—"}</pre></div>`).join("")
+      || `<div class="muted">no failures recorded</div>`;
+  } else {
+    h=`<table><tr><th>Test</th><th>Before</th><th></th><th>After</th></tr>${
+      (s.runs_before||[]).map(b=>{ const a=(s.runs_after||[]).find(x=>x.test===b.test)||b;
+        const reason=(a.guardDecisions||[]).find(g=>g.decision!=="allow")?.reason||"";
+        return `<tr><td>${b.test}</td><td><span class="status" style="color:${sc(b.eval.final_status)}">${b.eval.final_status}</span></td>
+          <td class="arrow">→</td><td><span class="status" style="color:${sc(a.eval.final_status)}">${a.eval.final_status}</span><div class="muted">${reason}</div></td></tr>`;
+      }).join("")}</table>`;
+  }
+  p.innerHTML=h;
+}
+load();
+</script>
+</body>
+</html>
