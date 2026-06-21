@@ -38,6 +38,8 @@
     "Added tests/pitch-spec/demo_evidence_packet.schema.json as a SPEC_ONLY structural schema for a future filled evidence packet.",
     "Added docs/pitch-v2/DEMO_EVIDENCE_PACKET_SCHEMA.md and tests/pitch-spec/demo_evidence_packet_schema_acceptance.json to document and review the schema without claiming live evidence.",
     "Added tests/pitch-spec/demo_evidence_packet.example.json as a TODO/NOT_CONFIGURED placeholder shape, not evidence.",
-    "Added tests/pitch-spec/demo_evidence_packet_example_acceptance.json to make the placeholder status reviewer-checkable."
+    "Added tests/pitch-spec/demo_evidence_packet_example_acceptance.json to make the placeholder status reviewer-checkable.",
+    "Added docs/pitch-v2/FINAL_MORNING_BRIEF.md as the final docs/spec-only morning overview.",
+    "Added tests/pitch-spec/final_morning_brief_acceptance.json to make final brief claims reviewer-checkable."
   ]
 }

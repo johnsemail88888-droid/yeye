@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-final-morning-brief-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "FINAL-BRIEF-001",
+      "name": "brief states docs/spec readiness only",
+      "expected": "Final brief says the branch is ready as a docs/spec package and not a runtime implementation branch."
+    },
+    {
+      "id": "FINAL-BRIEF-002",
+      "name": "brief keeps false gates false",
+      "expected": "Final brief states three_minute_timing_pass=false, overall_pass=false, no measured rehearsal results, and no filled live evidence packet."
+    },
+    {
+      "id": "FINAL-BRIEF-003",
+      "name": "brief preserves roadmap items",
+      "expected": "CLI install, browser extension, generated CI, readiness checks 5-12, external integrations, and legal/platform determinations remain roadmap or not configured."
+    },
+    {
+      "id": "FINAL-BRIEF-004",
+      "name": "brief gives role-based morning actions",
+      "expected": "Final brief gives separate presenter, integration owner, and reviewer steps."
+    },
+    {
+      "id": "FINAL-BRIEF-005",
+      "name": "brief merge wording preserves SPEC_ONLY status",
+      "expected": "Final brief includes safe merge wording that does not claim UI/runtime implementation or live pass status."
+    }
+  ]
+}

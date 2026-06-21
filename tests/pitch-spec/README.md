@@ -45,3 +45,4 @@ Forbidden writes:
 17. Integration owner review checklist separates mergeable docs/specs from runtime implementation and live-claim upgrades.
 18. Demo evidence packet schema defines structural requirements without claiming live evidence.
 19. Demo evidence packet example is a TODO/NOT_CONFIGURED placeholder, not evidence.
+20. Final morning brief summarizes docs/spec readiness while keeping live/timing/overall claims false.

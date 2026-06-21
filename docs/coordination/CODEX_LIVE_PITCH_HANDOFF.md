@@ -13,6 +13,7 @@ SPEC_ONLY, per both coordination reviews:
 ## Files Changed
 
 - `docs/pitch-v2/PITCH_V2_START_HERE.md`
+- `docs/pitch-v2/FINAL_MORNING_BRIEF.md`
 - `docs/pitch-v2/INTEGRATION_OWNER_REVIEW_CHECKLIST.md`
 - `docs/pitch-v2/AIDA_BEAT_SHEET.md`
 - `docs/pitch-v2/LIVE_DEMO_SCRIPT.md`
@@ -45,6 +46,7 @@ SPEC_ONLY, per both coordination reviews:
 - `tests/pitch-spec/demo_evidence_packet.example.json`
 - `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
+- `tests/pitch-spec/final_morning_brief_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -85,6 +87,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/demo_evidence_packet.example.json`
 - `tests/pitch-spec/demo_evidence_packet_schema_acceptance.json`
 - `tests/pitch-spec/demo_evidence_packet_example_acceptance.json`
+- `tests/pitch-spec/final_morning_brief_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -263,3 +266,16 @@ Purpose:
 - Provide a schema-shaped placeholder packet using TODO / NOT_CONFIGURED / ROADMAP values only.
 - Prevent the placeholder from being mistaken for live or recorded demo evidence.
 - Give the integration owner a safe structure to replace with real values later.
+
+## 2026-06-21 08:04 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/FINAL_MORNING_BRIEF.md`
+- `tests/pitch-spec/final_morning_brief_acceptance.json`
+
+Purpose:
+
+- Provide a short final morning overview for presenter, integration owner, and reviewer.
+- Keep docs/spec readiness separate from live demo, timing, and overall pass claims.
+- Preserve roadmap/not-configured status for unsupported capabilities.
