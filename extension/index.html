@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Extension Export Packet</title>
+    <link rel="stylesheet" href="/ui-next/styles.css">
+  </head>
+  <body>
+    <main class="export-shell" data-app>
+      <aside class="popup-pane" aria-label="Extension popup">
+        <header class="pane-head">
+          <div class="title-stack">
+            <span class="eyebrow">Extension experience</span>
+            <span class="title">Export packet</span>
+            <span class="subtitle">Local review packet, not a shipped MV3 extension.</span>
+          </div>
+          <button class="icon-button" type="button" data-action="toggle-command" title="Command menu" aria-label="Command menu">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 8h12M6 12h8M6 16h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </header>
+        <section class="scan-cards" data-scan-cards></section>
+      </aside>
+
+      <section class="side-panel" aria-label="Pinned side panel">
+        <header class="side-head">
+          <div class="title-stack">
+            <span class="eyebrow">Pinned side panel</span>
+            <span class="title">Findings to include</span>
+            <span class="subtitle" data-source-line>Loading state snapshot</span>
+          </div>
+          <span class="badge" data-tone="critical" data-total-badge>0</span>
+        </header>
+        <section class="summary-grid" data-summary-grid></section>
+        <section class="filter-tabs" data-filter-tabs></section>
+        <section class="finding-list" data-finding-list></section>
+        <footer class="status-bar">
+          <span class="chip" data-tone="mock">Phoenix local fallback</span>
+          <span class="subtitle" data-status-line>Ready to assemble packet.</span>
+        </footer>
+      </section>
+
+      <aside class="packet-panel" aria-label="Packet preview">
+        <header class="packet-head">
+          <div class="title-stack">
+            <span class="eyebrow">Review packet</span>
+            <span class="title" data-packet-title>0 findings selected</span>
+          </div>
+          <span class="chip" data-tone="mock">TODO send</span>
+        </header>
+        <section class="packet-stack">
+          <article class="packet-card">
+            <span class="eyebrow">Destination</span>
+            <span class="title" data-destination-title>Local JSON packet</span>
+            <p class="subtitle" data-destination-copy>No Phoenix artifact is exposed, so this stays a local preview.</p>
+            <div class="packet-actions">
+              <button class="button" data-primary="true" type="button" data-action="copy-packet">Copy local packet</button>
+              <button class="button" type="button" data-action="send-phoenix">Send to Phoenix</button>
+            </div>
+          </article>
+          <article class="packet-card">
+            <span class="eyebrow">Evidence references</span>
+            <div class="artifact-list" data-artifact-list></div>
+          </article>
+          <pre class="json-preview" data-json-preview>{}</pre>
+        </section>
+      </aside>
+
+      <section class="command-menu" data-command-menu aria-label="Command menu">
+        <input class="command-search" data-command-search aria-label="Search commands" placeholder="Search export actions">
+        <div class="command-list" data-command-list></div>
+      </section>
+    </main>
+    <script type="module" src="/extension/app.js"></script>
+  </body>
+</html>

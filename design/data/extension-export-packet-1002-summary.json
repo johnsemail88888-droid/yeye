@@ -1,0 +1,88 @@
+{
+  "captured_at": "2026-06-21T10:03:39.4462790-07:00",
+  "source_status": "LIVE /api/state",
+  "source_detail": "Read-only GET http://127.0.0.1:7878/api/state. The endpoint exposed run ids, findings, severity counts, verify booleans, and evidence file path patterns. It did not expose Phoenix export status, browser confidence, DOM selectors, request URLs, or canary in-out traces.",
+  "project_id": "support-agent",
+  "run_id": "run-0003",
+  "live_scan_run_id": "run-0003",
+  "finding_count": 8,
+  "severity_counts": {
+    "critical": 3,
+    "high": 3,
+    "medium": 1,
+    "low": 1
+  },
+  "verify": {
+    "demo_ready": true,
+    "report_audit_pass": true,
+    "browser_live_loop_pass": true
+  },
+  "evidence_files": [
+    "runs/before/*.json",
+    "runs/after/*.json",
+    ".vibeshield/traces/*",
+    "risk_map.json"
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "tool": "refund_customer",
+      "category": "money-movement",
+      "severity": "critical",
+      "detail": "moves money - must require approval above a threshold"
+    },
+    {
+      "id": "F2",
+      "tool": "send_email",
+      "category": "external-communication",
+      "severity": "critical",
+      "detail": "can exfiltrate data to an external recipient"
+    },
+    {
+      "id": "F3",
+      "tool": "update_user_plan",
+      "category": "privilege-change",
+      "severity": "high",
+      "detail": "changes account state / entitlements"
+    },
+    {
+      "id": "F4",
+      "tool": "lookup_customer",
+      "category": "pii-access",
+      "severity": "high",
+      "detail": "reads customer PII (name/email/phone)"
+    },
+    {
+      "id": "F5",
+      "tool": "read_ticket",
+      "category": "untrusted-input",
+      "severity": "medium",
+      "detail": "reads attacker-controllable ticket text"
+    },
+    {
+      "id": "F6",
+      "tool": "create_support_reply",
+      "category": "output",
+      "severity": "low",
+      "detail": "drafts a customer-facing reply"
+    },
+    {
+      "id": "F7",
+      "category": "missing-control",
+      "severity": "critical",
+      "detail": "no runtime intent guard: untrusted ticket text can trigger any tool, including money movement and PII exfiltration"
+    },
+    {
+      "id": "F8",
+      "category": "missing-control",
+      "severity": "high",
+      "detail": "no approval gate for high-impact tools (refund / plan change)"
+    }
+  ],
+  "mock_todo": [
+    "Phoenix export status is not exposed by /api/state.",
+    "Browser confidence is not exposed by /api/state.",
+    "DOM selectors, request URLs, and canary traces are not exposed by /api/state.",
+    "This prototype does not write an export artifact or call a network endpoint."
+  ]
+}
