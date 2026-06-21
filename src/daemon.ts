@@ -198,7 +198,7 @@ export function createDaemon() {
 
 function main() {
   const server = createDaemon();
-  server.listen(PORT, HOST, () => console.log(`VibeShield daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
+  server.listen(PORT, HOST, () => console.log(`Yeye daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
   const shutdown = () => {
     server.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();

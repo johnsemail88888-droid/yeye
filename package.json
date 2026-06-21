@@ -1,12 +1,12 @@
 {
-  "name": "vibeshield",
+  "name": "yeye",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "engines": {
     "node": ">=20"
   },
-  "description": "VibeShield Risk Debugger — find where a vibe-coded AI agent can be hijacked, prove it, install an ArmorIQ-style tool firewall, and prove the risk is fixed while normal utility is preserved.",
+  "description": "Yeye Risk Debugger — find where a vibe-coded AI agent can be hijacked, prove it, install an ArmorIQ-style tool firewall, and prove the risk is fixed while normal utility is preserved.",
   "scripts": {
     "demo:before": "tsx src/run.ts before",
     "demo:after": "tsx src/run.ts after",

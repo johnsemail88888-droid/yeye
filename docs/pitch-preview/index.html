@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VibeShield Pitch Preview</title>
+  <title>Yeye Pitch Preview</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header class="topbar">
     <div>
       <p class="label">Pitch preview package</p>
-      <h1>VibeShield 3-minute demo</h1>
+      <h1>Yeye 3-minute demo</h1>
     </div>
     <div class="top-actions">
       <a href="../../artifacts/demo_showcase/SHOWCASE.html">Open showcase</a>
@@ -87,7 +87,7 @@
         <blockquote>This app works. That is exactly why a first-time builder might ship it. But working normally tells us nothing about what happens when an untrusted user talks to an AI agent that can refund customers, access PII, or call external tools.</blockquote>
         <div class="demo-grid">
           <div><span>UI action</span><p>Open <code>http://localhost:7878/demo</code> and show the controlled Acme support app.</p></div>
-          <div><span>Expected screen</span><p>Support/refund demo with the in-page VibeShield panel and fake customer/tool surface.</p></div>
+          <div><span>Expected screen</span><p>Support/refund demo with the in-page Yeye panel and fake customer/tool surface.</p></div>
           <div><span>Fallback</span><p>Open <code>web/demo.html</code> or the developer report summary if the daemon is not running.</p></div>
         </div>
       </section>
@@ -98,7 +98,7 @@
           <span class="badge fallback">LOCAL FALLBACK</span>
         </div>
         <h2>0:15-0:35 - Scope one authorized workflow</h2>
-        <blockquote>Instead of scanning an entire company, I select one risky feature. VibeShield maps the surface and launches bounded test agents against only this authorized workflow.</blockquote>
+        <blockquote>Instead of scanning an entire company, I select one risky feature. Yeye maps the surface and launches bounded test agents against only this authorized workflow.</blockquote>
         <div class="demo-grid">
           <div><span>UI action</span><p>Use the in-page panel as the local substitute for the planned Shield Pill. Select <code>Support / Refund Flow</code>, then press <code>Run live assessment</code> if the daemon is available.</p></div>
           <div><span>Expected screen</span><p>The panel captures page scope into <code>.vibeshield/live_scan.json</code> with <code>source=browser-panel</code> and <code>run_id=run-0002</code>.</p></div>
@@ -140,7 +140,7 @@
           <span class="badge fallback">LOCAL FALLBACK</span>
         </div>
         <h2>1:35-2:05 - Apply protection as guarded replay</h2>
-        <blockquote>VibeShield runs a plan-aware local guard in the harness. The trusted goal allows a support reply, but a large refund requires human approval, and customer PII cannot be sent to an unauthorized destination.</blockquote>
+        <blockquote>Yeye runs a plan-aware local guard in the harness. The trusted goal allows a support reply, but a large refund requires human approval, and customer PII cannot be sent to an unauthorized destination.</blockquote>
         <div class="demo-grid">
           <div><span>UI action</span><p>Use the current <code>Install guard</code> button only as a local guarded replay. Do not claim source patch, rebuild, or real install.</p></div>
           <div><span>Expected screen</span><p>After artifacts show <code>NEEDS_APPROVAL</code> or <code>BLOCKED</code> with guard decisions from <code>src/guard.ts</code>.</p></div>
@@ -168,7 +168,7 @@
           <span class="badge not-ready">NOT READY</span>
         </div>
         <h2>2:30-2:48 - Readiness breadth, safely scoped</h2>
-        <blockquote>VibeShield also surfaces a static readiness checklist for issues first-time builders commonly forget. In this build, those secondary readiness items are roadmap indicators, not live scanner results. Legal items are evidence-backed review indicators, not legal advice.</blockquote>
+        <blockquote>Yeye also surfaces a static readiness checklist for issues first-time builders commonly forget. In this build, those secondary readiness items are roadmap indicators, not live scanner results. Legal items are evidence-backed review indicators, not legal advice.</blockquote>
         <div class="demo-grid">
           <div><span>UI action</span><p>Open a readiness summary only if it is visibly labeled static or roadmap.</p></div>
           <div><span>Expected screen</span><p>No live scanner claims for rate limits, token budgets, streaming, audit logs, privacy declarations, Apple/Google, or UGC/DMCA.</p></div>
@@ -218,7 +218,7 @@
           <span class="badge real">REAL</span>
           <h3>Why not just ask Claude?</h3>
           <p><strong>10 sec:</strong> A model opinion is not behavioral proof.</p>
-          <p><strong>30 sec:</strong> VibeShield records what the agent actually tried to do at the tool boundary.</p>
+          <p><strong>30 sec:</strong> Yeye records what the agent actually tried to do at the tool boundary.</p>
           <p><strong>Open:</strong> <code>runs/before/*.json</code></p>
           <p><strong>Limit:</strong> Current agent is deterministic, not Claude.</p>
         </article>

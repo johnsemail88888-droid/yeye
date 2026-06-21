@@ -1,6 +1,6 @@
-# VibeShield — Risk Debugger for AI Agents
+# Yeye — Risk Debugger for AI Agents
 
-VibeShield points at a deployed AI agent, finds where it can be hijacked (an unauthorized refund, customer PII emailed out), **proves it with real evidence**, installs a runtime intent guard, and **reruns the same + paraphrased attacks to prove the risk is fixed** while normal utility is preserved — then keeps the test in CI.
+Yeye points at a deployed AI agent, finds where it can be hijacked (an unauthorized refund, customer PII emailed out), **proves it with real evidence**, installs a runtime intent guard, and **reruns the same + paraphrased attacks to prove the risk is fixed** while normal utility is preserved — then keeps the test in CI.
 
 ## Run (offline, no API keys)
 ```
