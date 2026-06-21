@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Patch Preview Prototype</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../ui-next/styles.css">
+  </head>
+  <body>
+    <div class="shell" data-shell>
+      <nav class="rail" aria-label="Activity rail">
+        <div class="brand" aria-label="VibeShield">VS</div>
+        <button class="icon-button is-active" type="button" aria-label="Risk scan">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3 4 7v6c0 4 3 7 8 8 5-1 8-4 8-8V7l-8-4Z"></path>
+            <path d="m9 12 2 2 4-5"></path>
+          </svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="Files">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h7l2 2h7v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"></path>
+          </svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="Open command menu" data-command-trigger>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+      </nav>
+
+      <aside class="tree" aria-label="Mock project files">
+        <header class="tree__header">
+          <strong>MOCK project</strong>
+          <span class="pill pill--mock">Sandbox copy</span>
+        </header>
+        <div class="tree-list">
+          <div class="tree-row is-active"><span>routes/login.tsx</span><span class="pill">MOCK</span></div>
+          <div class="tree-row"><span>lib/session.ts</span><span class="pill">MOCK</span></div>
+          <div class="tree-row"><span>components/agent.tsx</span><span class="pill">MOCK</span></div>
+        </div>
+      </aside>
+
+      <main class="workspace" aria-label="Patch preview workspace">
+        <header class="topbar">
+          <div class="topbar__left">
+            <h1 class="title">Mode 2 patch preview</h1>
+            <span class="pill pill--mock">All data is MOCK</span>
+            <span class="muted">Read-only diff drawer</span>
+          </div>
+          <button class="ghost-button" type="button" data-command-trigger>/ Command</button>
+        </header>
+
+        <section class="editor" aria-label="Mock editor and preview">
+          <article class="code-card">
+            <div class="code-card__bar">
+              <div class="tab-row">
+                <span class="tab is-active">MOCK routes/login.tsx</span>
+                <span class="tab">Preview diff only</span>
+              </div>
+              <span class="pill pill--accent">selectedFindingId bound</span>
+            </div>
+            <pre class="code" aria-label="Mock source code"><code><span class="code-line"><span class="line-no">38</span><span>function LoginGate({ formValues }) {</span></span>
+<span class="code-line"><span class="line-no">39</span><span>  const [message, setMessage] = useState("");</span></span>
+<span class="code-line is-selected"><span class="line-no">40</span><span>  const result = <span class="risk-span">submitLogin(formValues)</span>;</span></span>
+<span class="code-line"><span class="line-no">41</span><span>  if (result.ok) return &lt;Dashboard /&gt;;</span></span>
+<span class="code-line is-selected"><span class="line-no">42</span><span>  return &lt;button&gt;<span class="risk-span">Continue without server check</span>&lt;/button&gt;;</span></span>
+<span class="code-line"><span class="line-no">43</span><span>}</span></span></code></pre>
+          </article>
+
+          <aside class="editor-side" aria-label="Mock app preview">
+            <article class="preview-card">
+              <h2>MOCK live preview</h2>
+              <p class="muted">The drawer previews a patch. It does not write to source.</p>
+              <div class="preview-box">
+                <div class="field">team@example.com</div>
+                <div class="field">Password field</div>
+                <button class="primary-button" type="button">Continue without server check</button>
+              </div>
+            </article>
+            <article class="preview-card">
+              <h2>Patch guardrails</h2>
+              <p class="muted">The suggested diff is labeled MOCK and must be copied or rejected by the user. Apply remains a proposal-only action in this prototype.</p>
+            </article>
+          </aside>
+        </section>
+      </main>
+
+      <aside class="panel" aria-label="Patch suggestions">
+        <header class="panel__header">
+          <div>
+            <h2>Suggestions</h2>
+            <p class="muted">Select a finding to preview its diff drawer.</p>
+          </div>
+          <span class="pill pill--mock">MOCK findings</span>
+        </header>
+        <section class="suggestion-list" data-suggestions></section>
+        <div class="button-row">
+          <button class="ghost-button" type="button" data-open-drawer>Open preview</button>
+          <button class="danger-button" type="button" data-reject>Reject selected</button>
+        </div>
+      </aside>
+    </div>
+
+    <section class="drawer" aria-label="Read-only patch preview" data-drawer hidden>
+      <header class="drawer__header">
+        <div>
+          <h2 data-drawer-title>MOCK patch preview</h2>
+          <p class="muted" data-drawer-summary>Preview only. No files are changed.</p>
+        </div>
+        <span class="pill pill--mock">MOCK diff</span>
+      </header>
+      <pre class="diff" aria-label="Mock before and after diff" data-diff></pre>
+      <footer class="drawer__footer">
+        <div class="button-row">
+          <button class="primary-button" type="button" data-copy-diff>Copy MOCK diff</button>
+          <button class="ghost-button" type="button" data-close-drawer>Close</button>
+          <button class="danger-button" type="button" data-reject>Reject selected</button>
+        </div>
+      </footer>
+    </section>
+
+    <section class="command-menu" aria-label="Command menu" data-command-menu>
+      <input type="search" value="preview selected patch" aria-label="Command search">
+      <button type="button" data-open-drawer><span>Preview selected MOCK patch</span><span class="pill">Enter</span></button>
+      <button type="button" data-copy-diff><span>Copy selected MOCK diff</span><span class="pill">Cmd+C</span></button>
+      <button type="button" data-close-command><span>Close command menu</span><span class="pill">Esc</span></button>
+    </section>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
