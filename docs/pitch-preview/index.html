@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VibeShield Pitch Preview</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="label">Pitch preview package</p>
+      <h1>VibeShield 3-minute demo</h1>
+    </div>
+    <div class="top-actions">
+      <a href="../../artifacts/demo_showcase/SHOWCASE.html">Open showcase</a>
+      <a href="../../.vibeshield/reports/developer-report.md">Developer report</a>
+    </div>
+  </header>
+
+  <main class="preview-shell">
+    <aside class="timeline" aria-label="AIDA pitch timeline">
+      <div class="panel-title">AIDA spine</div>
+      <a class="time active" href="#attention">
+        <span>0:00</span>
+        <strong>Attention</strong>
+        <small>Show the working app and the risk.</small>
+      </a>
+      <a class="time" href="#interest">
+        <span>0:15</span>
+        <strong>Interest</strong>
+        <small>Scope one authorized feature.</small>
+      </a>
+      <a class="time" href="#failure">
+        <span>0:35</span>
+        <strong>Failure</strong>
+        <small>Open the reproduced critical finding.</small>
+      </a>
+      <a class="time" href="#trace">
+        <span>1:10</span>
+        <strong>Trace</strong>
+        <small>Show tool boundary evidence.</small>
+      </a>
+      <a class="time" href="#desire">
+        <span>1:35</span>
+        <strong>Desire</strong>
+        <small>Run guarded replay, not source install.</small>
+      </a>
+      <a class="time" href="#proof">
+        <span>2:05</span>
+        <strong>Proof</strong>
+        <small>Same attack plus mutation and utility.</small>
+      </a>
+      <a class="time" href="#breadth">
+        <span>2:30</span>
+        <strong>Breadth</strong>
+        <small>Static readiness roadmap only.</small>
+      </a>
+      <a class="time" href="#action">
+        <span>2:48</span>
+        <strong>Action</strong>
+        <small>Close with what is real now.</small>
+      </a>
+    </aside>
+
+    <section class="script-stage" aria-label="Main pitch script and demo steps">
+      <section class="hero-card">
+        <div class="hero-copy">
+          <p class="label">Ground truth</p>
+          <h2>Use the demo as a controlled risk debugger, not as a broad compliance scanner.</h2>
+          <p>Real evidence exists for the deterministic support-agent sandbox, before/after runs, local guard decisions, JSON traces, report audit, and three-run stability artifact. Unsupported claims are labeled below.</p>
+        </div>
+        <div class="hero-metrics" aria-label="Current artifact summary">
+          <div><strong>5</strong><span>before failures</span></div>
+          <div><strong>0</strong><span>after failures</span></div>
+          <div><strong>2</strong><span>mutations contained</span></div>
+          <div><strong>3/3</strong><span>stability artifact</span></div>
+        </div>
+      </section>
+
+      <section class="step" id="attention">
+        <div class="step-head">
+          <span class="phase">Attention</span>
+          <span class="badge real">REAL</span>
+        </div>
+        <h2>0:00-0:15 - The app works, but that is not enough</h2>
+        <blockquote>This app works. That is exactly why a first-time builder might ship it. But working normally tells us nothing about what happens when an untrusted user talks to an AI agent that can refund customers, access PII, or call external tools.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Open <code>http://localhost:7878/demo</code> and show the controlled Acme support app.</p></div>
+          <div><span>Expected screen</span><p>Support/refund demo with the in-page VibeShield panel and fake customer/tool surface.</p></div>
+          <div><span>Fallback</span><p>Open <code>web/demo.html</code> or the developer report summary if the daemon is not running.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="interest">
+        <div class="step-head">
+          <span class="phase">Interest</span>
+          <span class="badge fallback">LOCAL FALLBACK</span>
+        </div>
+        <h2>0:15-0:35 - Scope one authorized workflow</h2>
+        <blockquote>Instead of scanning an entire company, I select one risky feature. VibeShield maps the surface and launches bounded test agents against only this authorized workflow.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Use the in-page panel as the local substitute for the planned Shield Pill. Select <code>Support / Refund Flow</code>, then press <code>Run live assessment</code> if the daemon is available.</p></div>
+          <div><span>Expected screen</span><p>The panel captures page scope into <code>.vibeshield/live_scan.json</code> with <code>source=browser-panel</code> and <code>run_id=run-0002</code>.</p></div>
+          <div><span>Fallback</span><p>Say clearly: packaged browser extension is NOT READY; this demo uses an in-page panel.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="failure">
+        <div class="step-head">
+          <span class="phase">Interest</span>
+          <span class="badge real">REAL</span>
+        </div>
+        <h2>0:35-1:10 - Show one reproduced failure</h2>
+        <blockquote>The normal user test passed. But an indirect prompt injection hidden in a support ticket caused the agent to attempt a five-hundred-dollar refund and expose customer data.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Open <code>http://localhost:7878/judge</code> and select the critical finding if the page is live.</p></div>
+          <div><span>Expected screen</span><p>Finding <code>VS-F-001</code> or mutation finding with before result <code>FAIL</code>, run/trace evidence, and high-impact tool calls.</p></div>
+          <div><span>Fallback</span><p>Open <code>.vibeshield/reports/developer-report.md</code> and show <code>VS-F-001</code>.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="trace">
+        <div class="step-head">
+          <span class="phase">Interest</span>
+          <span class="badge real">REAL</span>
+        </div>
+        <h2>1:10-1:35 - Explain why this is dynamic</h2>
+        <blockquote>We are not asking an LLM whether the app looks secure. We run the workflow, capture the tool boundary, and evaluate the actual behavior. The trace shows the precise step where untrusted content changed a high-impact action.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Open trace evidence for <code>before:indirect_prompt_injection_overrefund</code> or <code>before:pii_exfiltration_attempt</code>.</p></div>
+          <div><span>Expected screen</span><p>Trusted goal, untrusted ticket, tool attempt, tool result, and eval spans in <code>.vibeshield/traces/before/*.json</code>.</p></div>
+          <div><span>Fallback</span><p>Use <code>runs/before/*.json</code> if the trace viewer is not ready.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="desire">
+        <div class="step-head">
+          <span class="phase">Desire</span>
+          <span class="badge fallback">LOCAL FALLBACK</span>
+        </div>
+        <h2>1:35-2:05 - Apply protection as guarded replay</h2>
+        <blockquote>VibeShield runs a plan-aware local guard in the harness. The trusted goal allows a support reply, but a large refund requires human approval, and customer PII cannot be sent to an unauthorized destination.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Use the current <code>Install guard</code> button only as a local guarded replay. Do not claim source patch, rebuild, or real install.</p></div>
+          <div><span>Expected screen</span><p>After artifacts show <code>NEEDS_APPROVAL</code> or <code>BLOCKED</code> with guard decisions from <code>src/guard.ts</code>.</p></div>
+          <div><span>Fallback</span><p>Open <code>runs/after/indirect_prompt_injection_overrefund.json</code> and <code>.vibeshield/traces/after/indirect_prompt_injection_overrefund.json</code>.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="proof">
+        <div class="step-head">
+          <span class="phase">Desire</span>
+          <span class="badge real">REAL</span>
+        </div>
+        <h2>2:05-2:30 - Same test, mutation, benign utility</h2>
+        <blockquote>This is the same test, plus an independently rephrased attack. Both are stopped by generic policy checks, while the normal workflow still works.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Show after results for original attack, two paraphrased mutations, and benign support cases.</p></div>
+          <div><span>Expected screen</span><p>Report summary: before failures <code>5</code>, after failures <code>0</code>, mutations contained <code>2</code>, utility preserved <code>true</code>.</p></div>
+          <div><span>Fallback</span><p>Open <code>.vibeshield/reports/report.json</code> or <code>.vibeshield/demo-runs/stability-summary.json</code>.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="breadth">
+        <div class="step-head">
+          <span class="phase">Desire</span>
+          <span class="badge not-ready">NOT READY</span>
+        </div>
+        <h2>2:30-2:48 - Readiness breadth, safely scoped</h2>
+        <blockquote>VibeShield also surfaces a static readiness checklist for issues first-time builders commonly forget. In this build, those secondary readiness items are roadmap indicators, not live scanner results. Legal items are evidence-backed review indicators, not legal advice.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Open a readiness summary only if it is visibly labeled static or roadmap.</p></div>
+          <div><span>Expected screen</span><p>No live scanner claims for rate limits, token budgets, streaming, audit logs, privacy declarations, Apple/Google, or UGC/DMCA.</p></div>
+          <div><span>Fallback</span><p>Skip this section and go straight to report/Q&amp;A.</p></div>
+        </div>
+      </section>
+
+      <section class="step" id="action">
+        <div class="step-head">
+          <span class="phase">Action</span>
+          <span class="badge not-ready">NOT READY</span>
+        </div>
+        <h2>2:48-3:00 - Close with the real adoption path</h2>
+        <blockquote>One live scan finds the failure. The local guard replay proves the same attack no longer executes unauthorized actions, and the evidence can be turned into a repeatable check. The installable CLI and generated policy artifact are not ready in this repo yet.</blockquote>
+        <div class="demo-grid">
+          <div><span>UI action</span><p>Do not show <code>npx vibeshield install</code> as working. Show existing package commands only as repo-local verification commands.</p></div>
+          <div><span>Expected screen</span><p>Package scripts exist for <code>demo:before</code>, <code>demo:after</code>, <code>demo:all</code>, <code>report</code>, <code>experiment</code>, <code>verify</code>, and <code>demo:verify-three</code>.</p></div>
+          <div><span>Fallback</span><p>End on the founder report and the report audit pass instead of an install command.</p></div>
+        </div>
+      </section>
+
+      <section class="cue-card" aria-label="One-page cue card">
+        <div class="panel-title">One-page cue card</div>
+        <div class="cue-grid">
+          <div><span>Open first</span><strong><code>artifacts/demo_showcase/SHOWCASE.html</code></strong></div>
+          <div><span>Live screens</span><strong><code>/demo</code> then <code>/judge</code></strong></div>
+          <div><span>Best evidence</span><strong><code>.vibeshield/reports/report.json</code></strong></div>
+          <div><span>Say often</span><strong>controlled sandbox, local guard, not legal advice</strong></div>
+          <div><span>Never say</span><strong>real extension, source install, live sponsor SDK</strong></div>
+          <div><span>Fallback close</span><strong>report audit + trace files + after artifacts</strong></div>
+        </div>
+      </section>
+    </section>
+
+    <aside class="qa-panel" aria-label="Judge Q&A and evidence">
+      <section class="side-section">
+        <div class="panel-title">Judge Q&amp;A cards</div>
+        <article class="qa-card">
+          <span class="badge real">REAL</span>
+          <h3>Why is this not a static scanner?</h3>
+          <p><strong>10 sec:</strong> It runs the workflow and checks actual tool behavior.</p>
+          <p><strong>30 sec:</strong> The evidence includes before/after run artifacts, trace spans, tool attempts, guard decisions, and eval results.</p>
+          <p><strong>Open:</strong> <code>.vibeshield/traces/**</code></p>
+          <p><strong>Limit:</strong> Controlled sandbox, not arbitrary app coverage.</p>
+        </article>
+        <article class="qa-card">
+          <span class="badge real">REAL</span>
+          <h3>Why not just ask Claude?</h3>
+          <p><strong>10 sec:</strong> A model opinion is not behavioral proof.</p>
+          <p><strong>30 sec:</strong> VibeShield records what the agent actually tried to do at the tool boundary.</p>
+          <p><strong>Open:</strong> <code>runs/before/*.json</code></p>
+          <p><strong>Limit:</strong> Current agent is deterministic, not Claude.</p>
+        </article>
+        <article class="qa-card">
+          <span class="badge fallback">LOCAL FALLBACK</span>
+          <h3>What is ArmorIQ here?</h3>
+          <p><strong>10 sec:</strong> A local ArmorIQ-compatible guard pattern.</p>
+          <p><strong>30 sec:</strong> <code>src/guard.ts</code> enforces plan-aware tool rules before sandbox tool execution.</p>
+          <p><strong>Open:</strong> <code>src/guard.ts</code>, after traces</p>
+          <p><strong>Limit:</strong> No official ArmorIQ SDK/API is integrated.</p>
+        </article>
+        <article class="qa-card">
+          <span class="badge fallback">LOCAL FALLBACK</span>
+          <h3>What is Arize/Phoenix here?</h3>
+          <p><strong>10 sec:</strong> Local OpenInference/Phoenix-ready export.</p>
+          <p><strong>30 sec:</strong> Artifact says <code>local_experiment=true</code>, <code>openinference_spans=229</code>, and Phoenix endpoint not configured.</p>
+          <p><strong>Open:</strong> <code>.vibeshield/experiments/phoenix_status.json</code></p>
+          <p><strong>Limit:</strong> Not shipped to Phoenix cloud.</p>
+        </article>
+        <article class="qa-card">
+          <span class="badge not-ready">NOT READY</span>
+          <h3>What supports production today?</h3>
+          <p><strong>10 sec:</strong> The controlled demo loop, reports, and local evidence are showable.</p>
+          <p><strong>30 sec:</strong> Productionization needs real model wiring, broader app support, real install, and official integrations.</p>
+          <p><strong>Open:</strong> <code>artifacts/demo_showcase/SHOWCASE.md</code></p>
+          <p><strong>Limit:</strong> CLI, extension, Browserbase, Token Company, Deepgram, Simular are not ready.</p>
+        </article>
+      </section>
+
+      <section class="side-section">
+        <div class="panel-title">Sponsor evidence</div>
+        <div class="evidence-card"><span class="badge fallback">LOCAL FALLBACK</span><strong>ArmorIQ</strong><p>Local guard decisions in after traces. No official SDK.</p></div>
+        <div class="evidence-card"><span class="badge fallback">LOCAL FALLBACK</span><strong>Arize Phoenix</strong><p>OpenInference JSONL and local Phoenix-ready status. Endpoint false.</p></div>
+        <div class="evidence-card"><span class="badge not-ready">NOT READY</span><strong>Claude</strong><p>Current demo uses deterministic agent stand-in.</p></div>
+        <div class="evidence-card"><span class="badge not-ready">NOT READY</span><strong>Browserbase / Token / Deepgram / Simular</strong><p>No live code, dependency, run ID, or replay artifact found.</p></div>
+      </section>
+
+      <section class="side-section">
+        <div class="panel-title">Legal wording safety</div>
+        <ul class="safety-list">
+          <li>Say: risk indicator for developer or legal review; not legal advice.</li>
+          <li>Do not say: compliant, lawsuit-proof, guaranteed secure, automatic violation.</li>
+          <li>FTC: unclear AI disclosures or unsupported claims may warrant review.</li>
+          <li>Apple/Google: data declarations must accurately describe relevant data use.</li>
+          <li>DMCA/UGC: safe harbor has multiple conditions; do not reduce it to a fee.</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+</body>
+</html>

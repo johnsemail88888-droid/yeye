@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>耶耶 · Yeye Mascot Demo</title><link rel="stylesheet" href="yeye.css"></head>
+<body>
+  <main class="app-shell">
+    <header><div><span class="logo">Y</span><strong>VibeShield</strong><small>with 耶耶</small></div><button id="scanBtn">开启安全扫描</button></header>
+    <section class="hero"><span class="eyebrow">DEMO TARGET</span><h1>AI Support Console</h1><p>选择一个功能，然后让耶耶闻出风险。</p></section>
+    <section class="grid">
+      <article class="card yeye-target" data-yeye-target="support"><b>Support chat</b><p>Customer messages and reply generation.</p><button>Open chat</button></article>
+      <article class="card yeye-target" data-yeye-target="refund"><b>Refund workflow</b><p>High-impact refund and approval actions.</p><button>Review flow</button></article>
+      <article class="card yeye-target" data-yeye-target="privacy"><b>Privacy controls</b><p>PII handling and outbound communication.</p><button>Inspect policy</button></article>
+    </section>
+    <section id="result" class="result"><b>耶耶正在角落巡逻。</b><span>点击“开启安全扫描”查看完整动画。</span></section>
+  </main>
+  <div id="yeye" class="yeye" role="status" aria-live="polite" aria-label="耶耶安全助手">
+    <img id="yeyeImg" src="assets/yeye_idle.svg" alt="耶耶安全助手">
+    <div id="bubble" class="bubble">巡逻中</div>
+  </div>
+  <script src="yeye.js"></script>
+</body></html>

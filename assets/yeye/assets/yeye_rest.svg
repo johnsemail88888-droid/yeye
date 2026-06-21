@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="yeye rest">
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity=".18"/>
+    </filter>
+    <linearGradient id="harness" x1="0" x2="1">
+      <stop offset="0" stop-color="#63E5D7"/><stop offset="1" stop-color="#24BDB1"/>
+    </linearGradient>
+  </defs>
+  
+  <g filter="url(#shadow)">
+    <ellipse cx="256" cy="424" rx="154" ry="27" fill="#000" opacity=".12"/>
+    <ellipse cx="262" cy="306" rx="142" ry="91" fill="#C98A4A" stroke="#2A211C" stroke-width="10" transform="rotate(-8 262 306)"/>
+    <path d="M374 286 C445 252 451 331 393 338" fill="none" stroke="#A96632" stroke-width="34" stroke-linecap="round"/>
+    <g transform="translate(120 188) rotate(8 120 100)">
+      <circle cx="124" cy="105" r="82" fill="#F4D6A3" stroke="#2A211C" stroke-width="10"/>
+      <ellipse cx="69" cy="118" rx="38" ry="75" fill="#B77339" stroke="#2A211C" stroke-width="9" transform="rotate(20 69 118)"/>
+      <ellipse cx="179" cy="118" rx="38" ry="75" fill="#B77339" stroke="#2A211C" stroke-width="9" transform="rotate(-20 179 118)"/>
+      <path d="M93 94 Q109 88 120 98" fill="none" stroke="#2A211C" stroke-width="7" stroke-linecap="round"/>
+      <path d="M140 98 Q151 88 167 94" fill="none" stroke="#2A211C" stroke-width="7" stroke-linecap="round"/>
+      <ellipse cx="130" cy="131" rx="42" ry="31" fill="#FFE7BE"/>
+      <ellipse cx="130" cy="119" rx="17" ry="13" fill="#2A211C"/>
+      <path d="M130 132 Q130 144 145 149" fill="none" stroke="#2A211C" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <path d="M206 287 Q264 251 323 281" fill="none" stroke="url(#harness)" stroke-width="31" stroke-linecap="round"/>
+    <rect x="245" y="248" width="48" height="31" rx="11" fill="#168F88" stroke="#2A211C" stroke-width="7"/>
+    <path d="M156 334 Q128 370 170 394" fill="none" stroke="#F4D6A3" stroke-width="40" stroke-linecap="round"/>
+  </g>
+  <g fill="#4DA8FF" font-family="system-ui,sans-serif" font-weight="800">
+    <text x="360" y="154" font-size="52">Z</text><text x="410" y="108" font-size="38">Z</text><text x="447" y="74" font-size="28">Z</text>
+  </g>
+</svg>

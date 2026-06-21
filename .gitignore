@@ -13,3 +13,6 @@ runs/
 verify_results.json
 risk_map.json
 dataset.json
+
+audits/
+artifacts/
