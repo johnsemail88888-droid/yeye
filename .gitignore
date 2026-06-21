@@ -16,3 +16,6 @@ dataset.json
 
 audits/
 artifacts/
+
+# Yeye mascot raw source art (13MB) — served frames live in web/yeye/
+assets/yeye/v2/

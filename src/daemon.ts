@@ -134,6 +134,11 @@ export function createDaemon() {
     if (m === "POST" && !originOk(req)) return json(res, 403, { error: "forbidden origin" });
 
     if (m === "GET" && SAFE_PAGES[url]) return servePage(res, SAFE_PAGES[url]);
+    if (m === "GET" && /^\/yeye\/[a-z0-9_]+\.png$/.test(url)) { // Yeye mascot frames — png only, regex-guarded (no path traversal)
+      const fp = join(ROOT, "web", url);
+      if (existsSync(fp)) { res.writeHead(200, { "content-type": "image/png", "cache-control": "max-age=86400" }); return res.end(readFileSync(fp)); }
+      res.writeHead(404); return res.end("not found");
+    }
     if (m === "GET" && url === "/api/state") return json(res, 200, state());
 
     if (m === "POST" && url === "/api/scan") {
