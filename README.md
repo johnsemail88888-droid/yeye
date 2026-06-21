@@ -14,7 +14,7 @@ npx tsx src/demo-verify-three.ts   # 3 consecutive full loops -> demo_ready=true
 
 ## Quality gates
 - `npm run typecheck` — strict `tsc --noEmit` (passes).
-- `npm test` — **38 unit tests** (vitest): the guard (`safeInvoke`, structural `disclosesPII` incl. bypass cases), `evaluateRun`, the agent's money/egress extraction, the scanner (`buildRiskMap`), **and the deciders of record** — `computeGates` (the `demo_ready` logic) and `auditReport` (the honesty gate).
+- `npm test` — a **vitest unit-test suite** (run it for the exact count) covering: the guard (`safeInvoke`, structural `disclosesPII` incl. bypass cases), `evaluateRun`, the agent's money/egress extraction, the scanner (`buildRiskMap`), **and the deciders of record** — `computeGates` (the `demo_ready` logic) and `auditReport` (the honesty gate).
 - CI (`.github/workflows/vibeshield.yml`) runs typecheck + tests **before** the risk loop and gates on regressions.
 
 ## ⚠️ LIMITATIONS (honest scope — read this)

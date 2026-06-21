@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, rmSync
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { createRequire } from "node:module";
+import { pathToFileURL } from "node:url";
 import { join } from "node:path";
 import { runTicket } from "./harness";
 
@@ -61,13 +62,13 @@ function state() {
     live_scan: readJson(join(ROOT, ".vibeshield/live_scan.json")),
   };
 }
-async function runCmd(args: string[]): Promise<boolean> {
+async function runCmd(args: string[]): Promise<void> {
+  // Throws on failure so the endpoint returns 500 (never 200 + stale state).
   try {
     await execFileP(process.execPath, [TSX_CLI, ...args], { cwd: ROOT, timeout: CMD_TIMEOUT, windowsHide: true });
-    return true;
   } catch (e) {
     console.error("[daemon] cmd failed:", args.join(" "), (e as Error).message);
-    return false;
+    throw new Error(`command failed: ${args.join(" ")}`);
   }
 }
 function bumpRun() {
@@ -124,7 +125,8 @@ function sanitizeScope(raw: unknown): Record<string, string> {
   return { url: str(s.url, 300), feature: str(s.feature, 80), captured_at: new Date().toISOString() };
 }
 
-const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+export function createDaemon() {
+  return createServer(async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const url = (req.url || "/").split("?")[0];
     const m = req.method || "GET";
@@ -191,11 +193,18 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     if (!res.headersSent) json(res, 500, { error: "internal" });
     else res.end();
   }
-});
-server.listen(PORT, HOST, () => console.log(`VibeShield daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
-function shutdown() {
-  server.close(() => process.exit(0));
-  setTimeout(() => process.exit(0), 5000).unref();
+  });
 }
-process.on("SIGTERM", shutdown);
-process.on("SIGINT", shutdown);
+
+function main() {
+  const server = createDaemon();
+  server.listen(PORT, HOST, () => console.log(`VibeShield daemon on http://${HOST}:${PORT}  (desktop / · product /demo · judge /judge)`));
+  const shutdown = () => {
+    server.close(() => process.exit(0));
+    setTimeout(() => process.exit(0), 5000).unref();
+  };
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

@@ -73,3 +73,15 @@ Verified: typecheck exit 0 · **38/38 tests** · 3-run 3/3 · **demo_ready=true*
 
 Verified: typecheck exit 0 · **39/39 tests** · daemon POST executes on Windows · 3-run 3/3 · **demo_ready=true**.
 
+---
+
+## Round 5 — SCORE 9/10
+> "Functionally sound; the security engineering is real and bypass-resistant. The 10th point is withheld for one concrete, reproducible defect: the README says 38 tests but there are 39 — an honesty-gated tool failing its own rule. Plus `runCmd` discards its success boolean (200 + stale on failure), and there is no daemon integration test."
+
+**Issues → fixes applied (round 6 commit) — verified:**
+1. ✅ README hardcoded test count drifted (38 vs 39) → removed the brittle literal ("a vitest unit-test suite — run it for the exact count") so it can't be wrong again.
+2. ✅ `runCmd` discarded its result (a subprocess failure returned 200 + stale state) → `runCmd` now **throws**, so the endpoint returns **500** on any loop-step failure.
+3. ✅ No daemon integration test → exported `createDaemon()` (script `main` guarded by `import.meta.url`); added `tests/daemon.test.ts` (5 tests on an ephemeral port: GET state→200, foreign-Host POST→403, malformed→400, in-process agent→200, unknown route→404). Total **44 tests**.
+
+Verified: typecheck exit 0 · **44/44 tests** · daemon script POST regenerates `risk_map.json` · 3-run 3/3 · **demo_ready=true**.
+
