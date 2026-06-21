@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VibeShield Desktop Remediation Prototype</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../ui-next/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell" data-app>
+      <nav class="rail" aria-label="Workspace">
+        <div class="rail__mark" aria-label="VibeShield">VS</div>
+        <button class="icon-button is-active" type="button" aria-label="Review findings">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3 4 7v6c0 4 3 7 8 8 5-1 8-4 8-8V7l-8-4Z"></path>
+            <path d="m9 12 2 2 4-5"></path>
+          </svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="Open imported files">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h7l2 2h7v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"></path>
+            <path d="M4 7V5a2 2 0 0 1 2-2h4l2 2"></path>
+          </svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="Open command menu" data-command-trigger>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+      </nav>
+
+      <main class="workspace" aria-label="Imported product workspace">
+        <header class="topbar">
+          <div class="crumbs">
+            <span class="pill pill--mock">MOCK imported app</span>
+            <strong>Desktop inline review</strong>
+            <span class="muted">Mode 2 remediation drafting</span>
+          </div>
+          <button class="ghost-button" type="button" data-command-trigger>
+            <span class="button-icon" aria-hidden="true">/</span>
+            Command
+          </button>
+        </header>
+
+        <section class="editor-region" aria-label="Code and preview">
+          <div class="code-pane">
+            <div class="section-title">
+              <h1>Inline highlights</h1>
+              <span class="pill pill--mock">All findings are MOCK</span>
+            </div>
+            <article class="code-card">
+              <div class="code-toolbar">
+                <div class="file-tabs" aria-label="Open files">
+                  <span class="file-tab is-active">MOCK routes/login.tsx</span>
+                  <span class="file-tab">MOCK lib/session.ts</span>
+                </div>
+                <span class="pill">Draft only</span>
+              </div>
+              <pre class="code-grid" aria-label="Mock code sample"><code><span class="code-line"><span class="line-no">18</span><span>export function LoginPanel() {</span></span>
+<span class="code-line"><span class="line-no">19</span><span>  const [email, setEmail] = useState("");</span></span>
+<span class="code-line hotspot"><span class="line-no">20</span><span>  const [token, setToken] = <mark>useState("MOCK-demo-token")</mark>;</span></span>
+<span class="code-line"><span class="line-no">21</span><span>  return (</span></span>
+<span class="code-line hotspot"><span class="line-no">22</span><span>    &lt;form action=<mark>"/api/mock-login"</mark>&gt;</span></span>
+<span class="code-line"><span class="line-no">23</span><span>      &lt;input value={email} onChange={setEmail} /&gt;</span></span>
+<span class="code-line hotspot"><span class="line-no">24</span><span>      &lt;button&gt;<mark>Continue without server check</mark>&lt;/button&gt;</span></span>
+<span class="code-line"><span class="line-no">25</span><span>    &lt;/form&gt;</span></span>
+<span class="code-line"><span class="line-no">26</span><span>  );</span></span>
+<span class="code-line"><span class="line-no">27</span><span>}</span></span></code></pre>
+            </article>
+          </div>
+
+          <aside class="preview-pane" aria-label="Preview and impact map">
+            <div class="section-title">
+              <h2>Product preview</h2>
+              <span class="pill">Read-only</span>
+            </div>
+            <article class="preview-card">
+              <header>
+                <strong>MOCK sign-in surface</strong>
+                <span class="pill pill--mock">MOCK</span>
+              </header>
+              <div class="login-mock" aria-label="Mock sign in form">
+                <div class="input-mock">team@example.com</div>
+                <div class="input-mock">Password field</div>
+                <button class="primary-button" type="button">Continue</button>
+              </div>
+            </article>
+            <div class="risk-strip" aria-label="Mock risk map">
+              <div class="risk-strip__item">
+                <span class="risk-dot" aria-hidden="true"></span>
+                <p><strong>MOCK blocking path.</strong> The highlighted flow lets a draft token look production-like.</p>
+              </div>
+              <div class="risk-strip__item">
+                <span class="risk-dot risk-dot--yellow" aria-hidden="true"></span>
+                <p><strong>MOCK copy gap.</strong> A reviewer needs exact fix text and a verification step before editing.</p>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+
+      <aside class="side-panel" aria-label="Remediation suggestions">
+        <header class="panel-header">
+          <div class="panel-header__top">
+            <h2>Fix plan</h2>
+            <span class="pill pill--mock">MOCK suggestions</span>
+          </div>
+          <p class="muted">Each card now separates Diagnosis, Fix, and Verify so a builder can copy the next safe step without leaving the desktop review.</p>
+        </header>
+
+        <section class="finding-list" aria-label="Mock remediation cards" data-finding-list></section>
+
+        <footer class="panel-footer">
+          <div class="footer-actions">
+            <button class="ghost-button" type="button" data-reveal>Reveal selected line</button>
+            <button class="primary-button" type="button" data-apply>Draft patch</button>
+          </div>
+          <span class="muted" data-status>Draft patch is disabled until every Verify checkbox is complete.</span>
+        </footer>
+      </aside>
+    </div>
+
+    <div class="command-menu" role="dialog" aria-modal="false" aria-label="Command menu" data-command-menu>
+      <input type="search" value="copy selected remediation" aria-label="Command search">
+      <button type="button" data-copy-selected>
+        <span>Copy selected MOCK fix bundle</span>
+        <span class="pill">Enter</span>
+      </button>
+      <button type="button" data-close-command>
+        <span>Close menu</span>
+        <span class="pill">Esc</span>
+      </button>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
