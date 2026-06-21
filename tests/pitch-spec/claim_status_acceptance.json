@@ -1,0 +1,31 @@
+{
+  "spec_name": "pitch-v2-claim-status-acceptance",
+  "mode": "SPEC_ONLY",
+  "tests": [
+    {
+      "id": "CLAIM-STATUS-001",
+      "name": "claim statuses are explicit",
+      "expected": "Each major product, legal, platform, and adoption claim is labeled LIVE, RECORDED REAL RUN, LOCAL FALLBACK, ROADMAP, or DO NOT CLAIM."
+    },
+    {
+      "id": "CLAIM-STATUS-002",
+      "name": "scanner capability is not overstated",
+      "expected": "Readiness checks 5-12 are described as static checklist or roadmap unless future scanner evidence exists."
+    },
+    {
+      "id": "CLAIM-STATUS-003",
+      "name": "CLI and generated CI are not claimed",
+      "expected": "`npx vibeshield install` and CLI-generated GitHub Action are either ROADMAP or DO NOT CLAIM."
+    },
+    {
+      "id": "CLAIM-STATUS-004",
+      "name": "legal claims remain review indicators",
+      "expected": "Legal and platform claims use risk-indicator language and never present compliance determinations."
+    },
+    {
+      "id": "CLAIM-STATUS-005",
+      "name": "overall pass remains evidence-bound",
+      "expected": "The ledger cannot set overall_pass true without live or recorded demo evidence and three measured rehearsals."
+    }
+  ]
+}

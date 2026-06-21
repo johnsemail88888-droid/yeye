@@ -6,6 +6,7 @@ Target length: 3:00
 This script assumes the integration owner has a daemon-backed demo state or a labeled recorded real run. If the daemon is unavailable, do not improvise live success. Use LOCAL FALLBACK or NOT CONFIGURED labels.
 
 Before calling any action LIVE, check `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`.
+Before using broad product, legal, platform, or adoption language, check `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`.
 
 ## Preflight Truth Badges
 

@@ -22,10 +22,12 @@ SPEC_ONLY, per both coordination reviews:
 - `docs/pitch-v2/MORNING_REHEARSAL.md`
 - `docs/pitch-v2/CLAUDE_INTEGRATION_REQUEST.md`
 - `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`
+- `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
 - `docs/pitch-v2/pitch_automation_results.json`
 - `tests/pitch-spec/README.md`
 - `tests/pitch-spec/pitch_truth_acceptance.json`
 - `tests/pitch-spec/evidence_binding_acceptance.json`
+- `tests/pitch-spec/claim_status_acceptance.json`
 - `docs/coordination/CODEX_LIVE_PITCH_HANDOFF.md`
 
 ## Commands Run
@@ -55,6 +57,7 @@ Created reviewer acceptance specs in:
 - `tests/pitch-spec/README.md`
 - `tests/pitch-spec/pitch_truth_acceptance.json`
 - `tests/pitch-spec/evidence_binding_acceptance.json`
+- `tests/pitch-spec/claim_status_acceptance.json`
 
 ## Unsupported Items Left As Placeholders
 
@@ -115,3 +118,16 @@ Purpose:
 - Make truth badges fail-safe by default.
 - Keep timing gates false until measured rehearsals exist.
 - Reassert that state-changing endpoints and UI implementation are owned by the integration/UI worker, not this branch.
+
+## 2026-06-21 03:34 PT SPEC_ONLY Increment
+
+Added:
+
+- `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
+- `tests/pitch-spec/claim_status_acceptance.json`
+
+Purpose:
+
+- Status-label broad product, legal, platform, and adoption claims before the morning pitch.
+- Keep `npx vibeshield install`, generated CI, real browser Shield Pill, and readiness checks 5-12 out of LIVE narration unless future evidence exists.
+- Give Devpost, Q&A, and spoken script one shared source for supported wording.

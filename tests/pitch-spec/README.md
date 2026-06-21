@@ -34,3 +34,4 @@ Forbidden writes:
 8. Timing remains false unless three real rehearsals are measured.
 9. No UI is built by this branch.
 10. Every scripted live action is bound to endpoint evidence, artifact evidence, or ROADMAP in `docs/pitch-v2/EVIDENCE_BINDING_MATRIX.md`.
+11. Every broad pitch/Devpost/Q&A claim is status-labeled in `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`.

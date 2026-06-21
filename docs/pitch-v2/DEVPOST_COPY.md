@@ -2,6 +2,8 @@
 
 Status: SPEC_ONLY
 
+Claim status source: `docs/pitch-v2/CLAIM_STATUS_LEDGER.md`
+
 ## One-Liner
 
 VibeShield is a live risk debugger for AI products: it tests one deployed feature, captures the exact tool-boundary failure, applies a guard, and reruns the same attack to prove the fix.
